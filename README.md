@@ -52,10 +52,18 @@ Everything the learner sees and hears is in `site/lessons.json`:
 Then regenerate the voices and check:
 
 ```sh
-pip install edge-tts          # or: EDGE_TTS=/path/to/edge-tts
+pip install edge-tts imageio-ffmpeg    # imageio-ffmpeg bundles an ffmpeg that can write Opus
+export EDGE_TTS=/path/to/edge-tts      # only if edge-tts is not on PATH
+export FFMPEG=$(python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())')   # or any ffmpeg with libopus
 npm run audio                 # only lines that changed are regenerated
 npm run check
 ```
+
+**Sound size.** Clips are Ogg Opus, 16 kbps mono: about 0.55 MB per language, so a first visit is about
+0.7 MB (the same clips as 48 kbps MP3 were 2 MB). Opus plays on Android, Chrome and Firefox. Older iPhones
+and Safari versions may not play it (not tested); if that matters, switch `scripts/make-audio.mjs` to
+`libmp3lame` at 24 kbps and the `.ogg` names in `site/content.js` and `scripts/serve.mjs` to `.mp3`.
+Changing the bitrate there and re-running `npm run audio` after deleting `site/audio/*/` re-encodes everything.
 
 ### Add a language
 

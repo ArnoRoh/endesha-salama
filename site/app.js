@@ -1,4 +1,4 @@
-import { audioItems } from './content.js';
+import { audioItems, audioPath } from './content.js';
 
 const L = await fetch('lessons.json').then((r) => r.json());
 const app = document.getElementById('app');
@@ -12,7 +12,7 @@ let pos = [0, 0];
 // ponytail: media served from the service worker cache may not play offline on iOS Safari (no Range support); Android Chrome is the target.
 const player = new Audio();
 function say(name) {
-  player.src = `audio/${lang()}/${name}.mp3`;
+  player.src = audioPath(lang(), name);
   player.play().catch(() => {});
 }
 const speaker = (name) => `<button class="speak" data-say="${name}" aria-label="${u('listen')}">🔊</button>`;

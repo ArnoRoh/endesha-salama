@@ -1,9 +1,12 @@
-// One MP3 per spoken line, made with Microsoft neural voices through edge-tts (needs internet).
+// One Ogg Opus clip (16 kbps mono, ~70% smaller than edge-tts's own 48 kbps MP3) per spoken line.
+// Voices: Microsoft neural voices through edge-tts (needs internet), then re-encoded with ffmpeg + libopus.
 // Re-run after editing lessons.json: only lines whose voice or text changed are regenerated.
-//   pip install edge-tts   (or set EDGE_TTS=/path/to/edge-tts)   then   npm run audio
+//   pip install edge-tts imageio-ffmpeg   (or set EDGE_TTS=/path/to/edge-tts and FFMPEG=/path/to/ffmpeg)
+//   npm run audio
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
@@ -12,6 +15,8 @@ import { audioItems } from '../site/content.js';
 const run = promisify(execFile);
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', 'site');
 const edge = process.env.EDGE_TTS ?? 'edge-tts';
+const ffmpeg = process.env.FFMPEG ?? 'ffmpeg';
+const raw = join(tmpdir(), `endesha-${process.pid}.mp3`);
 const L = JSON.parse(await readFile(join(site, 'lessons.json'), 'utf8'));
 const hashFile = join(site, 'audio', 'hashes.json');
 const hashes = await readFile(hashFile, 'utf8').then(JSON.parse, () => ({}));
@@ -27,7 +32,8 @@ try {
     await mkdir(dirname(out), { recursive: true });
     for (let attempt = 1; ; attempt++) {
       try {
-        await run(edge, ['--voice', L.voices[a.lang], `--text=${a.text}`, '--write-media', out]);
+        await run(edge, ['--voice', L.voices[a.lang], `--text=${a.text}`, '--write-media', raw]);
+        await run(ffmpeg, ['-v', 'error', '-y', '-i', raw, '-ac', '1', '-c:a', 'libopus', '-b:a', '16k', '-application', 'voip', out]);
         break;
       } catch (err) {
         if (attempt === 3) throw new Error(`${a.file}: ${err.message}`);
@@ -39,6 +45,7 @@ try {
     console.log(`made ${a.file}`);
   }
 } finally {
+  await unlink(raw).catch(() => {});
   await mkdir(dirname(hashFile), { recursive: true });
   await writeFile(hashFile, JSON.stringify(hashes, null, 1) + '\n');
 }
