@@ -4,7 +4,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { audioItems } from '../site/content.js';
-import { ART } from '../site/art.js';
+import { ART, ART_FILES } from '../site/art.js';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', 'site');
 const read = (f) => readFile(join(site, f), 'utf8');
@@ -45,7 +45,8 @@ for (const a of audioItems(L)) {
 }
 
 const shell = (await read('sw.js')).match(/SHELL = \[([^\]]*)\]/)?.[1].match(/'([^']+)'/g) ?? [];
-for (const f of shell.map((s) => s.slice(1, -1)).filter((f) => f !== './')) if (!(await exists(f))) bad(`sw.js caches missing file ${f}`);
+const shellFiles = shell.map((s) => s.slice(1, -1));
+for (const f of shellFiles.filter((f) => f !== './')) if (!(await exists(f))) bad(`sw.js caches missing file ${f}`);
 for (const i of JSON.parse(await read('manifest.webmanifest')).icons) if (!(await exists(i.src))) bad(`manifest icon ${i.src} missing`);
 
 const sizeOf = async (d) => {
@@ -56,8 +57,13 @@ const sizeOf = async (d) => {
 };
 const artSize = (await stat(join(site, 'art.js'))).size;
 if (artSize > 120e3) bad(`art.js is ${artSize} bytes, budget is 120 KB`);
-for (const [name, draw] of Object.entries(ART))
-  if (Buffer.byteLength(draw()) > 4e3) bad(`${name}: SVG exceeds 4 KB`);
+for (const f of ART_FILES) {
+  if (!shellFiles.includes(f)) bad(`${f}: picture missing from offline SHELL`);
+  if (!(await exists(f))) { bad(`missing picture ${f}`); continue; }
+  const bytes = await readFile(join(site, f));
+  if (bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WEBP') bad(`${f}: not a WebP image`);
+  if (bytes.length > 40e3) bad(`${f}: picture exceeds 40 KB`);
+}
 const size = await sizeOf(site);
 if (size > 5e6) bad(`site is ${(size / 1e6).toFixed(1)} MB, budget is 5 MB`);
 

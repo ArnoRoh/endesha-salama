@@ -46,10 +46,16 @@ After a lesson edit, reload twice: the offline cache shows the old copy once, th
 Everything the learner sees and hears is in `site/lessons.json`:
 
 - `ui` — interface words, per language.
-- `modules[].steps[]` — `id`, `pic` (emoji for now; replace with images later), `text` per language.
+- `modules[].steps[]` — `id`, `pic` (emoji fallback), `art` (picture name), `text` per language.
   A step with `answer` (`safe` or `danger`) is a question and needs `why` per language.
 
-Then regenerate the voices and check:
+Pictures use the approved comic ink style: off-white lines on navy, with one amber teaching detail.
+Each picture is a 480 × 400 WebP in `site/art/`, with a 40 KB limit. `site/art.js` maps its name to
+an image. Add each picture to `SHELL` in `site/sw.js` so it is available offline before its lesson
+is opened. Keep question pictures free of answer symbols. Source prompts are in
+`scripts/art-prompts.json`. Bump `CACHE` after changes to site files.
+
+After a lesson text change, regenerate the voices and check:
 
 ```sh
 pip install edge-tts imageio-ffmpeg    # imageio-ffmpeg bundles an ffmpeg that can write Opus

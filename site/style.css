@@ -102,13 +102,6 @@ a { color: inherit; }
 @keyframes pulse { 50% { transform: scale(1.12); } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
-/* Ink pictures (art.js): one teaching motion at most, with a still fallback above. */
+/* Static comic pictures stay clear at phone size. */
 .pic:has(.art) { animation: none; line-height: 0; }
-.pic .art { width: min(78vw, 17rem); height: auto; }
-.art .focus { filter: drop-shadow(0 0 3px #ffb30066); }
-.ink-glow { animation: ink-glow 2.4s ease-in-out infinite; }
-.ink-tighten { transform-origin: 120px 100px; animation: ink-tighten 1s ease-out both; }
-.ink-dangle { transform-origin: 150px 100px; animation: ink-dangle 2.4s ease-in-out infinite; }
-@keyframes ink-glow { 50% { opacity: .72; } }
-@keyframes ink-tighten { from { transform: translateY(5px) scaleY(1.06); } }
-@keyframes ink-dangle { 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
+.pic .art { width: min(78vw, 17rem); height: auto; border-radius: 0.8rem; background: var(--navy); }

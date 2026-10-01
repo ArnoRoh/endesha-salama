@@ -1,0 +1,190 @@
+{
+  "style": "Use the supplied image ONLY as the approved VISUAL STYLE reference, not as the scene to repeat. Create a NEW single educational illustration for Endesha Salama, adult East African/eastern DRC motorcycle-taxi safety. STYLE: slightly cartoony adult comic-strip ink illustration, confident rounded flowing off-white #e9eef3 contours, bold flat navy/slate shadow shapes, simplified friendly natural forms, little texture, no dense hatching or realism. Solid dark navy #0f2a44 background, optional quiet darker/lighter navy simple shapes. Exactly ONE amber #ffb300 focal object/detail specified below, very restrained glow. ALL other colors neutral navy/slate/off-white; skin dark slate, no colored skin tones. No red/green. Real adult proportions and anatomically correct hands, no big eyes, exaggerated expressions, mascots or childish bodies. Motorcycles MUST be small ordinary 100–150cc spoked-wheel commuter boda-boda bikes, no racing superbikes; all worn helmets full-face with solid chin bar. COMPOSITION: wide 6:5 panel intended to display at 280 pixels wide; teaching detail must be LARGE and unmistakable, sparse background, simplify secondary objects, allow breathing room. NO TEXT, letters, numbers, labels, ticks, crosses, badges, watermarks or explanatory judgements. No gore, blood, visible injuries or bodies on the ground.",
+  "scenes": [
+    {
+      "id": "check-1",
+      "art": "bike-check",
+      "prompt": "A helmeted adult African rider crouches beside a parked small 125 cc commuter motorcycle on its stand, doing a pre-ride inspection. Clear entire small bike silhouette, no passengers. ONE amber focal detail at the front wheel where his hand checks. Simple sparse setting, no labels."
+    },
+    {
+      "id": "check-2",
+      "art": "tyre-pressure",
+      "prompt": "Close-up of a real spoked motorcycle tyre, valve and an adult dark-skinned hand attaching a small round pressure gauge firmly to the valve. Gauge dial has simple white tick marks with no numbers. Good visible tyre tread in off-white. ONLY the small gauge body/rim is amber. Large clear mechanical detail, avoid extra fingers or impossible detached hose."
+    },
+    {
+      "id": "check-3",
+      "art": "brake-test",
+      "prompt": "Close-up of two real controls on the same parked small motorcycle, composed as one scene: dominant gloved right hand squeezing the FRONT BRAKE lever toward the handlebar, with a smaller clear lower view of sturdy boot poised over the rear brake pedal. ONE amber highlight on the front brake lever only; rear pedal neutral white. Clear natural control anatomy, no words, no arrows."
+    },
+    {
+      "id": "check-4",
+      "art": "lights-check",
+      "prompt": "Three-quarter front view of a parked small 125cc commuter bike, a rider beside it checking the lighting. The round headlight is the ONLY amber luminous point. Front indicators, handlebar, round mirrors and a small rear lamp silhouette are neutral off-white. No colored indicators or tail lamp. Sparse large simple shapes."
+    },
+    {
+      "id": "check-q1",
+      "art": "weak-brakes",
+      "prompt": "Close-up of the handlebar of a small commuter motorcycle being ridden, with gloved hand pulling a brake lever all the way against the grip. The brake cable housing is visibly loose and frayed near the lever, clearly drawn with a separated broken inner wire. ONLY this loose brake-cable connection is amber. A sliver of road beyond suggests the rider setting off. No check, cross or symbols indicating judgement."
+    },
+    {
+      "id": "check-q2",
+      "art": "chain-fuel",
+      "prompt": "A parked small commuter motorcycle and crouching adult rider checking the drive chain with one gloved hand. A plain fuel jerrycan with closed cap rests beside the bike as supporting context, no pouring. ONLY a short section of the drive chain under the checking hand is amber. No judgement symbols."
+    },
+    {
+      "id": "gear-1",
+      "art": "helmet-on",
+      "prompt": "Natural three-quarter portrait of an adult dark-skinned African rider checking the fit of a conventional FULL-FACE helmet with both hands lightly at the temples, helmet sitting securely and level. Helmet silhouette unmistakable with closed dark visor and solid chin bar. ONLY one short amber rim accent around the helmet brow; everything else monochrome. Ordinary work jacket, adult proportions."
+    },
+    {
+      "id": "gear-2",
+      "art": "strap-closed",
+      "prompt": "TIGHT three-quarter close-up of the lower full-face helmet chin bar and chin strap. Two natural adult dark-skinned hands gently pull outward on a CLEARLY CONNECTED SINGLE CLOSED rectangular quick-release buckle snugly under the jaw. Black/dark strap runs continuously from both sides of helmet through the buckle, no loose hook or disconnected parts, not a necklace. ONLY the connected buckle and adjacent short strap section are amber. Crop crown and torso to make buckle and hands large, hands do not obscure closure."
+    },
+    {
+      "id": "gear-3",
+      "art": "vest",
+      "prompt": "Waist-up adult African motorcycle rider wearing a full-face helmet and a correctly shaped sleeveless reflective safety vest over a plain work jacket. Confident relaxed asymmetrical standing pose, no hands hiding vest. ONE connected amber focal object: the vest's broad reflective H-shaped bands, other vest fabric stays dark slate. Off-white helmet and clothing outlines. No other bright objects."
+    },
+    {
+      "id": "gear-4",
+      "art": "boots-gloves",
+      "prompt": "Close-up of a sturdy lace-up motorcycle boot that visibly covers the ankle and a protective full-finger riding glove. Gloved hands fastening the boot laces make one natural connected action, frame from knee down with both gloved hands visible. ONLY the boot ankle cuff has amber accent. Clean shapes, anatomically sound glove fingers, no bare toes or fingers."
+    },
+    {
+      "id": "gear-q1",
+      "art": "strap-open",
+      "prompt": "TIGHT three-quarter close-up of lower full-face motorcycle helmet and neck, same teaching scale as a chin-buckle detail. Two visibly separated strap ends hang loose, with a broad dark GAP between male and female buckle halves, nothing bridges them beneath the chin. ONLY the dangling open chin strap/buckle assembly is amber. No hands, no facial expression, no ticks, crosses or warning marks. Large unmistakable open buckle."
+    },
+    {
+      "id": "gear-q2",
+      "art": "flip-flop",
+      "prompt": "Close-up side view of a dark-skinned adult rider's BARE foot wearing a simple thong flip-flop, resting on a small commuter motorcycle's footpeg. Clearly exposed heel, toes and ankle, trousers end above ankle. Include cropped neutral engine and peg for context. ONLY the bare foot/ankle outline is amber, sandal dark navy. No injuries, no judgement symbols."
+    },
+    {
+      "id": "gear-q3",
+      "art": "two-helmets",
+      "prompt": "Medium close side/three-quarter view of exactly TWO adult African people seated in tandem on ONE small commuter motorcycle, driver in front with hands on bars and one passenger behind. Both have real full-face helmets and visibly CLOSED chin straps with small connected buckles under their jaws. Frame upper bodies large enough to see BOTH fastened buckles. ONLY the passenger buckle has small amber highlight, driver buckle off-white. No approval symbols or gestures."
+    },
+    {
+      "id": "road-1",
+      "art": "steady-speed",
+      "prompt": "A helmeted African adult riding a small 125 cc commuter motorcycle slowly on a visibly rough dusty road. Calm upright posture, both hands on bars, wheels tracking shallow ruts, no speed streaks. A close foreground view of the speedometer is integrated at bottom with a low white needle, ONE small amber rim highlight around the gauge, dial ticks only no numbers. Sparse road context, adult comic style."
+    },
+    {
+      "id": "road-2",
+      "art": "following-gap",
+      "prompt": "Elevated oblique view of a small motorcycle rider following a car on the SAME road, same direction, with a very large empty road distance between them. Driver in full-face helmet. ONE amber double-ended measurement line along the EMPTY GAP between bike and car, not a path crossing traffic. All vehicles off-white outlines and slate. Clear spatial diagram with natural illustrated vehicles, no numbers or text."
+    },
+    {
+      "id": "road-3",
+      "art": "wet-road",
+      "prompt": "Helmeted adult African rider on small commuter motorcycle in light rain, upright relaxed and slow through a shallow puddle on rough road. Both wheels planted, both hands on bars, no dramatic lean, no skidding. ONE amber focal area outlining the wet patch ahead of front wheel. Rain streaks and sparse gravel neutral off-white. No danger symbols, no injury."
+    },
+    {
+      "id": "road-4",
+      "art": "night-ride",
+      "prompt": "A helmeted adult African rider on a small commuter motorcycle moving cautiously through a dark quiet road at night. Dominant ONE amber headlight and its short connected beam illuminating road immediately ahead. Everything else sparse off-white ink and flat slate, including small dim neutral moon. Both hands on bars, upright posture, no speed streaks."
+    },
+    {
+      "id": "road-q1",
+      "art": "blind-overtake",
+      "prompt": "Elevated oblique view of a large truck rounding a BLIND bend around a dark hill or dense roadside vegetation that blocks the view ahead. A much smaller helmeted motorcycle rider is alongside the truck, overtaking into the opposing half of the road toward the unseen bend. Both travel same direction. ONE amber highlight on the small overtaking motorcycle silhouette. No crashes, no warning symbols, no arrows or judgement labels. Make truck, bike and hidden bend read clearly."
+    },
+    {
+      "id": "road-q2",
+      "art": "junction-stop",
+      "prompt": "Three-quarter rear view of an adult helmeted motorcycle rider STOPPED at the mouth of a T junction, one boot firmly on the ground, hands on bars, helmet turned to look across intersecting road. No traffic signals or jurisdiction-specific lane markings. ONE amber focal accent on the planted boot/stop position. Intersecting road visibly runs left and right. No ticks or judgement symbols."
+    },
+    {
+      "id": "load-1",
+      "art": "one-passenger",
+      "prompt": "Side view of exactly TWO adult African people on one small 125cc commuter motorcycle: ONE driver with hands on bars, exactly ONE passenger behind seated properly. Both full-face helmets closed straps. Show both adults and whole bike clearly in adult proportions. ONE small amber outline on passenger jacket shoulder to focus passenger count. No extra people or symbols."
+    },
+    {
+      "id": "load-2",
+      "art": "passenger-helmet",
+      "prompt": "Medium close-up of an adult African passenger seated behind a driver on a small motorcycle. Passenger is fastening their own full-face helmet strap, visibly closed buckle under chin; driver partially visible in foreground in a neutral full-face helmet. ONLY passenger helmet brow rim has amber accent. Natural relaxed posture, no badges.\nFinal correction: Preserve this illustration's composition, people, helmets, natural adult proportions, bold simplified comic ink style and navy/slate/off-white palette. Make TWO precise corrections. 1) Remove the amber brow-rim accent on the passenger helmet; make that rim off-white like the driver's helmet. 2) Replace the dangling hook-shaped buckle between the passenger's hands with a clearly CONNECTED, closed rectangular quick-release buckle, dark strap continuous from each side of helmet through the buckle, snug under the jaw. Hands gently pull on strap ends without hiding the closure. The buckle alone is the SINGLE amber #ffb300 focal point. No text, ticks, crosses or extra accent colors. Change nothing else."
+    },
+    {
+      "id": "load-3",
+      "art": "secure-load",
+      "prompt": "Rear three-quarter close-up of a small parked commuter motorcycle with one modest rectangular parcel centered on the rear rack, secured firmly by crossed tie-down straps. Parcel no wider than handlebars and balanced, not obscuring lights or mirrors. ONE connected amber focal object: the crossing tie-down straps. Everything else off-white ink and navy/slate. No people needed, no words."
+    },
+    {
+      "id": "load-q1",
+      "art": "three-passengers",
+      "prompt": "Clear side view of one small motorcycle with EXACTLY FOUR adults total: ONE driver at front with hands on bars and THREE separate adult passengers squeezed behind. Four separate adult heads, four distinct seated torsos, all wear full-face helmets. This is a neutral question picture, no tick/cross/warning/expression. ONLY the rear seat rail beneath the overcrowded passengers has amber highlight. All riders adult proportions, no children. Make the count unmistakable."
+    },
+    {
+      "id": "load-q2",
+      "art": "wide-load",
+      "prompt": "Rear view of a small commuter motorcycle whose oversized wide bundle extends far beyond BOTH sides of the bike and obstructs the rider's view of the mirrors. Helmeted driver partially visible, oversized load clear. ONE amber outline around the single wide load silhouette. No ticks/crosses/arrows or labels. Neutral question illustration."
+    },
+    {
+      "id": "load-q3",
+      "art": "passenger-footrests",
+      "prompt": "Side close view of an adult passenger properly seated behind driver, both in full-face helmets. Passenger holds the bike's rear grab rail firmly, and both booted feet are on their corresponding passenger footrests; use three-quarter side angle to show footrest placement and grip naturally. ONE amber accent at visible passenger boot contacting its footrest. No approving symbols or extra passengers."
+    },
+    {
+      "id": "habits-1",
+      "art": "refuse-alcohol",
+      "prompt": "Adult African rider standing beside a PARKED small motorcycle, holding a full-face helmet in one arm and raising the other palm to decline a single plain beer bottle offered from edge of frame. ONE amber focus on the offered beer bottle. Dignified neutral expression and anatomically natural open palm; no prohibition symbol, no text or logos. Simplified fun comic style."
+    },
+    {
+      "id": "habits-2",
+      "art": "park-to-phone",
+      "prompt": "Adult African rider safely PARKED well off the road beside a small motorcycle on its stand, helmet resting on seat. Rider standing beside bike using a phone. Road clearly separated in distant background, no riding. ONLY phone screen/frame is amber. No text on phone, no badges or ticks."
+    },
+    {
+      "id": "habits-3",
+      "art": "rest-break",
+      "prompt": "Adult African rider taking a quiet seated rest beneath a simple tree beside a parked small commuter motorcycle well away from road. Helmet rests securely on seat, hands relaxed on lap, posture naturally at rest without exaggerated sleepy face or Z symbols. ONE small amber accent on the shaded resting seat/bench. Sparse friendly comic drawing."
+    },
+    {
+      "id": "habits-q1",
+      "art": "phone-riding",
+      "prompt": "Side three-quarter view of helmeted adult African rider MOVING on a small commuter motorcycle, left hand holds phone against helmet ear while only right hand remains on handlebar. Both wheels on road and seated riding posture clearly visible. ONLY the phone is amber. No warning marks, no facial expression, no tick/cross."
+    },
+    {
+      "id": "habits-q2",
+      "art": "two-beers",
+      "prompt": "Adult African rider at a simple roadside table with EXACTLY TWO plain empty beer bottles in foreground and full-face motorcycle helmet resting beside them. Motorcycle parked in background. Neutral composed rider, no drunken caricature or wobbling. ONE amber highlight on the nearer beer bottle; second bottle off-white. No brand names, labels or judgement symbols."
+    },
+    {
+      "id": "habits-q3",
+      "art": "safe-rest",
+      "prompt": "Helmeted adult African rider has stopped a small motorcycle on its stand in a wide safe roadside resting area separated from traffic. Rider now seated on a low bench beside bike, shoulders relaxed, full-face helmet set on bike seat. ONE amber accent on the resting rider's bench edge. No sleep lettering, ticks or approval symbols."
+    },
+    {
+      "id": "crash-1",
+      "art": "warn-traffic",
+      "prompt": "Non-graphic roadside safety illustration: a helmeted adult helper stands safely well OFF the road on the shoulder, warning approaching distant traffic with one raised hand. A small unattended motorcycle is parked or tipped harmlessly far behind on shoulder, no victim or bodies. ONE amber reflective warning triangle placed at a safe distance along road edge. No red or green, no blood, no injuries, no fire."
+    },
+    {
+      "id": "crash-2",
+      "art": "emergency-call",
+      "prompt": "Non-graphic close-up of an African adult helper standing in a safe roadside place calling emergency services on a phone and pointing with other hand toward a clearly recognizable road junction/location in background. ONE amber phone. Phone has no digits or words. Small unattended bike far behind provides context, no victims, bodies, blood or injuries. Calm efficient gesture, no expression."
+    },
+    {
+      "id": "crash-3",
+      "art": "leave-helmet",
+      "prompt": "Non-graphic instructional close-up: a fully clothed upright adult wearing a full-face motorcycle helmet kept securely ON. A helper's open hands gently steady the sides of the helmet without lifting it. Frame only helmet, neck/shoulders and helper's hands; no fallen body or visible injury. ONE amber accent along base of helmet at neck, illustrating keeping head still. No pulling arrows, no removing helmet, no marks or text."
+    },
+    {
+      "id": "crash-4",
+      "art": "cloth-pressure",
+      "prompt": "Non-graphic instructional close-up of two adult dark-skinned hands applying firm downward pressure through a folded CLEAN opaque cloth on another person's clothed forearm. Only forearm and hands visible, no visible wound, no blood, no embedded objects, no injured body. ONE amber outline on the folded cloth where pressure is applied. Simple clear anatomically sound hands, no text or arrows."
+    },
+    {
+      "id": "crash-q1",
+      "art": "neck-still",
+      "prompt": "Non-graphic contextual question illustration, close-up of a helmeted adult's upright head and clothed shoulders with two helpers' hands near the shoulders. Helmet remains on, head aligned with neck, no actual lifting or dangerous motion is drawn. ONE amber accent at the neck/collar to focus the topic. No fallen or injured body, blood, visible injury, motion arrows, tick/cross or judgement symbols. Illustrate the neck-care situation, not a dramatic casualty."
+    },
+    {
+      "id": "crash-q2",
+      "art": "location-call",
+      "prompt": "Non-graphic adult African helper using a phone beside a distinctive roadside junction and simple unlettered direction sign, gesturing to explain the location. Small neutral outline of an emergency van approaching in far background, NO cross logo or flashing colored lights. ONE amber phone. No phone digits or words, no blood, injury or victims, no approving symbols.\nFinal correction: Correct this illustration so the emergency caller is unmistakably standing safely off the road, NOT riding or sitting on a motorcycle while on the phone. Remove the foreground motorcycle under the caller and show the caller standing with both feet on the roadside shoulder. Put a small parked commuter motorcycle on its stand BEHIND the caller. Retain the junction and unlettered direction sign and distant neutral emergency van, the pointing gesture, the full-face helmet, adult African rider, simplified bold comic ink style. ONLY the phone is amber #ffb300; all else off-white and dark navy/slate. No red cross logo, no text, no injury, no victims, no tick/cross symbols."
+    }
+  ]
+}
