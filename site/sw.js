@@ -1,6 +1,6 @@
 // Offline: serve from cache, refresh the cache in the background (stale-while-revalidate).
 // Bump CACHE to drop old files after a breaking change.
-const CACHE = 'es-v7';
+const CACHE = 'es-v8';
 const SHELL = [
   './', 'index.html', 'style.css', 'app.js', 'content.js', 'art.js', 'lessons.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png',
   'art/bike-check.webp', 'art/tyre-pressure.webp', 'art/brake-test.webp', 'art/lights-check.webp', 'art/weak-brakes.webp', 'art/chain-fuel.webp',
@@ -17,7 +17,7 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('activate', (e) => {
-  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => /^es-v\d+$/.test(k) && k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
 self.addEventListener('fetch', (e) => {
