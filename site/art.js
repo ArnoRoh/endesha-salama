@@ -1,42 +1,41 @@
-// Pictures drawn as small inline SVG (flat, adult, road-safety-poster style). Animation lives in style.css.
-// A step uses one with "art": "<name>" in lessons.json; steps without it keep their emoji "pic".
-const SKIN = '#7a4a2e', STRAP = '#1b1b1b', METAL = 'fill="#cfd6dd" stroke="#6b7782" stroke-width="2"';
-const BODY = 'M20 200C22 165 50 158 90 160H130C175 160 210 168 222 200Z';
+// Ink outlines with one amber teaching point. Motion lives in style.css.
+// Shared parts use local coordinates; each scene places them inside the same dark panel.
+const NAVY = '#0f2a44', SLATE = '#263b4b';
+const svg = (body) => `<svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" aria-hidden="true"><rect width="240" height="200" rx="16" fill="${NAVY}"/><g fill="none" stroke="#e9eef3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</g></svg>`;
+const place = (x, y, scale, body) => `<g transform="translate(${x} ${y}) scale(${scale})">${body}</g>`;
+const focus = (body, cls = '') => `<g class="focus ${cls}" stroke="#ffb300">${body}</g>`;
 
-const bg = '<circle cx="115" cy="100" r="92" fill="#0f2a44" opacity=".07"/>';
-const tick = '<g class="badge"><circle cx="206" cy="34" r="20" fill="#1b8a3a"/><path d="M196 34L204 42L218 26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>';
-const svg = (body) => `<svg class="art" viewBox="0 0 240 200" aria-hidden="true">${body}</svg>`;
+// Full-face helmet, front view: sealed visor, cheek padding and solid chin bar.
+const helmet = (lit = false) => {
+  const shell = `<path d="M-25 27C-26 9-17 0 0 0S26 9 25 27L22 43Q18 53 0 54Q-18 53-22 43Z" fill="${NAVY}"/>`;
+  return (lit ? focus(shell, 'ink-glow') : shell) + `<path d="M-20 19Q0 13 20 19L18 32Q0 38-18 32Z" fill="${SLATE}"/><path d="M-15 22Q0 18 14 22M-19 36L-14 43Q0 49 14 43L19 36M-8 43H8M-5 47H5"/><path d="M-16 10Q0 5 16 10" stroke-width="1"/>`;
+};
+const neck = () => `<path d="M-12 50L-13 65Q0 72 13 65L12 50" fill="${SLATE}"/>`;
+const body = () => `<path d="M-13 62L-39 72Q-48 76-51 91L-55 136H55L51 91Q48 76 39 72L13 62L0 76Z" fill="${NAVY}"/><path d="M-39 76L-33 136M39 76L33 136M0 76V136M-13 62L-21 75L-8 83M13 62L21 75L8 83"/>`;
+const strap = () => `<path d="M-18 49L-12 60H12L18 49" stroke-width="2.6"/><rect x="-4" y="57" width="8" height="6" rx="1" fill="${SLATE}"/>`;
+const riderBust = (lit = false, litStrap = false) => body() + neck() + helmet(lit) + (litStrap ? focus(strap()) : strap());
 
-const jacket = (col) => `<path d="${BODY}" fill="${col}"/><path d="M20 200C22 180 30 170 44 165L52 200ZM222 200C220 180 212 172 198 166L190 200Z" fill="#ffb300"/>`;
-const vest = `<path d="${BODY}" fill="#d7e600"/><g class="shine" stroke="#eef2f5" stroke-width="7"><path d="M44 182H196M40 194H200"/></g><path d="M92 160L110 200L128 160" fill="none" stroke="#a3ad00" stroke-width="3"/>`;
+// The buckle is the main drawing here, rather than a small side-view detail.
+const chin = () => place(120, 17, 1.65, neck() + helmet()) + `<path d="M60 182Q61 163 86 156L99 147M180 182Q179 163 154 156L141 147M99 147Q120 156 141 147"/>`;
+const chinStrap = (closed) => closed
+  ? focus(`<path d="M90 100L98 111Q100 119 105 119M150 100L142 111Q140 119 135 119" stroke-width="5"/><rect x="105" y="111" width="30" height="16" rx="3" fill="${SLATE}"/><path d="M119 112V126M125 117H130" stroke-width="2"/>`, 'ink-tighten')
+  : focus(`<path d="M90 100L83 139" stroke-width="5"/><rect x="74" y="139" width="18" height="17" rx="2" fill="${SLATE}"/><path d="M79 144H87V151H79Z" stroke-width="1.4"/><g class="ink-dangle"><path d="M150 100L158 136" stroke-width="5"/><path d="M150 136H166V144H162V153H154V144H150Z" fill="${SLATE}"/></g>`);
 
-const closedStrap = `<path d="M98 132C100 152 140 154 168 138" fill="none" stroke="${STRAP}" stroke-width="7" stroke-linecap="round"/><g class="click"><rect x="126" y="143" width="16" height="13" rx="3" ${METAL}/></g>`;
-const openStrap = `<g class="swing a"><path d="M98 132L102 166" stroke="${STRAP}" stroke-width="7" stroke-linecap="round"/><rect x="95" y="164" width="14" height="12" rx="3" ${METAL}/></g><g class="swing b"><path d="M156 138L160 160" stroke="${STRAP}" stroke-width="7" stroke-linecap="round"/><rect x="154" y="158" width="12" height="9" rx="2" ${METAL}/></g>`;
+const vest = () => focus(`<path d="M-15 65L-34 70L-30 95L-34 136H34L30 95L34 70L15 65L0 84Z" fill="${SLATE}"/><path d="M-23 74L-19 105M23 74L19 105M-30 110H30M-32 120H32" stroke-width="5"/><path d="M0 84V136" stroke-width="1.2"/>`, 'ink-glow');
+const boot = () => `<path d="M-27 0H12L15 44Q23 52 43 57Q61 60 63 74V85H-30V61L-27 45Z" fill="${SLATE}"/><path d="M-30 76H62M-17 13H5M-17 23H6M-16 33H7M-12 10L-10 44L14 62M-21 84V89H61V85M-20 86V89M-5 86V89M10 86V89M25 86V89M40 86V89M54 86V89"/><path d="M36 60Q35 67 37 75"/>`;
+const hand = () => `<path d="M-19 72L-20 48L-32 29Q-35 22-30 20Q-25 18-21 25L-15 33L-15 8Q-15 1-10 1Q-5 1-5 8V27L-4-3Q-4-10 1-10Q6-10 6-3V27L8 1Q8-5 13-4Q18-3 17 4L16 29L20 12Q21 6 26 8Q31 10 29 16L24 46Q22 58 17 62V72Z" fill="${SLATE}"/><path d="M-19 61H18M-19 70H17M-12 37Q0 31 15 38M-7 45L-5 55M2 43V54M10 45L8 55"/>`;
+const foot = () => `<path d="M-30-55L-28-6Q-24 8-10 13L40 19Q54 22 57 30Q58 36 48 37H-23Q-39 35-39 26L-40-55" fill="${SLATE}"/><path d="M-27 15Q-19 11-12 16M40 25L47 28M49 30L53 32" stroke-width="1.2"/><path d="M-42 39H57Q62 39 61 43H-43Z" fill="${NAVY}"/><path d="M-18 36L5 19L25 37" stroke-width="4"/>`;
+// Cropped cockpit of a small commuter bike: narrow seat, tank, fork and round headlight.
+const bike = () => `<path d="M23 171H116L123 178H23ZM126 177Q139 163 165 164L187 179Q167 190 135 185Z" fill="${SLATE}"/><path d="M192 190L207 138L198 130L191 124M207 138L216 143L205 190M180 133L199 120H219M210 120L207 107"/><circle cx="207" cy="103" r="5" fill="${SLATE}"/><path d="M222 139Q230 147 222 155H214V139Z" fill="${SLATE}"/><path d="M178 131L188 126L196 129L194 136L184 138" fill="${SLATE}"/>`;
 
-// Full-face helmet seen from the side, facing right. cls animates the whole helmet.
-const helmet = (strap, col = '#c62828', cls = '') => `<g class="helmet ${cls}">
-  <path d="M58 122C48 100 50 60 78 40C100 24 142 24 164 48C178 64 182 92 182 112C182 126 176 136 162 136L118 134C100 134 80 134 68 130C62 128 60 126 58 122Z" fill="${col}"/>
-  <path d="M62 72C80 36 130 28 160 52" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-  <path d="M118 62C138 56 160 60 172 74C176 86 176 96 174 102L128 100C120 92 116 76 118 62Z" fill="#0b1c2e"/>
-  <path d="M128 68C142 64 156 68 163 76" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".45"/>
-  <path d="M150 116H172M150 123H172" stroke="#000" stroke-width="3" stroke-linecap="round" opacity=".3"/>${strap}</g>`;
-
-const neck = `<path d="M92 124L86 166Q110 176 134 166L128 124Z" fill="${SKIN}"/>`;
-const rider = ({ body = jacket('#35465a'), strap = '', col, cls } = {}) => body + neck + helmet(strap, col, cls);
-
-const boot = `<g transform="translate(2 60) scale(.72)"><path d="M72 30H124L128 104C150 108 192 108 198 132V150H70Z" fill="#35465a"/><rect x="66" y="150" width="136" height="16" rx="6" fill="#111"/><path d="M72 62H126M72 82H126" stroke="#ffb300" stroke-width="7"/></g>`;
-const glove = `<g transform="translate(154 56) scale(.9)"><g fill="#35465a"><rect x="6" y="8" width="17" height="56" rx="8"/><rect x="25" y="0" width="17" height="64" rx="8"/><rect x="44" y="4" width="17" height="60" rx="8"/><rect x="63" y="14" width="16" height="50" rx="8"/><rect x="4" y="50" width="78" height="56" rx="14"/><rect x="-14" y="62" width="30" height="16" rx="8" transform="rotate(-30 4 70)"/></g><rect x="4" y="58" width="78" height="12" fill="#ffb300"/><rect x="10" y="102" width="66" height="30" rx="6" fill="#1f2b3a"/></g>`;
-
-const flipFlop = `<rect x="80" y="8" width="42" height="104" rx="10" fill="${SKIN}"/><g class="slip"><path d="M82 108C76 122 74 134 80 142H196C208 142 208 132 198 128C184 122 160 120 144 108Z" fill="${SKIN}"/><rect x="72" y="140" width="136" height="10" rx="5" fill="#1565c0"/><path d="M178 140L156 120L132 140" fill="none" stroke="#0d3c7a" stroke-width="7" stroke-linejoin="round"/></g><rect x="60" y="164" width="150" height="10" rx="5" fill="#6b7782"/>`;
-
-const person = (x, y, s, col) => `<g transform="translate(${x} ${y}) scale(${s})">${rider({ strap: closedStrap, col })}</g>`;
 
 export const ART = {
-  'helmet-on': () => svg(bg + rider({ cls: 'drop' }) + tick),
-  'strap-closed': () => svg(bg + rider({ strap: closedStrap }) + tick),
-  'strap-open': () => svg(bg + rider({ strap: openStrap, cls: 'loose' })),
-  'vest': () => svg(bg + rider({ body: vest, strap: closedStrap }) + tick),
-  'boots-gloves': () => svg(bg + boot + glove + tick),
-  'flip-flop': () => svg(bg + flipFlop),
-  'two-helmets': () => svg(bg + person(-20, 40, 0.8, '#1565c0') + person(58, 40, 0.8, '#c62828') + tick),
+  'helmet-on': () => svg(place(120, 14, 1.27, riderBust(true))),
+  'strap-closed': () => svg(chin() + chinStrap(true)),
+  'vest': () => svg(place(120, 14, 1.27, riderBust() + vest())),
+  'boots-gloves': () => svg(place(59, 91, 1, boot() + focus(`<path d="M-27 0H12L13 9H-27Z" fill="${SLATE}"/>`)) + place(172, 48, 1.22, hand())),
+  'strap-open': () => svg(chin() + chinStrap(false)),
+  'flip-flop': () => svg(`<path d="M28 59H79L88 78V106H25V75ZM29 69H80M27 79H87M26 90H88M25 101H88M36 109L31 123H77M79 128V168H162M78 177H173" fill="${SLATE}"/><circle cx="49" cy="131" r="15" fill="${NAVY}"/><circle cx="49" cy="131" r="5"/><path d="M84 61V68H162V61M19 179H62"/>` + place(123, 132, 1.12, focus(foot())) + `<path d="M33 185H203" stroke-width="1" opacity=".45"/>`),
+  'two-helmets': () => svg(place(72, 18, 1, riderBust(false, true))
+    + place(153, 34, 1, riderBust()) + bike()),
 };

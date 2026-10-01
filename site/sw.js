@@ -1,6 +1,6 @@
 // Offline: serve from cache, refresh the cache in the background (stale-while-revalidate).
 // Bump CACHE to drop old files after a breaking change.
-const CACHE = 'es-v3';
+const CACHE = 'es-v4';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'content.js', 'art.js', 'lessons.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

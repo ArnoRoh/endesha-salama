@@ -4,6 +4,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { audioItems } from '../site/content.js';
+import { ART } from '../site/art.js';
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', 'site');
 const read = (f) => readFile(join(site, f), 'utf8');
@@ -28,6 +29,7 @@ for (const m of L.modules) {
     if (ids.has(s.id)) bad(`duplicate step id ${s.id}`);
     ids.add(s.id);
     if (!s.pic) bad(`${s.id}: no pic`);
+    if ('art' in s && !Object.hasOwn(ART, s.art)) bad(`${s.id}: unknown art ${s.art}`);
     for (const l of langs) {
       if (!s.text?.[l]) bad(`${s.id}: text.${l} missing`);
       if (s.answer && !s.why?.[l]) bad(`${s.id}: why.${l} missing`);
@@ -52,6 +54,10 @@ const sizeOf = async (d) => {
     n += e.isDirectory() ? await sizeOf(join(d, e.name)) : (await stat(join(d, e.name))).size;
   return n;
 };
+const artSize = (await stat(join(site, 'art.js'))).size;
+if (artSize > 120e3) bad(`art.js is ${artSize} bytes, budget is 120 KB`);
+for (const [name, draw] of Object.entries(ART))
+  if (Buffer.byteLength(draw()) > 4e3) bad(`${name}: SVG exceeds 4 KB`);
 const size = await sizeOf(site);
 if (size > 5e6) bad(`site is ${(size / 1e6).toFixed(1)} MB, budget is 5 MB`);
 

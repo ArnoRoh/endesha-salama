@@ -102,21 +102,13 @@ a { color: inherit; }
 @keyframes pulse { 50% { transform: scale(1.12); } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
-/* Drawn pictures (art.js). Motion is off for people who ask their phone for less of it. */
+/* Ink pictures (art.js): one teaching motion at most, with a still fallback above. */
+.pic:has(.art) { animation: none; line-height: 0; }
 .pic .art { width: min(78vw, 17rem); height: auto; }
-.helmet { transform-origin: 110px 132px; }
-.loose { animation: lift 2.2s ease-in-out infinite; }
-.swing { transform-origin: 98px 132px; animation: dangle 1.1s ease-in-out infinite alternate; }
-.swing.b { transform-origin: 156px 138px; animation-delay: -0.5s; }
-.click { transform-origin: 134px 150px; animation: snap 0.6s 0.5s both; }
-.badge { transform-origin: 206px 34px; animation: pop 0.5s 0.8s both cubic-bezier(0.3, 1.6, 0.5, 1); }
-@keyframes lift { 0%, 35% { transform: none; } 60%, 80% { transform: translate(-5px, -9px) rotate(-8deg); } 100% { transform: none; } }
-@keyframes dangle { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
-@keyframes snap { 0% { transform: scale(1.5); } 60% { transform: scale(0.85); } 100% { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } }
-.drop { animation: drop 1.2s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
-.shine { animation: shine 1.4s ease-in-out infinite alternate; }
-.slip { transform-origin: 196px 145px; animation: slip 2s ease-in-out infinite; }
-@keyframes drop { from { transform: translateY(-70px); opacity: 0; } }
-@keyframes shine { from { opacity: 0.45; } to { opacity: 1; } }
-@keyframes slip { 0%, 40% { transform: none; } 65%, 80% { transform: rotate(-9deg); } 100% { transform: none; } }
+.art .focus { filter: drop-shadow(0 0 3px #ffb30066); }
+.ink-glow { animation: ink-glow 2.4s ease-in-out infinite; }
+.ink-tighten { transform-origin: 120px 100px; animation: ink-tighten 1s ease-out both; }
+.ink-dangle { transform-origin: 150px 100px; animation: ink-dangle 2.4s ease-in-out infinite; }
+@keyframes ink-glow { 50% { opacity: .72; } }
+@keyframes ink-tighten { from { transform: translateY(5px) scaleY(1.06); } }
+@keyframes ink-dangle { 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
