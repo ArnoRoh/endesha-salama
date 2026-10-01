@@ -114,3 +114,9 @@ a { color: inherit; }
 @keyframes dangle { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
 @keyframes snap { 0% { transform: scale(1.5); } 60% { transform: scale(0.85); } 100% { transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .art * { animation: none !important; } }
+.drop { animation: drop 1.2s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+.shine { animation: shine 1.4s ease-in-out infinite alternate; }
+.slip { transform-origin: 196px 145px; animation: slip 2s ease-in-out infinite; }
+@keyframes drop { from { transform: translateY(-70px); opacity: 0; } }
+@keyframes shine { from { opacity: 0.45; } to { opacity: 1; } }
+@keyframes slip { 0%, 40% { transform: none; } 65%, 80% { transform: rotate(-9deg); } 100% { transform: none; } }
