@@ -1,0 +1,12 @@
+{
+  "name": "endesha-salama",
+  "private": true,
+  "type": "module",
+  "description": "Free motorcycle safety lessons in Kiswahili and English. No build step: the site is the site/ folder.",
+  "scripts": {
+    "audio": "node scripts/make-audio.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "python3 -m http.server 8080 -d site"
+  },
+  "license": "MIT"
+}
