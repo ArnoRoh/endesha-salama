@@ -1,6 +1,6 @@
 // Offline: serve from cache, refresh the cache in the background (stale-while-revalidate).
 // Bump CACHE to drop old files after a breaking change.
-const CACHE = 'es-v5';
+const CACHE = 'es-v6';
 const SHELL = [
   './', 'index.html', 'style.css', 'app.js', 'content.js', 'art.js', 'lessons.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png',
   'art/bike-check.webp', 'art/tyre-pressure.webp', 'art/brake-test.webp', 'art/lights-check.webp', 'art/weak-brakes.webp', 'art/chain-fuel.webp',
