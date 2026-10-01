@@ -1,0 +1,25 @@
+# Endesha Salama test server (systemd --user). Loopback only; Tailscale Serve adds tailnet HTTPS.
+#
+# Install (as user arno):
+#   mkdir -p ~/.config/systemd/user
+#   ln -sf /srv/repos/endesha-salama/scripts/endesha-salama.service ~/.config/systemd/user/endesha-salama.service
+#   systemctl --user daemon-reload && systemctl --user enable --now endesha-salama.service
+#   tailscale serve --bg --https=4520 http://127.0.0.1:4520      # tailnet only; never add --funnel
+# Remove: tailscale serve --https=4520 off; systemctl --user disable --now endesha-salama.service
+# Logs: journalctl --user -u endesha-salama.service -f
+
+[Unit]
+Description=Endesha Salama static site (test)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/repos/endesha-salama
+Environment=HOST=127.0.0.1
+Environment=PORT=4520
+ExecStart=/usr/bin/node scripts/serve.mjs
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -24,7 +24,7 @@
       "shareCert": "Shiriki cheti",
       "shareSite": "Shiriki na rafiki",
       "disclaimerTitle": "Tahadhari",
-      "disclaimer": "Haya ni mafunzo ya jumla tu. Hayachukui nafasi ya mafunzo rasmi ya udereva, leseni halali, wala sheria za barabarani za nchi yako. Maudhui na sauti zimetengenezwa kwa msaada wa akili mnemba (AI).",
+      "disclaimer": "Haya ni mafunzo ya jumla tu. Hayachukui nafasi ya mafunzo rasmi ya udereva, leseni halali, wala sheria za barabarani za nchi yako. Akili bandia (AI) imetengeneza maneno na sauti za mafunzo haya. Hakuna mtaalamu wa usalama barabarani wala wa huduma ya kwanza aliyeyakagua.",
       "brand": "Imeletwa kwako na Masika Ventures",
       "openSource": "Programu huria"
     },
@@ -49,7 +49,7 @@
       "shareCert": "Share certificate",
       "shareSite": "Share with a friend",
       "disclaimerTitle": "Disclaimer",
-      "disclaimer": "This is general safety education only. It does not replace formal rider training, a valid licence, or the traffic laws of your country. The content and voices were made with the help of AI.",
+      "disclaimer": "This is general safety education only. It does not replace formal rider training, a valid licence, or the traffic laws of your country. AI made the words and voices. No road-safety or first-aid expert has checked these lessons.",
       "brand": "Brought to you by Masika Ventures",
       "openSource": "Open source"
     }
@@ -61,11 +61,11 @@
       "title": { "sw": "Kabla ya Kuondoka", "en": "Before You Ride" },
       "steps": [
         { "id": "check-1", "pic": "🏍️🔍", "text": { "sw": "Kabla ya kuondoka, kagua pikipiki yako kila siku.", "en": "Check your motorcycle every day before you ride." } },
-        { "id": "check-2", "pic": "⭕💨", "text": { "sw": "Angalia matairi: yawe na upepo wa kutosha na yasiwe yameisha.", "en": "Check the tyres: they need enough air and must not be worn out." } },
+        { "id": "check-2", "pic": "⭕💨", "text": { "sw": "Pima upepo wa matairi kwa kipima upepo. Matairi yasiwe yameisha au kuharibika.", "en": "Check the tyre pressure with a gauge. Do not ride on worn or damaged tyres." } },
         { "id": "check-3", "pic": "🛑", "text": { "sw": "Jaribu breki za mbele na za nyuma.", "en": "Test the front and rear brakes." } },
-        { "id": "check-4", "pic": "💡", "text": { "sw": "Washa taa ya mbele, taa ya nyuma na taa za kuashiria.", "en": "Switch on the headlight, the tail light and the indicators." } },
+        { "id": "check-4", "pic": "💡", "text": { "sw": "Hakikisha taa ya mbele, taa ya nyuma, taa ya breki na taa za kuashiria zinafanya kazi.", "en": "Check that the headlight, tail light, brake light and indicators work." } },
         { "id": "check-q1", "pic": "🛑❓", "answer": "danger", "text": { "sw": "Dereva anaondoka na breki mbovu.", "en": "A rider leaves with weak brakes." }, "why": { "sw": "Hatari! Usiendeshe. Rekebisha breki kwanza.", "en": "Danger! Do not ride. Fix the brakes first." } },
-        { "id": "check-q2", "pic": "⛓️⛽", "answer": "safe", "text": { "sw": "Dereva anakagua mnyororo na kuweka mafuta kabla ya safari.", "en": "A rider checks the chain and adds fuel before the trip." }, "why": { "sw": "Salama! Ukaguzi mdogo unazuia ajali kubwa.", "en": "Safe! A small check prevents a big crash." } }
+        { "id": "check-q2", "pic": "⛓️⛽", "answer": "safe", "text": { "sw": "Dereva anakagua mnyororo na kuweka mafuta kabla ya safari.", "en": "A rider checks the chain and adds fuel before the trip." }, "why": { "sw": "Salama! Ukaguzi unakusaidia kuona tatizo kabla ya safari.", "en": "Safe! A check helps you find a problem before you ride." } }
       ]
     },
     {
@@ -73,12 +73,12 @@
       "icon": "⛑️",
       "title": { "sw": "Vifaa vya Kujikinga", "en": "Protective Gear" },
       "steps": [
-        { "id": "gear-1", "pic": "⛑️", "text": { "sw": "Vaa kofia ngumu kila safari, hata safari fupi.", "en": "Wear a helmet on every trip, even a short one." } },
+        { "id": "gear-1", "pic": "⛑️", "text": { "sw": "Vaa kofia ya pikipiki inayokutosha vizuri kila safari, hata safari fupi.", "en": "Wear a motorcycle helmet that fits you well on every trip, even a short one." } },
         { "id": "gear-2", "pic": "⛑️🔒", "text": { "sw": "Funga kamba ya kofia. Kofia isiyofungwa huruka wakati wa ajali.", "en": "Fasten the helmet strap. A helmet that is not fastened comes off in a crash." } },
         { "id": "gear-3", "pic": "👕✨", "text": { "sw": "Vaa jaketi la kuakisi mwanga ili madereva wengine wakuone.", "en": "Wear a reflective vest so other drivers can see you." } },
-        { "id": "gear-4", "pic": "🧤🥾", "text": { "sw": "Vaa glovu na viatu vinavyofunika miguu.", "en": "Wear gloves and closed shoes." } },
+        { "id": "gear-4", "pic": "🧤🥾", "text": { "sw": "Vaa glovu na viatu imara vinavyofunika vifundo vya miguu.", "en": "Wear gloves and sturdy shoes that cover your ankles." } },
         { "id": "gear-q1", "pic": "⛑️🔓", "answer": "danger", "text": { "sw": "Dereva amevaa kofia lakini kamba haijafungwa.", "en": "A rider wears a helmet but the strap is open." }, "why": { "sw": "Hatari! Funga kamba kila wakati.", "en": "Danger! Always fasten the strap." } },
-        { "id": "gear-q2", "pic": "👡", "answer": "danger", "text": { "sw": "Dereva anaendesha akiwa amevaa ndala.", "en": "A rider rides in flip-flops." }, "why": { "sw": "Hatari! Ndala hazilindi miguu. Vaa viatu vinavyofunika.", "en": "Danger! Flip-flops do not protect your feet. Wear closed shoes." } },
+        { "id": "gear-q2", "pic": "👡", "answer": "danger", "text": { "sw": "Dereva anaendesha akiwa amevaa ndala.", "en": "A rider rides in flip-flops." }, "why": { "sw": "Hatari! Ndala hazilindi miguu. Vaa viatu imara vinavyofunika vifundo vya miguu.", "en": "Danger! Flip-flops do not protect your feet. Wear sturdy shoes that cover your ankles." } },
         { "id": "gear-q3", "pic": "⛑️⛑️", "answer": "safe", "text": { "sw": "Dereva na abiria wote wamevaa kofia zilizofungwa.", "en": "The rider and the passenger both wear fastened helmets." }, "why": { "sw": "Salama! Abiria pia anahitaji kofia.", "en": "Safe! The passenger also needs a helmet." } }
       ]
     },
@@ -87,12 +87,12 @@
       "icon": "🛣️",
       "title": { "sw": "Barabarani", "en": "On the Road" },
       "steps": [
-        { "id": "road-1", "pic": "🐢", "text": { "sw": "Endesha kwa mwendo wa wastani. Mwendo kasi unaua.", "en": "Ride at a moderate speed. Speed kills." } },
+        { "id": "road-1", "pic": "🐢", "text": { "sw": "Usizidi kikomo cha mwendo. Punguza zaidi mwendo barabara ikiwa mbaya au huoni vizuri.", "en": "Stay within the speed limit. Slow down more when the road is bad or you cannot see well." } },
         { "id": "road-2", "pic": "🏍️↔️🚗", "text": { "sw": "Acha nafasi kubwa kati yako na gari lililo mbele.", "en": "Keep a big gap between you and the vehicle in front." } },
-        { "id": "road-3", "pic": "🌧️", "text": { "sw": "Mvua na matope hufanya barabara iteleze. Punguza mwendo na breki taratibu.", "en": "Rain and mud make the road slippery. Slow down and brake gently." } },
+        { "id": "road-3", "pic": "🌧️", "text": { "sw": "Maji, matope na changarawe vinaweza kufanya barabara iteleze. Punguza mwendo na tumia breki zote mbili taratibu.", "en": "Water, mud and loose gravel can make the road slippery. Slow down and use both brakes gently." } },
         { "id": "road-4", "pic": "🌙💡", "text": { "sw": "Usiku, washa taa na endesha polepole zaidi.", "en": "At night, switch on your lights and ride more slowly." } },
-        { "id": "road-q1", "pic": "🚛🏍️", "answer": "danger", "text": { "sw": "Dereva anapita lori kwenye kona bila kuona mbele.", "en": "A rider overtakes a lorry on a bend without seeing ahead." }, "why": { "sw": "Hatari! Pita tu pale unapoona barabara iko wazi mbele.", "en": "Danger! Only overtake when you can see a clear road ahead." } },
-        { "id": "road-q2", "pic": "✋👀", "answer": "safe", "text": { "sw": "Dereva anasimama na kuangalia kushoto na kulia kwenye makutano.", "en": "A rider stops and looks left and right at a junction." }, "why": { "sw": "Salama! Angalia pande zote kabla ya kuvuka.", "en": "Safe! Look both ways before you cross." } }
+        { "id": "road-q1", "pic": "🚛🏍️", "answer": "danger", "text": { "sw": "Dereva anapita lori kwenye kona bila kuona mbele.", "en": "A rider overtakes a lorry on a bend without seeing ahead." }, "why": { "sw": "Hatari! Pita tu mahali panaporuhusiwa na unapoona njia iko wazi mbele.", "en": "Danger! Overtake only where it is allowed and when you can see the road is clear ahead." } },
+        { "id": "road-q2", "pic": "✋👀", "answer": "safe", "text": { "sw": "Dereva anasimama na kuangalia kushoto na kulia kwenye makutano.", "en": "A rider stops and looks left and right at a junction." }, "why": { "sw": "Salama! Angalia pande zote, wape njia wenye haki ya kupita, kisha vuka njia ikiwa wazi.", "en": "Safe! Look both ways, let traffic with priority pass, then cross when the way is clear." } }
       ]
     },
     {
@@ -102,10 +102,10 @@
       "steps": [
         { "id": "load-1", "pic": "☝️🚶", "text": { "sw": "Beba abiria mmoja tu.", "en": "Carry only one passenger." } },
         { "id": "load-2", "pic": "🚶⛑️", "text": { "sw": "Abiria lazima avae kofia ngumu iliyofungwa.", "en": "The passenger must wear a fastened helmet." } },
-        { "id": "load-3", "pic": "📦🔗", "text": { "sw": "Funga mzigo vizuri. Mzigo mzito au mpana unaweza kukuangusha.", "en": "Tie the load well. A heavy or wide load can make you fall." } },
+        { "id": "load-3", "pic": "📦🔗", "text": { "sw": "Funga mzigo vizuri na usawa pande zote. Usizidishe uzito unaoruhusiwa kwa pikipiki.", "en": "Tie the load firmly and balance it on both sides. Do not go over the weight your motorcycle can carry." } },
         { "id": "load-q1", "pic": "🚶🚶🚶", "answer": "danger", "text": { "sw": "Dereva amebeba abiria watatu.", "en": "A rider carries three passengers." }, "why": { "sw": "Hatari! Beba abiria mmoja tu.", "en": "Danger! Carry only one passenger." } },
         { "id": "load-q2", "pic": "📦📦📦", "answer": "danger", "text": { "sw": "Mzigo ni mpana kuliko pikipiki na unazuia vioo.", "en": "The load is wider than the motorcycle and blocks the mirrors." }, "why": { "sw": "Hatari! Punguza mzigo au tumia usafiri mwingine.", "en": "Danger! Make the load smaller or use other transport." } },
-        { "id": "load-q3", "pic": "🚶⛑️👍", "answer": "safe", "text": { "sw": "Abiria mmoja, amevaa kofia na ameshika vizuri.", "en": "One passenger, wearing a helmet and holding on well." }, "why": { "sw": "Salama! Hivi ndivyo inavyotakiwa.", "en": "Safe! This is the correct way." } }
+        { "id": "load-q3", "pic": "🚶⛑️👍", "answer": "safe", "text": { "sw": "Abiria mmoja amevaa kofia iliyofungwa, ameshika vizuri na ameweka miguu kwenye sehemu za kukanyagia.", "en": "One passenger wears a fastened helmet, holds on well and keeps both feet on the footrests." }, "why": { "sw": "Salama! Kofia iliyofungwa na kukaa vizuri humlinda abiria.", "en": "Safe! A fastened helmet and good seating help protect the passenger." } }
       ]
     },
     {
@@ -114,11 +114,11 @@
       "title": { "sw": "Pombe, Simu na Uchovu", "en": "Alcohol, Phones and Tiredness" },
       "steps": [
         { "id": "habits-1", "pic": "🍺🚫", "text": { "sw": "Usinywe pombe kabla ya kuendesha. Pombe hupunguza uwezo wa kuona na kuamua.", "en": "Do not drink alcohol before you ride. Alcohol makes you slow to see and to decide." } },
-        { "id": "habits-2", "pic": "📱🚫", "text": { "sw": "Usitumie simu ukiendesha. Simama pembeni kwanza.", "en": "Do not use your phone while you ride. Stop at the side of the road first." } },
+        { "id": "habits-2", "pic": "📱🚫", "text": { "sw": "Usitumie simu ukiendesha. Simama kwanza mahali salama mbali na magari.", "en": "Do not use your phone while you ride. Stop first in a safe place away from traffic." } },
         { "id": "habits-3", "pic": "😴", "text": { "sw": "Ukichoka, pumzika. Usingizi unaweza kuja ghafla.", "en": "If you are tired, rest. Sleep can come suddenly." } },
-        { "id": "habits-q1", "pic": "📱🏍️", "answer": "danger", "text": { "sw": "Dereva anaongea na simu huku akiendesha.", "en": "A rider talks on the phone while riding." }, "why": { "sw": "Hatari! Simama pembeni kabla ya kupokea simu.", "en": "Danger! Stop at the side of the road before you answer." } },
+        { "id": "habits-q1", "pic": "📱🏍️", "answer": "danger", "text": { "sw": "Dereva anaongea na simu huku akiendesha.", "en": "A rider talks on the phone while riding." }, "why": { "sw": "Hatari! Simama mahali salama mbali na magari kabla ya kupokea simu.", "en": "Danger! Stop in a safe place away from traffic before you answer." } },
         { "id": "habits-q2", "pic": "🍺🍺", "answer": "danger", "text": { "sw": "Dereva amekunywa bia mbili tu na anasema yuko sawa.", "en": "A rider had only two beers and feels fine." }, "why": { "sw": "Hatari! Hata pombe kidogo ni hatari. Usiendeshe.", "en": "Danger! Even a little alcohol is dangerous. Do not ride." } },
-        { "id": "habits-q3", "pic": "😴☕", "answer": "safe", "text": { "sw": "Dereva aliyechoka anasimama kupumzika kwa dakika ishirini.", "en": "A tired rider stops to rest for twenty minutes." }, "why": { "sw": "Salama! Kupumzika kunaokoa maisha.", "en": "Safe! Rest saves lives." } }
+        { "id": "habits-q3", "pic": "😴☕", "answer": "safe", "text": { "sw": "Dereva aliyechoka anasimama mahali salama kupumzika.", "en": "A tired rider stops in a safe place to rest." }, "why": { "sw": "Salama! Endelea tu ukiwa macho na makini. Ukiwa na usingizi, lala kwanza.", "en": "Safe! Ride on only when you are awake and alert. If you are sleepy, sleep first." } }
       ]
     },
     {
@@ -127,11 +127,11 @@
       "title": { "sw": "Ajali Ikitokea", "en": "If a Crash Happens" },
       "steps": [
         { "id": "crash-1", "pic": "⚠️", "text": { "sw": "Kwanza, jilinde. Weka alama ya hatari ili magari mengine yapunguze mwendo.", "en": "First, keep yourself safe. Warn other traffic so they slow down." } },
-        { "id": "crash-2", "pic": "📞", "text": { "sw": "Piga simu ya dharura, 112. Sema mahali ulipo na idadi ya majeruhi.", "en": "Call the emergency number, 112. Say where you are and how many people are hurt." } },
-        { "id": "crash-3", "pic": "⛑️✋", "text": { "sw": "Usimvue kofia mtu aliyejeruhiwa. Unaweza kuumiza shingo yake.", "en": "Do not take off an injured person's helmet. You can hurt their neck." } },
-        { "id": "crash-4", "pic": "🔴🤲", "text": { "sw": "Kama damu inatoka sana, bonyeza jeraha kwa kitambaa safi.", "en": "If there is a lot of bleeding, press on the wound with a clean cloth." } },
-        { "id": "crash-q1", "pic": "🤕🏃", "answer": "danger", "text": { "sw": "Watu wanamwinua haraka mtu aliyeumia shingo.", "en": "People quickly lift a person with a neck injury." }, "why": { "sw": "Hatari! Usimsogeze, isipokuwa kuna moto au hatari kubwa.", "en": "Danger! Do not move them unless there is a fire or other serious danger." } },
-        { "id": "crash-q2", "pic": "📞🚑", "answer": "safe", "text": { "sw": "Mtu anapiga 112 na kueleza mahali ajali ilipotokea.", "en": "Someone calls 112 and says where the crash is." }, "why": { "sw": "Salama! Msaada utafika haraka zaidi.", "en": "Safe! Help will come faster." } }
+        { "id": "crash-2", "pic": "📞", "text": { "sw": "Piga namba ya dharura ya nchi yako, kama 1 1 2 au 9 9 9. Sema mahali ulipo na idadi ya majeruhi.", "en": "Call your country's emergency number, such as 1 1 2 or 9 9 9. Say where you are and how many people are hurt." } },
+        { "id": "crash-3", "pic": "⛑️✋", "text": { "sw": "Usimvue kofia mtu aliyejeruhiwa. Unaweza kuumiza shingo yake. Mvue tu kama hapumui.", "en": "Do not take off an injured person's helmet. You can hurt their neck. Take it off only if they are not breathing." } },
+        { "id": "crash-4", "pic": "🔴🤲", "text": { "sw": "Damu ikitoka sana, bonyeza jeraha kwa kitambaa safi na uendelee kubonyeza. Kitu kikiwa kimekwama kwenye jeraha, usikitoe.", "en": "If there is a lot of bleeding, press on the wound with a clean cloth and keep pressing. If something is stuck in the wound, leave it there." } },
+        { "id": "crash-q1", "pic": "🤕🏃", "answer": "danger", "text": { "sw": "Watu wanamwinua haraka mtu aliyeumia shingo.", "en": "People quickly lift a person with a neck injury." }, "why": { "sw": "Hatari! Usimsogeze bila sababu. Msogeze tu kama kuna moto au hatari kubwa, au ili kumsaidia apumue.", "en": "Danger! Do not move them without a reason. Move them only if there is fire or serious danger, or to help them breathe." } },
+        { "id": "crash-q2", "pic": "📞🚑", "answer": "safe", "text": { "sw": "Mtu anapiga namba ya dharura na kueleza mahali ajali ilipotokea.", "en": "Someone calls the emergency number and says where the crash is." }, "why": { "sw": "Salama! Kujua mahali ajali ilipotokea huwasaidia wahudumu kufika.", "en": "Safe! Knowing where the crash is helps the emergency workers get there." } }
       ]
     }
   ]

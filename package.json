@@ -6,7 +6,7 @@
   "scripts": {
     "audio": "node scripts/make-audio.mjs",
     "check": "node scripts/check.mjs",
-    "serve": "python3 -m http.server 8080 -d site"
+    "serve": "node scripts/serve.mjs"
   },
   "license": "MIT"
 }

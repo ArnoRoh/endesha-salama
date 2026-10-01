@@ -29,9 +29,17 @@ phone's own share menu (WhatsApp, etc.). The certificate is drawn on the phone a
 There is no build step. The website is the `site/` folder.
 
 ```sh
-npm run serve        # http://localhost:8080  (needs python3)
+npm run serve        # http://localhost:8080
 npm run check        # lessons, audio, offline list and 5 MB size budget
 ```
+
+### Test on a phone over Tailscale (private)
+
+Offline mode and the share button only work over HTTPS, so plain `http://<tailscale-ip>` is not enough.
+`scripts/endesha-salama.service` runs the server on loopback, and Tailscale Serve adds tailnet-only HTTPS.
+Install steps are in the header of that file. On the VPS this is live at
+`https://inmotion-vps.tail09dd9a.ts.net:4520/`. Never add `--funnel`: that would make it public.
+After a lesson edit, reload twice: the offline cache shows the old copy once, then updates.
 
 ## Change or add a lesson
 
@@ -66,6 +74,17 @@ The site is static, so Cloudflare serves it for free.
 
 Or without Git: `npx wrangler pages deploy site --project-name endesha-salama` (needs `wrangler login`).
 The Cloudflare dashboard changes now and then; if a menu differs, the settings above are what matters.
+
+## Content review status
+
+- 2026-10-01: a second AI (OpenAI GPT-6.1-Sol, via Codex) reviewed all lessons for road-safety accuracy,
+  Kiswahili and English wording, and how the lines sound read aloud. No answer key was wrong. Its must-fix
+  items (crash advice, emergency number, disclaimer) and most should-fix items are applied.
+- **No human road-safety or first-aid expert has reviewed this.** Please do so before promoting it widely,
+  and send corrections as issues or pull requests.
+- The emergency numbers in the crash lesson (112 and 999) come from secondary sources, not the national
+  authorities, and are not confirmed for eastern DRC. The lesson says "your country's emergency number".
+  Spoken digits are written with spaces (`1 1 2`) because the voice reads `112` as one hundred and twelve.
 
 ## Licences
 
