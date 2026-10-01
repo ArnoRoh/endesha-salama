@@ -1,4 +1,5 @@
 import { audioItems, audioPath } from './content.js';
+import { ART } from './art.js';
 
 const L = await fetch('lessons.json').then((r) => r.json());
 const app = document.getElementById('app');
@@ -60,7 +61,7 @@ function step(mi, si) {
   app.innerHTML = `
     <header class="bar"><button data-go="home" aria-label="${u('home')}">🏠</button><span>${m.icon} ${t(m.title)}</span></header>
     <div class="dots">${m.steps.map((_, i) => `<i class="${i < si ? 'past' : i === si ? 'now' : ''}"></i>`).join('')}</div>
-    <div class="pic" aria-hidden="true">${s.pic}</div>
+    <div class="pic" aria-hidden="true">${ART[s.art]?.() ?? s.pic}</div>
     <p class="text">${t(s.text)} ${speaker(s.id)}</p>
     ${s.answer ? `<div class="answers">
         <button class="safe" data-answer="safe">✅<span>${u('safe')}</span></button>

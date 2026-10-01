@@ -74,10 +74,10 @@
       "title": { "sw": "Vifaa vya Kujikinga", "en": "Protective Gear" },
       "steps": [
         { "id": "gear-1", "pic": "⛑️", "text": { "sw": "Vaa kofia ya pikipiki inayokutosha vizuri kila safari, hata safari fupi.", "en": "Wear a motorcycle helmet that fits you well on every trip, even a short one." } },
-        { "id": "gear-2", "pic": "⛑️🔒", "text": { "sw": "Funga kamba ya kofia. Kofia isiyofungwa huruka wakati wa ajali.", "en": "Fasten the helmet strap. A helmet that is not fastened comes off in a crash." } },
+        { "id": "gear-2", "pic": "⛑️🔒", "art": "strap-closed", "text": { "sw": "Funga kamba ya kofia. Kofia isiyofungwa huruka wakati wa ajali.", "en": "Fasten the helmet strap. A helmet that is not fastened comes off in a crash." } },
         { "id": "gear-3", "pic": "👕✨", "text": { "sw": "Vaa jaketi la kuakisi mwanga ili madereva wengine wakuone.", "en": "Wear a reflective vest so other drivers can see you." } },
         { "id": "gear-4", "pic": "🧤🥾", "text": { "sw": "Vaa glovu na viatu imara vinavyofunika vifundo vya miguu.", "en": "Wear gloves and sturdy shoes that cover your ankles." } },
-        { "id": "gear-q1", "pic": "⛑️🔓", "answer": "danger", "text": { "sw": "Dereva amevaa kofia lakini kamba haijafungwa.", "en": "A rider wears a helmet but the strap is open." }, "why": { "sw": "Hatari! Funga kamba kila wakati.", "en": "Danger! Always fasten the strap." } },
+        { "id": "gear-q1", "pic": "⛑️🔓", "art": "strap-open", "answer": "danger", "text": { "sw": "Dereva amevaa kofia lakini kamba haijafungwa.", "en": "A rider wears a helmet but the strap is open." }, "why": { "sw": "Hatari! Funga kamba kila wakati.", "en": "Danger! Always fasten the strap." } },
         { "id": "gear-q2", "pic": "👡", "answer": "danger", "text": { "sw": "Dereva anaendesha akiwa amevaa ndala.", "en": "A rider rides in flip-flops." }, "why": { "sw": "Hatari! Ndala hazilindi miguu. Vaa viatu imara vinavyofunika vifundo vya miguu.", "en": "Danger! Flip-flops do not protect your feet. Wear sturdy shoes that cover your ankles." } },
         { "id": "gear-q3", "pic": "⛑️⛑️", "answer": "safe", "text": { "sw": "Dereva na abiria wote wamevaa kofia zilizofungwa.", "en": "The rider and the passenger both wear fastened helmets." }, "why": { "sw": "Salama! Abiria pia anahitaji kofia.", "en": "Safe! The passenger also needs a helmet." } }
       ]
