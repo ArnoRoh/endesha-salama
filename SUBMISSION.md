@@ -52,9 +52,12 @@ models used adversarially: content review, a security round table, and image
 generation critique. In the product, HSSE staff can draft new monthly safety
 scenarios with **Muse Spark** (Meta Model API, `muse-spark-1.3`): it writes a
 bilingual Kiswahili/English scenario from the topic learners miss most, and a
-human must review it before any learner sees it. (Live in the admin portal
-when a Model API key is configured; the endpoint is in the repo and covered
-by tests.)
+human must review it before any learner sees it. **Verified live:** a spoken
+Kiswahili model answer ("Naangalia matairi na upepo wake, breki za mbele na
+nyuma, taa, mnyororo na mafuta kabla ya safari") was transcribed by Muse Voice
+and graded 3/3 with Kiswahili feedback ("Hongera sana! Umetaja yote matatu
+vizuri."). Kiswahili is not yet a validated Muse transcription language, so
+HSSE checks transcripts before acting on low scores.
 
 ## Why it can grow
 Open source (MIT code, CC BY 4.0 content) so any school, SACCO, factory or
