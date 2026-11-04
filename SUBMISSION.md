@@ -4,6 +4,7 @@
 **Track:** Indie developer · **Theme:** Build for Your World
 **Demo (live, no login):** https://arnoroh.github.io/endesha-salama/
 **Code:** https://github.com/ArnoRoh/endesha-salama
+**Demo video (2:23):** https://github.com/ArnoRoh/endesha-salama/blob/main/docs/demo-video.mp4
 
 ## One line
 Free, offline, Kiswahili-first safety lessons with audio and pictures for the
