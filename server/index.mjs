@@ -227,13 +227,15 @@ async function distributeScenario(env) {
 // Muse draft generator (Meta Model API, OpenAI-compatible). HSSE reviews every
 // draft; nothing AI-generated is published to learners automatically. Without a
 // MODEL_API_KEY secret this returns 503 code 'no_meta_key' so the portal can say so.
+const metaKey = (env) => env.MODEL_API_KEY ?? env.META_API_KEY; // dashboard keys are often stored as META_API_KEY
+const metaBase = (env) => env.MODEL_API_URL ?? env.BASE_URL ?? 'https://api.meta.ai/v1';
 async function draftScenario(env, b) {
-  if (!env.MODEL_API_KEY) throw Object.assign(fail(503, 'Meta Model API key not configured (set the MODEL_API_KEY secret)'), { code: 'no_meta_key' });
+  if (!metaKey(env)) throw Object.assign(fail(503, 'Meta Model API key not configured (set the MODEL_API_KEY secret)'), { code: 'no_meta_key' });
   const mod = lessons.modules.find((m) => m.id === b.module) ?? lessons.modules.find((m) => m.track === 'work');
   const step = mod.steps.find((s) => s.id === b.step) ?? mod.steps.find((s) => s.answer);
   const prompt = `You write short safety-training quiz questions for East African workplace staff with low literacy. Module: ${mod.title.en}. Example question: "${step.text.en}" Write ONE new scenario multiple-choice question on the same topic, different situation. Simple English (one short sentence per option), plus a faithful Kiswahili translation of everything. Exactly 3 options, exactly one correct. Reply with only JSON: {"question_en":"","question_sw":"","options_en":["","",""],"options_sw":["","",""],"answer":0,"why_en":"","why_sw":""} where answer is the 0-based index of the correct option.`;
-  const r = await fetch(`${env.MODEL_API_URL ?? 'https://api.meta.ai/v1'}/chat/completions`, { method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.MODEL_API_KEY}` },
+  const r = await fetch(`${metaBase(env)}/chat/completions`, { method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${metaKey(env)}` },
     body: JSON.stringify({ model: env.MODEL_API_MODEL ?? 'muse-spark-1.3', messages: [{ role: 'user', content: prompt }], temperature: 0.7 }),
     signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw fail(502, `Meta Model API returned HTTP ${r.status}`);
@@ -539,7 +541,7 @@ async function api(req, env, path) {
     }
     // Cost guard: the key never leaves the server, callers need a personal code, and
     // caps bound the spend even if a code leaks (ASR is ~$3 per 1000 minutes).
-    if (!env.MODEL_API_KEY) throw Object.assign(fail(503, 'Meta Model API key not configured'), { code: 'no_meta_key' });
+    if (!metaKey(env)) throw Object.assign(fail(503, 'Meta Model API key not configured'), { code: 'no_meta_key' });
     const mineToday = (await env.DB.prepare("select count(*) as n from viva_result where employee_id = ? and status = 'graded' and created_at > strftime('%Y-%m-%dT%H:%M:%fZ','now','start of day')").bind(who.id).first()).n;
     if (mineToday >= 6) throw fail(429, 'daily voice-question limit reached');
     const cap = Number(env.VIVA_DAILY_CAP ?? 200);
@@ -551,12 +553,12 @@ async function api(req, env, path) {
     const form = new FormData();
     form.append('request', new Blob([JSON.stringify({ mode: 'ENDPOINTING', model: env.ASR_MODEL ?? 'muse-voice-transcribe-1.0', audioEncoding: 'WAV', keywords: ['pikipiki', 'ngazi', 'kufuli', 'kizima moto', 'msimamizi', 'forklift', 'matairi'] })], { type: 'application/json' }));
     form.append('audio', new Blob([wav], { type: 'audio/wav' }), 'answer.wav');
-    const asr = await fetch(`https://api.meta.ai/v1/asr/transcribe?sessionId=viva-${who.id}-${Date.now()}`, { method: 'POST', headers: { Authorization: `Bearer ${env.MODEL_API_KEY}` }, body: form, signal: AbortSignal.timeout(45000) });
+    const asr = await fetch(`https://api.meta.ai/v1/asr/transcribe?sessionId=viva-${who.id}-${Date.now()}`, { method: 'POST', headers: { Authorization: `Bearer ${metaKey(env)}` }, body: form, signal: AbortSignal.timeout(45000) });
     if (!asr.ok) throw fail(502, `speech API returned HTTP ${asr.status}`);
     const transcript = String((await asr.json()).transcript ?? '').trim();
     if (!transcript) { await env.DB.prepare("insert into viva_result(employee_id, module, status, secs) values (?,?,'no_speech',?)").bind(who.id, mod.id, secs).run(); return json({ status: 'no_speech' }); }
     const keys = mod.viva.points.map((pt, i) => `${i + 1}. ${pt.en}`).join('\n');
-    const grade = await fetch(`${env.MODEL_API_URL ?? 'https://api.meta.ai/v1'}/chat/completions`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.MODEL_API_KEY}` },
+    const grade = await fetch(`${env.MODEL_API_URL ?? 'https://api.meta.ai/v1'}/chat/completions`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${metaKey(env)}` },
       body: JSON.stringify({ model: env.MODEL_API_MODEL ?? 'muse-spark-1.3', temperature: 0, messages: [{ role: 'user', content: `Grade this spoken safety-training answer. Question: "${mod.viva.q.en}" Key points:\n${keys}\nLearner transcript (may be Kiswahili, English or mixed, and may contain speech-recognition errors — grade the meaning, not the wording): "${transcript}" Score = how many key points are clearly covered (0-3). Reply with only JSON: {"score":0,"feedback_sw":"","feedback_en":""} with one short encouraging feedback sentence in Kiswahili and the same in English, naming a missed point if any.` }] }), signal: AbortSignal.timeout(30000) });
     if (!grade.ok) throw fail(502, `grading API returned HTTP ${grade.status}`);
     let g; try { g = JSON.parse(String((await grade.json()).choices?.[0]?.message?.content ?? '').replace(/^```json?|```$/gm, '').trim()); } catch { throw fail(502, 'grading did not return JSON'); }

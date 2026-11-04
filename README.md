@@ -1,6 +1,10 @@
 # Endesha Salama
 
-**Live demo (learner app, no login): https://arnoroh.github.io/endesha-salama/** · Built with Muse Code for the Meta Global AI Developer Hackathon — see [SUBMISSION.md](SUBMISSION.md). — Usalama wa Pikipiki
+**Live demo (learner app, no login): https://arnoroh.github.io/endesha-salama/** · Built with Muse Code for the Meta Global AI Developer Hackathon — see [SUBMISSION.md](SUBMISSION.md).
+
+![Lessons spoken aloud](docs/img/demo-lessons.jpg)
+
+![Kiswahili voice questions graded by Meta AI](docs/img/demo-voice.jpg) — Usalama wa Pikipiki
 
 Free motorcycle safety lessons in **Kiswahili and English**, built for riders who do not read much.
 Each lesson has a picture, short text, a 🔊 button that reads it aloud, and big buttons.
