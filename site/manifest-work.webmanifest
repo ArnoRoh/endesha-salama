@@ -1,0 +1,24 @@
+{
+  "name": "Salama — Usalama Kazini na Barabarani",
+  "short_name": "Salama",
+  "description": "Workplace and motorcycle safety lessons in Kiswahili and English.",
+  "lang": "sw",
+  "start_url": "work.html",
+  "display": "standalone",
+  "background_color": "#0b2033",
+  "theme_color": "#0b2033",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

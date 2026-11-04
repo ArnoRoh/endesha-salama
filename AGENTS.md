@@ -22,12 +22,16 @@ and deployment procedures. Read it before you change content.
 - No human road-safety or first-aid expert has reviewed the content. Do not
   remove the disclaimer or describe the content as reviewed.
 
+- In build discussions about gamified rider or staff lessons, use the installed Game Studio `game-ui-frontend` skill automatically. Use `web-game-foundations` only if the lesson loop or architecture is under discussion. Keep the static site and its offline and size rules unless the owner chooses a change. An incidental game reference does not trigger a redesign.
+- For learner-facing browser checks, use the installed OpenAI Game Studio `game-playtest` skill when available. Play the rider and staff tracks separately. Check a small phone screen, English and Kiswahili, quiz feedback, audio, and offline reload after the required cache update. Save screenshots and reproducible defects. Keep the existing static app and size budget. A browser pass does not replace HSSE or native-language review.
+
 ## HSSE staff platform
 
 - Work modules have `"track": "work"` and show only in `site/work.html`. Rider modules show only in `index.html`. Keep the two tracks apart.
 - `server/` is a Cloudflare Worker (staff API and admin portal) with a D1 database; schema changes are new files in `migrations/`. Run `npm run test:server` after a change there.
 - Secrets are in `~/.config/endesha-salama/env` and Cloudflare Worker secrets. Never commit them and never print `ADMIN_TOKEN`.
 - `/admin` has employee records. On Cloudflare it must be behind Cloudflare Access. Never put the preview (port 4521) behind `--funnel`; `tailscale serve` for 4521 is tailnet-only.
+- For `/admin` browser checks, use synthetic staff records only. Run `npm run test:server`, then check the real browser flow for access, import, assignments, due status, code reset, and CSV export. Game Studio is for the interactive lessons; it does not validate staff access control or personal-data handling.
 - Staff data is personal data. Do not add analytics. Do not send the staff code or names to any external service.
 - Odoo is linked by `odoo_login` or `odoo_employee_id` only. Production Odoo is read-only unless `MV_odoo_infra` approvals say otherwise.
 - Work pictures are painted from the prompts in `scripts/art-prompts.json`. After a picture change, run `npm run check`.

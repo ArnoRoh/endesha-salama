@@ -2,11 +2,17 @@
   "name": "endesha-salama",
   "private": true,
   "type": "module",
-  "description": "Free motorcycle safety lessons in Kiswahili and English. No build step: the site is the site/ folder.",
+  "description": "Motorcycle safety lessons (public) and HSSE work lessons (staff) in Kiswahili and English. No build step: the site is the site/ folder; server/ is the Cloudflare Worker (staff API and admin portal, D1 database).",
   "scripts": {
     "audio": "node scripts/make-audio.mjs",
-    "check": "node scripts/check.mjs",
-    "serve": "node scripts/serve.mjs"
+    "check": "node scripts/check-quiz.mjs && node scripts/check.mjs",
+    "serve": "node scripts/serve.mjs",
+    "server": "wrangler d1 migrations apply hsse --local && wrangler dev",
+    "test:server": "node server/test-upgrade.mjs && node server/test.mjs",
+    "deploy": "npm run check && npm run test:server && wrangler d1 migrations apply hsse --remote && wrangler deploy"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.149.0"
+  }
 }

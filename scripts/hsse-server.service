@@ -1,0 +1,23 @@
+# HSSE platform tailnet preview: the real Cloudflare Worker under wrangler dev, local D1 (systemd --user). Loopback only.
+# Production is `npm run deploy` to Cloudflare (README). This preview keeps its own local data in ~/.local/share/hsse-d1.
+# Secret: ADMIN_TOKEN (24+ characters) in ~/.config/endesha-salama/env (chmod 600).
+#   ln -sf /srv/repos/endesha-salama/scripts/hsse-server.service ~/.config/systemd/user/hsse-server.service
+#   systemctl --user daemon-reload && systemctl --user enable --now hsse-server.service
+#   tailscale serve --bg --https=4521 http://127.0.0.1:4521      # tailnet only; never add --funnel (admin portal)
+# Remove: tailscale serve --https=4521 off; systemctl --user disable --now hsse-server.service
+# Logs: journalctl --user -u hsse-server.service -f
+[Unit]
+Description=HSSE platform Worker preview (wrangler dev, local D1)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/repos/endesha-salama
+ExecStartPre=/usr/bin/node node_modules/wrangler/bin/wrangler.js d1 migrations apply hsse --local --persist-to %h/.local/share/hsse-d1
+ExecStart=/usr/bin/node node_modules/wrangler/bin/wrangler.js dev --ip 127.0.0.1 --port 4521 --persist-to %h/.local/share/hsse-d1 --env-file %h/.config/endesha-salama/env --show-interactive-dev-session=false
+Environment=WRANGLER_SEND_METRICS=false
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

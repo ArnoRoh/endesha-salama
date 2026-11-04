@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HSSE training admin</title>
+<style>
+@font-face { font-family: Overpass; src: url(/fonts/overpass.woff2); font-weight: 100 900; }
+:root { --navy: #0f2a44; --navy2: #17395a; --line: #2d5578; --ink: #e9eef3; --mute: #9db2c6; --amber: #ffb300; --bad: #ff8a80; --ok: #9be7b0; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.45 Overpass, system-ui, sans-serif; background: var(--navy); color: var(--ink); }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 3px solid var(--amber); }
+h1 { margin: 0; font-size: 20px; } h2 { margin: 0 0 8px; font-size: 16px; color: var(--amber); }
+main { max-width: 1200px; margin: 0 auto; padding: 16px 20px 60px; display: grid; gap: 16px; }
+section { background: var(--navy2); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+button, input, select, textarea { font: inherit; color: var(--ink); background: var(--navy); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; }
+button { cursor: pointer; background: var(--amber); color: #1a1200; border-color: var(--amber); font-weight: 700; }
+button.ghost { background: transparent; color: var(--ink); border-color: var(--line); font-weight: 400; }
+textarea { width: 100%; min-height: 90px; font-family: ui-monospace, monospace; font-size: 13px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; } label { display: grid; gap: 3px; color: var(--mute); font-size: 13px; }
+.stats { display: flex; gap: 10px; flex-wrap: wrap; } .stat { padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; min-width: 110px; } .stat b { display: block; font-size: 24px; }
+table { width: 100%; border-collapse: collapse; } th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--mute); font-weight: 600; font-size: 13px; } tr.off td { opacity: .5; }
+.chip { display: inline-block; margin: 2px 4px 2px 0; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 12.5px; font-weight: 400; }
+.overdue { border-color: var(--bad); color: var(--bad); } .due_soon, .pending { border-color: var(--amber); color: var(--amber); } .current { border-color: var(--ok); color: var(--ok); }
+.small { color: var(--mute); font-size: 12.5px; } .msg { color: var(--amber); min-height: 1.4em; } code { background: var(--navy); padding: 1px 5px; border-radius: 4px; }
+.scroll { overflow-x: auto; }
+</style>
+</head>
+<body>
+<header><h1>HSSE training admin <span class="small">Endesha Salama · open source</span></h1>
+  <div class="row"><button class="ghost" id="report">Download report (CSV)</button><button class="ghost" id="logout">Sign out</button></div></header>
+<main id="main"></main>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const LABEL = { overdue: 'Overdue', due_soon: 'Due soon', pending: 'Assigned', current: 'Current' };
+let token = sessionStorage.token, mods = [], people = [], msg = '', links = [], filter = '', status = '', me = null, keys = [], hooks = [], users = [], auditRows = [], quizStats = null, reminderRows = [], scenarioNow = null;
+
+async function call(path, opts = {}) {
+  const r = await fetch('/admin/api/' + path, { ...opts, headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' } });
+  if (r.status === 401) { delete sessionStorage.token; token = ''; msg = 'Admin token not accepted.'; return render(); }
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || r.statusText);
+  return r;
+}
+const post = (path, data) => call(path, { method: 'POST', body: JSON.stringify(data) }).then((r) => r?.json());
+const say = (m) => { msg = m; const el = $('#msg'); if (el) el.textContent = m; };
+const link = (code) => `${location.origin}/work.html?c=${code}`;
+
+function parseTable(text) { // CSV or tab separated, quoted fields allowed; header row required
+  const delim = text.split('\n', 1)[0].includes('\t') ? '\t' : ',';
+  const rows = []; let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; } else if (c === '"') q = false; else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === delim) { row.push(cell); cell = ''; }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cell); cell = ''; if (row.some((x) => x.trim())) rows.push(row); row = []; }
+    else cell += c;
+  }
+  row.push(cell); if (row.some((x) => x.trim())) rows.push(row);
+  const KEY = { name: 'name', 'employee name': 'name', employee: 'name', odoo_login: 'odoo_login', login: 'odoo_login', 'related user/login': 'odoo_login', user: 'odoo_login',
+    odoo_employee_id: 'odoo_employee_id', id: 'odoo_employee_id', 'employee id': 'odoo_employee_id', email: 'email', 'work email': 'email',
+    department: 'department', 'department/name': 'department', site: 'site', 'work location': 'site', country: 'country', language: 'language', lang: 'language',
+    external_system: 'external_system', 'external system': 'external_system', external_id: 'external_id', 'external id': 'external_id' };
+  const head = (rows.shift() ?? []).map((h) => KEY[h.trim().toLowerCase()]);
+  return rows.map((r) => Object.fromEntries(head.map((k, i) => [k, r[i]]).filter(([k]) => k)));
+}
+
+async function load() {
+  mods = (await fetch('/lessons.json').then((r) => r.json())).modules.map((m) => ({ id: m.id, title: m.title.en, track: m.track ?? 'ride' }));
+  me = await (await call('me'))?.json().catch(() => null) ?? null;
+  people = await (await call('overview'))?.json() ?? [];
+  quizStats = await (await call('quiz-stats'))?.json().catch(() => null) ?? null;
+  reminderRows = await (await call('reminders'))?.json().catch(() => []) ?? [];
+  scenarioNow = await (await call('scenario'))?.json().catch(() => null) ?? null;
+  if (me?.role === 'admin') {
+    keys = await (await call('api-keys'))?.json().catch(() => []) ?? [];
+    hooks = await (await call('webhooks'))?.json().catch(() => []) ?? [];
+    users = await (await call('users'))?.json().catch(() => []) ?? [];
+    auditRows = await (await call('audit'))?.json().catch(() => []) ?? [];
+  }
+  render();
+}
+const can = (...roles) => !me || roles.includes(me.role);
+
+function rowsHtml() {
+  const f = filter.toLowerCase(), st = status;
+  const modTitle = (id) => mods.find((m) => m.id === id)?.title ?? id;
+  return people.filter((p) => (!f || [p.name, p.odoo_login, p.department, p.site, p.country, p.external_id].join(' ').toLowerCase().includes(f)) && (!st || p.assignments.some((a) => a.status === st))).map((p) => `
+      <tr class="${p.active ? '' : 'off'}"><td><input type="checkbox" class="pick" value="${p.id}"></td>
+      <td><b>${esc(p.name)}</b><div class="small">${esc(p.email)} · ${esc(p.country ?? 'TZ')} · ${esc(p.language ?? 'sw')}</div></td>
+      <td>${esc(p.odoo_login)}<div class="small">${p.odoo_employee_id ? 'employee #' + esc(p.odoo_employee_id) : ''}${p.external_id ? ' · ' + esc(p.external_system) + ':' + esc(p.external_id) : ''}</div></td>
+      <td>${esc(p.department)}<div class="small">${esc(p.site)}</div></td>
+      <td>${p.assignments.map((a) => `<button class="chip ${a.status}" data-un="${p.id}|${esc(a.module)}" title="${LABEL[a.status]}. Last done: ${esc(a.last_completed?.slice(0, 10) ?? 'never')}. Click to remove.">${esc(modTitle(a.module))} · ${LABEL[a.status]}${a.next_due ? ' · due ' + esc(a.next_due.slice(0, 10)) : ''}</button>`).join('') || '<span class="small">nothing assigned</span>'}</td>
+      <td><button class="ghost" data-reset="${p.id}">New link</button> <button class="ghost" data-active="${p.id}|${p.active}">${p.active ? 'Deactivate' : 'Activate'}</button>${me?.role === 'admin' ? ` <button class="ghost" data-erase="${p.id}">Erase</button>` : ''}</td></tr>`).join('');
+}
+
+function render() {
+  document.querySelectorAll('header button').forEach((b) => (b.hidden = !token));
+  if (!token) {
+    $('#main').innerHTML = `<section><h2>Sign in</h2><form id="login" class="row"><label>Username<input id="user" autocomplete="username"></label><label>Password<input type="password" id="pass" autocomplete="current-password"></label><button>Sign in</button></form>
+    <form id="login2" class="row" style="margin-top:10px"><label>Or admin token (bootstrap)<input type="password" id="tok" autocomplete="current-password"></label><button class="ghost">Use token</button></form><p class="msg" id="msg">${esc(msg)}</p></section>`;
+    $('#login').onsubmit = (e) => { e.preventDefault(); run(async () => { const r = await fetch('/admin/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: $('#user').value, password: $('#pass').value }) }); const d = await r.json().catch(() => ({})); if (!r.ok) throw new Error(d.error || 'Sign in failed'); token = sessionStorage.token = d.token; await load(); }); };
+    $('#login2').onsubmit = (e) => { e.preventDefault(); token = sessionStorage.token = $('#tok').value.trim(); load().catch((x) => { delete sessionStorage.token; token = ''; say(x.message); render(); }); };
+    return;
+  }
+  const all = people.filter((p) => p.active).flatMap((p) => p.assignments);
+  const count = (s) => all.filter((a) => a.status === s).length;
+  const roleNote = me ? `<p class="small">Signed in as <b>${esc(me.username)}</b> · role <b>${esc(me.role)}</b>. HR manages people, HSSE manages training, Admin manages everything including API keys.</p>` : '';
+  $('#main').innerHTML = `
+  <section><div class="stats">${['overdue', 'due_soon', 'pending', 'current'].map((s) => `<div class="stat ${s}"><b>${count(s)}</b>${LABEL[s]}</div>`).join('')}<div class="stat"><b>${people.filter((p) => p.active).length}</b>Active people</div></div>
+    ${roleNote}<p class="small">Refresh interval is 6 months by default. "Due soon" means due within 30 days. Kiswahili (sw) is the default language; country is a 2-letter code (TZ, KE, UG, RW, BI, SS, CD, SO).</p><p class="msg" id="msg">${esc(msg)}</p></section>
+  ${can('hr', 'admin') ? `<section><h2>Add or update people (HR)</h2>
+    <p class="small"><b>No ERP/HRM? Add one person here.</b> Only a name is required: a staff number is generated when you leave it blank, and the personal learning link is shown once below. Everything else is optional and can be added later.</p>
+    <div class="row"><label>Name<input id="pname" placeholder="Amina Juma"></label><label>Staff number (optional)<input id="pext" placeholder="auto"></label><label>Email (for reminders)<input id="pemail"></label><label>Department<input id="pdept"></label><label>Country<input id="pcountry" value="TZ" size="3"></label><label>Language<select id="plang"><option value="sw">Kiswahili</option><option value="en">English</option></select></label><button id="addone">Add person</button></div><div id="links"></div>
+    <p class="small" style="margin-top:14px">With an ERP/HRM, paste its CSV export instead (Odoo headers also work). Columns: <code>name</code>, plus <code>odoo_login</code>/<code>odoo_employee_id</code> or <code>external_system</code>+<code>external_id</code>, optional <code>email</code>, <code>department</code>, <code>site</code>, <code>country</code> (default TZ), <code>language</code> (default sw). New people get a personal access link, shown once.</p>
+    <textarea id="paste" placeholder="name,external_system,external_id,country,language,department&#10;Amina Juma,odoo,142,KE,sw,Production"></textarea>
+    <div class="row"><input type="file" id="file" accept=".csv,.tsv,.txt"><button id="import">Import</button></div></section>` : ''}
+  ${can('hsse', 'admin') ? `<section><h2>Assign training (HSSE)</h2><div class="row">
+    <label>Module<select id="mod">${mods.map((m) => `<option value="${esc(m.id)}">${esc(m.track === 'work' ? 'Work: ' : 'Rider refresher: ') + esc(m.title)}</option>`).join('')}</select></label>
+    <label>First deadline<input type="date" id="due"></label>
+    <label>Refresh every (months)<input type="number" id="months" value="6" min="1" max="60" style="width:90px"></label>
+    <button id="assign">Assign to ticked people</button><button class="ghost" id="tickall">Tick all shown</button></div></section>` : ''}
+  <section><div class="row"><label>Search<input id="filter" placeholder="name, login, department, country" value="${esc(filter)}"></label>
+    <label>Show people with<select id="status"><option value="">any status</option>${Object.entries(LABEL).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label></div>
+    <div class="scroll"><table><thead><tr><th></th><th>Employee</th><th>ERP / HRM ID</th><th>Department</th><th>Training</th><th></th></tr></thead><tbody id="rows">${rowsHtml()}</tbody></table></div></section>
+  ${quizStats ? `<section><h2>Quiz results (HSSE review)</h2><p class="small">${quizStats.learners} learners, ${quizStats.answers} answers. Use this at the six-month review: completion rates are above, weak questions are below. Rider refresher defaults to 3 months, work HSSE to 6 months.</p>
+    <div class="row"><button class="ghost" id="quizcsv">Download quiz results (CSV, opens in Excel)</button></div>
+    <div class="scroll"><table><thead><tr><th>Module</th><th>Answers</th><th>Correct</th></tr></thead><tbody>${quizStats.per_module.map((r) => `<tr><td>${esc(r.module)}</td><td>${r.attempts}</td><td>${esc(r.pct_correct)}%</td></tr>`).join('')}</tbody></table></div>
+    <p class="small">Most-missed questions:</p><div class="scroll"><table><thead><tr><th>Module</th><th>Question</th><th>Wrong</th><th>Answers</th></tr></thead><tbody>${quizStats.most_missed.map((r) => `<tr><td>${esc(r.module)}</td><td>${esc(r.step)}</td><td>${r.wrong}</td><td>${r.attempts}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
+  ${can('hsse', 'admin') || me?.role === 'hr' ? `<section><h2>Reminders & monthly scenario</h2>
+    <p class="small">Automatic: weekly cron reminds everyone overdue or due soon (not repeated within 14 days); on the 1st the monthly scenario is generated from the most-missed question and distributed. Mail sends through the configured EMAIL_WEBHOOK_URL; with no mail provider every due reminder is logged as <b>no_provider</b> so nobody is silently missed. Current scenario: <b>${esc(scenarioNow?.month ?? '-')}</b> ${esc(scenarioNow?.module ?? '')}/${esc(scenarioNow?.step ?? '')}</p>
+    <div class="row">${can('hsse', 'admin') ? '<button id="runremind">Run reminders now</button><button class="ghost" id="dryremind">Preview (dry run)</button><button class="ghost" id="runscenario">Generate & distribute scenario</button><button class="ghost" id="aiscenario">Draft new scenario with Muse (Meta AI)</button>' : ''}</div><p class="msg" id="remindmsg"></p><div id="aiout"></div>
+    <div class="scroll"><table><thead><tr><th>When</th><th>Employee</th><th>Module</th><th>Kind</th><th>Status</th></tr></thead><tbody>${reminderRows.slice(0, 30).map((r) => `<tr><td>${esc(r.created_at)}</td><td>${esc(r.name)}</td><td>${esc(r.module)}</td><td>${esc(r.kind)}</td><td>${esc(r.status)}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
+  ${me?.role === 'admin' ? `<section><h2>ERP / HRM API keys (Admin)</h2><p class="small">Keys connect external systems to <code>/api/v1</code> (see docs/API.md). A key is shown once. Scopes: read, write, admin.</p>
+    <div class="row"><label>Name<input id="keyname" placeholder="Odoo production"></label><label>Scopes<input id="keyscopes" value="read,write"></label><button id="newkey">Create key</button></div><div id="newkeyout"></div>
+    <div class="scroll"><table><thead><tr><th>Name</th><th>Scopes</th><th>Last used</th><th></th></tr></thead><tbody>${keys.map((k) => `<tr><td>${esc(k.name)}</td><td>${esc(k.scopes)}${k.revoked ? ' (revoked)' : ''}</td><td>${esc(k.last_used_at ?? 'never')}</td><td>${k.revoked ? '' : `<button class="ghost" data-revoke="${k.id}">Revoke</button>`}</td></tr>`).join('')}</tbody></table></div></section>
+  <section><h2>Webhooks (Admin)</h2><p class="small">POST events (e.g. completion.created, assignment.created) signed with HMAC-SHA256 (X-Endesha-Signature). HTTPS only, except localhost.</p>
+    <div class="row"><label>URL<input id="hookurl" placeholder="https://erp.example.org/hsse" size="36"></label><label>Events<input id="hookevents" value="completion.created"></label><button id="newhook">Add webhook</button></div><div id="newhookout"></div>
+    <div class="scroll"><table><thead><tr><th>URL</th><th>Events</th><th>Active</th></tr></thead><tbody>${hooks.map((w) => `<tr><td>${esc(w.url)}</td><td>${esc(w.events)}</td><td>${w.active ? 'yes' : 'no'}</td></tr>`).join('')}</tbody></table></div></section>
+  <section><h2>Admin users (Admin)</h2><p class="small">HR: people and links. HSSE: assignments and reports. Admin: everything. Password at least 10 characters.</p>
+    <div class="row"><label>Username<input id="uname"></label><label>Password<input type="password" id="upass"></label><label>Role<select id="urole"><option>hr</option><option>hsse</option><option>admin</option></select></label><button id="newuser">Create user</button></div>
+    <div class="scroll"><table><thead><tr><th>Username</th><th>Role</th><th>Active</th><th></th></tr></thead><tbody>${users.map((u) => `<tr><td>${esc(u.username)}</td><td>${esc(u.role)}</td><td>${u.active ? 'yes' : 'no'}</td><td><button class="ghost" data-uactive="${u.id}|${u.active}">${u.active ? 'Deactivate' : 'Activate'}</button> <button class="ghost" data-upass="${u.id}">Reset password</button></td></tr>`).join('')}</tbody></table></div></section>
+  <section><h2>Audit log (Admin)</h2><div class="scroll"><table><thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Entity</th></tr></thead><tbody>${auditRows.slice(0, 50).map((a) => `<tr><td>${esc(a.created_at)}</td><td>${esc(a.actor)}</td><td>${esc(a.action)}</td><td>${esc(a.entity ?? '')} ${esc(a.entity_id ?? '')}</td></tr>`).join('')}</tbody></table></div></section>` : ''}`;
+  $('#status').value = status;
+  $('#filter').oninput = $('#status').onchange = () => { filter = $('#filter').value; status = $('#status').value; $('#rows').innerHTML = rowsHtml(); };
+  if ($('#links')) showLinks(links);
+  if ($('#file')) $('#file').onchange = async (e) => { $('#paste').value = await e.target.files[0].text(); };
+  if ($('#addone')) $('#addone').onclick = () => run(async () => {
+    const name = $('#pname').value.trim(); if (!name) throw new Error('Enter the person\'s name.');
+    const ext = $('#pext').value.trim() || ('M-' + Date.now().toString(36).toUpperCase());
+    const res = await post('employees', { rows: [{ name, external_system: 'manual', external_id: ext, email: $('#pemail').value.trim() || undefined, department: $('#pdept').value.trim() || undefined, country: $('#pcountry').value.trim() || undefined, language: $('#plang').value }] });
+    await refresh(res[0].created ? 'Person added. Their personal link is below, shown once.' : 'Person updated.');
+    showLinks(res.filter((r) => r.created));
+  });
+  if ($('#import')) $('#import').onclick = () => run(async () => {
+    const rows = parseTable($('#paste').value);
+    if (!rows.length) throw new Error('No rows found. Check the header row.');
+    const res = await post('employees', { rows });
+    const fresh = res.filter((r) => r.created);
+    await refresh(`${fresh.length} added, ${res.length - fresh.length} updated.`);
+    showLinks(fresh);
+  });
+  if ($('#tickall')) $('#tickall').onclick = () => document.querySelectorAll('.pick').forEach((c) => (c.checked = true));
+  if ($('#assign')) $('#assign').onclick = () => run(async () => {
+    const ids = [...document.querySelectorAll('.pick:checked')].map((c) => +c.value);
+    const r = await post('assign', { employee_ids: ids, module: $('#mod').value, due_date: $('#due').value || null, refresh_months: $('#months').value });
+    await refresh(`Assigned to ${r.assigned} people.`);
+  });
+  if ($('#runremind')) $('#runremind').onclick = () => run(async () => { const r = await post('reminders/run', {}); say(`Reminders: ${r.total} due, ${r.sent} sent. Rest logged (no provider / no email / recent).`); reminderRows = await (await call('reminders'))?.json() ?? reminderRows; render(); });
+  if ($('#dryremind')) $('#dryremind').onclick = () => run(async () => { const r = await post('reminders/run', { dry_run: true }); $('#remindmsg').textContent = `Dry run: ${r.total} due (${r.items.filter((x) => x.result === 'would_send').length} would be emailed). Nothing was sent or logged.`; });
+  if ($('#aiscenario')) $('#aiscenario').onclick = () => run(async () => { $('#aiout').innerHTML = '<p class="small">Asking Muse…</p>'; try { const r = await post('ai-scenario', { module: scenarioNow?.module, step: scenarioNow?.step }); const d = r.draft; $('#aiout').innerHTML = `<p class="small"><b>Muse draft (review before use — never auto-published):</b></p><p>${esc(d.question_en)}</p><p class="small">${esc(d.question_sw)}</p><ol>${d.options_en.map((o, i) => `<li>${esc(o)}${i === d.answer ? ' ✓' : ''}<div class="small">${esc(d.options_sw[i] ?? '')}</div></li>`).join('')}</ol><p class="small">${esc(d.why_en)}<br>${esc(d.why_sw)}</p>`; } catch (e) { $('#aiout').innerHTML = `<p class="small">${esc(e.message)} Add the MODEL_API_KEY secret to enable Meta AI drafts.</p>`; } });
+  if ($('#runscenario')) $('#runscenario').onclick = () => run(async () => { const r = await post('scenario/run', {}); say(`Scenario ${r.scenario.month}: ${r.scenario.module}/${r.scenario.step}, ${r.sent} sent of ${r.recipients} recipients.`); await load(); });
+  if ($('#quizcsv')) $('#quizcsv').onclick = () => run(async () => save('hsse-quiz-results.csv', await (await call('quiz-results.csv')).text()));
+  if ($('#mod')) { $('#mod').onchange = () => { const m = mods.find((x) => x.id === $('#mod').value); if (m && $('#months')) $('#months').value = m.track === 'work' ? 6 : 3; }; $('#mod').onchange(); }
+  if ($('#newkey')) $('#newkey').onclick = () => run(async () => { const r = await post('api-keys', { name: $('#keyname').value, scopes: $('#keyscopes').value }); $('#newkeyout').innerHTML = `<p class="small">Copy this key now, it is shown once:</p><code>${esc(r.key)}</code>`; keys = await (await call('api-keys'))?.json() ?? keys; });
+  if ($('#newhook')) $('#newhook').onclick = () => run(async () => { const r = await post('webhooks', { url: $('#hookurl').value, events: $('#hookevents').value }); $('#newhookout').innerHTML = `<p class="small">Webhook secret (shown once, verify X-Endesha-Signature with it):</p><code>${esc(r.secret)}</code>`; hooks = await (await call('webhooks'))?.json() ?? hooks; });
+  if ($('#newuser')) $('#newuser').onclick = () => run(async () => { await post('users', { username: $('#uname').value, password: $('#upass').value, role: $('#urole').value }); await refresh('User created.'); });
+  $('#main').onclick = (e) => {
+    const b = e.target.closest('[data-reset],[data-active],[data-un],[data-revoke],[data-uactive],[data-upass],[data-erase]');
+    if (!b) return;
+    const d = b.dataset;
+    run(async () => {
+      if (d.reset) { const p = people.find((x) => x.id == d.reset); if (!confirm(`Make a new link for ${p.name}? The old link stops working.`)) return; showLinks([{ ...p, ...(await post('reset-code', { id: +d.reset })) }]); say('New link made.'); }
+      if (d.active) { const [id, on] = d.active.split('|'); await post('active', { id: +id, active: on !== 'true' }); await refresh('Saved.'); }
+      if (d.un) { const [id, m] = d.un.split('|'); if (!confirm('Remove this assignment? Past completions stay on record.')) return; await post('unassign', { employee_id: +id, module: m }); await refresh('Removed.'); }
+      if (d.revoke) { if (!confirm('Revoke this API key? Connected systems will stop working.')) return; await post('api-keys/revoke', { id: +d.revoke }); await load(); }
+      if (d.uactive) { const [id, on] = d.uactive.split('|'); await post('users/active', { id: +id, active: on !== 'true' }); await load(); }
+      if (d.upass) { const pw = prompt('New password (at least 10 characters). The user is signed out everywhere.'); if (!pw) return; await post('users/password', { id: +d.upass, password: pw }); say('Password reset.'); }
+      if (d.erase) { const person = people.find((x) => x.id == d.erase); if (!confirm(`ERASE ${person.name} and all their training records? This cannot be undone.`)) return; await post('employees/delete', { id: +d.erase }); await refresh('Person erased.'); }
+    });
+  };
+}
+const run = (fn) => fn().catch((e) => say(e.message));
+async function refresh(m) { people = (await (await call('overview'))?.json()) ?? []; msg = m; render(); }
+function showLinks(list) {
+  links = list;
+  if (!list.length || !$('#links')) return;
+  const rows = list.map((p) => [p.name, link(p.code)]);
+  $('#links').innerHTML = `<p class="small">Personal links, shown once. Send each person only their own link.</p><div class="scroll"><table>${rows.map((r) => `<tr><td>${esc(r[0])}</td><td><code>${esc(r[1])}</code></td></tr>`).join('')}</table></div><button class="ghost" id="dl">Download links (CSV)</button>`;
+  $('#dl').onclick = () => save('hsse-links.csv', 'name,link\r\n' + rows.map((r) => r.map((v) => `"${v.replace(/"/g, '""')}"`).join(',')).join('\r\n'));
+}
+function save(name, text) { const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([text], { type: 'text/csv' })), download: name }); a.click(); }
+$('#report').onclick = () => run(async () => save('hsse-training-report.csv', await (await call('report.csv')).text()));
+$('#logout').onclick = () => run(async () => { try { await post('logout', {}); } catch {} delete sessionStorage.token; token = ''; me = null; links = []; render(); });
+token ? load().catch((e) => { say(e.message); render(); }) : render();
+</script>
+</body>
+</html>

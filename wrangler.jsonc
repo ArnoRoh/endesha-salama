@@ -1,0 +1,18 @@
+// One Worker for everything: site/ as static assets (rider app and staff app), /api and /admin in server/index.mjs, D1 database.
+// First deploy: see README "Put it online (Cloudflare)".
+{
+  "name": "endesha-salama",
+  "main": "server/index.mjs",
+  "compatibility_date": "2026-10-01",
+  // html_handling none: keep /work.html and /index.html as they are (no 307 to /work); the offline service worker cannot use redirected pages.
+  "assets": { "directory": "site", "binding": "ASSETS", "html_handling": "none" },
+  "d1_databases": [
+    // database_id comes from `npx wrangler d1 create hsse`; local dev ignores it.
+    { "binding": "DB", "database_name": "hsse", "database_id": "00000000-0000-0000-0000-000000000000", "migrations_dir": "migrations" }
+  ],
+  // Staff API calls per client IP per minute (server/index.mjs). namespace_id is any number unique in the account.
+  "ratelimits": [{ "name": "LIMITER", "namespace_id": "4521", "simple": { "limit": 120, "period": 60 } }],
+  // Automatic work: weekly overdue/due-soon reminder run (Mon 06:00 UTC) and monthly safety scenario (1st, 06:00 UTC).
+  // Mail delivery needs the EMAIL_WEBHOOK_URL secret (see docs/ROLLOUT.md); without it reminders are logged as no_provider.
+  "triggers": { "crons": ["0 6 * * 1", "0 6 1 * *"] }
+}

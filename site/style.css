@@ -1,3 +1,11 @@
+/* Overpass descends from Highway Gothic, the lettering on road signs: made to be read at a glance.
+   Latin subset, all weights 400-900, self-hosted so it works offline. Licence: SIL OFL 1.1. */
+@font-face {
+  font-family: 'Overpass';
+  src: url('fonts/overpass.woff2') format('woff2');
+  font-weight: 400 900;
+  font-display: swap;
+}
 :root {
   --navy: #0f2a44;
   --amber: #ffb300;
@@ -10,7 +18,7 @@
   --edge: #355269;
   --muted: #b5c4cf;
   color-scheme: dark;
-  font-family: system-ui, sans-serif;
+  font-family: 'Overpass', system-ui, sans-serif;
   font-size: 20px;
   color: var(--ink);
   background: var(--bg);
@@ -40,37 +48,42 @@ button {
   transition: transform 0.1s;
 }
 button:active { transform: translateY(1px); }
+button:disabled { opacity: 0.6; cursor: wait; }
 button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
 h1, h2 { margin: 0; line-height: 1.15; }
 .ui-icon { width: 1.4em; height: 1.4em; vertical-align: middle; flex-shrink: 0; }
 
 .top { background: var(--bg); color: var(--ink); margin: -1rem -1rem 0; padding: 1.5rem 1rem 1.1rem; border-bottom: 1px solid var(--edge); text-align: left; }
-.top h1 { font-size: clamp(2.1rem, 8vw, 3rem); font-weight: 900; font-style: italic; letter-spacing: -0.055em; }
-.tag { margin: 0.55rem 0 1rem; font-size: 0.9rem; line-height: 1.4; }
+.top h1 { font-size: clamp(2.3rem, 9vw, 3.2rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; }
+.top h1::before { content: ''; display: block; width: 2.6rem; height: 0.3rem; margin-bottom: 0.9rem; background: var(--amber); }
+.tag { margin: 0.6rem 0 1.1rem; font-size: 0.95rem; line-height: 1.4; color: var(--muted); }
 .langs { display: flex; gap: 0.5rem; }
 .langs button { background: transparent; color: var(--ink); border-color: var(--line); box-shadow: none; min-height: 2.6rem; padding: 0.45rem 0.85rem; font-size: 0.9rem; font-weight: 700; }
 .langs button[aria-pressed="true"] { background: var(--surface); border-color: var(--ink); box-shadow: inset 0 -3px 0 var(--amber); }
 
 .intro { display: flex; align-items: flex-start; gap: 0.75rem; text-align: left; padding: 0.35rem 0; }
 .intro p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
-.speak { background: var(--surface); color: var(--amber); min-width: 3rem; padding: 0.55rem; flex-shrink: 0; }
+/* Listen buttons are round so they never look like a "go" button. */
+.speak { background: transparent; color: var(--amber); border-color: rgb(255 179 0 / 0.45); border-radius: 50%; width: 3rem; height: 3rem; padding: 0; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
 .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.85rem; }
 .card { position: relative; padding: 0; overflow: hidden; display: flex; flex-direction: column; text-align: left; border-color: var(--edge); }
 .card-picture { position: relative; display: block; background: var(--navy); width: 100%; line-height: 0; }
 .card-picture .art { display: block; width: 100%; height: auto; }
-.card-number { position: absolute; top: 0.4rem; left: 0.4rem; background: var(--navy); color: var(--ink); border: 1px solid var(--line); border-radius: 0.2rem; padding: 0.3rem; font-size: 0.65rem; font-weight: 800; line-height: 1; }
-.card-title { padding: 0.7rem 0.6rem; font-size: 0.9rem; line-height: 1.25; font-weight: 800; }
+.card-number { position: absolute; top: 0.45rem; left: 0.45rem; background: var(--navy); color: var(--amber); border-radius: 0.2rem; padding: 0.3rem 0.35rem 0.2rem; font-size: 0.7rem; font-weight: 900; line-height: 1; }
+.card-title { padding: 0.7rem 0.65rem 0.8rem; font-size: 0.95rem; line-height: 1.2; font-weight: 800; }
+.card-count { display: block; margin-top: 0.4rem; font-size: 0.75rem; font-weight: 500; color: var(--muted); }
 .card.done { border-color: var(--safe); }
 .tick { position: absolute; top: 0.4rem; right: 0.4rem; background: var(--surface); color: var(--safe); border: 2px solid var(--safe); border-radius: 50%; padding: 0.2rem; font-size: 0.65rem; }
 
 .big, .ghost { display: flex; align-items: center; justify-content: center; gap: 0.6rem; font-weight: 800; line-height: 1.3; }
-.big { background: #26475f; border-color: #8fa8b9; font-size: 1.1rem; }
-.big .ui-icon { color: var(--amber); }
-.ghost { background: transparent; }
+/* The one action to take next is amber on navy, like a warning sign. */
+.big { background: var(--amber); color: var(--navy); border-color: var(--amber); font-size: 1.15rem; font-weight: 900; min-height: 3.6rem; }
+.big:focus-visible { outline-color: var(--ink); }
+.ghost { background: transparent; border-color: var(--edge); }
 footer { font-size: 0.75rem; line-height: 1.6; text-align: left; color: var(--muted); margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--edge); }
 footer p { margin: 0.5rem 0; }
-footer .speak { min-width: 2.4rem; min-height: 2.4rem; padding: 0.4rem; margin-right: 0.3rem; color: var(--amber); }
+footer .speak { float: left; width: 2.4rem; height: 2.4rem; min-height: 0; margin: 0.1rem 0.6rem 0.2rem 0; }
 a { color: inherit; text-underline-offset: 0.15em; }
 
 .bar { display: flex; align-items: center; gap: 0.75rem; font-weight: 800; text-align: left; padding-bottom: 0.8rem; border-bottom: 1px solid var(--edge); line-height: 1.25; }
@@ -84,7 +97,7 @@ a { color: inherit; text-underline-offset: 0.15em; }
 .pic:has(.art) { line-height: 0; border: 2px solid var(--edge); border-radius: 0.65rem; overflow: hidden; }
 .pic .art { display: block; width: 100%; height: auto; background: var(--navy); }
 .lesson-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 0.65rem; text-align: left; padding-top: 0.25rem; }
-.text { font-size: 1.2rem; line-height: 1.4; font-weight: 700; margin: 0; }
+.text { font-size: 1.3rem; line-height: 1.35; font-weight: 700; margin: 0; }
 .party { align-self: center; background: var(--surface); color: var(--amber); border: 1px solid var(--edge); border-radius: 50%; padding: 1.2rem; margin: 1rem 0; font-size: 4rem; }
 
 .answers { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.8rem; }
@@ -95,11 +108,19 @@ a { color: inherit; text-underline-offset: 0.15em; }
 .safe .ui-icon { color: var(--safe); }
 .danger { background: #452c34; border-color: var(--danger); }
 .danger .ui-icon { color: var(--danger); }
+.answers.choices { grid-template-columns: minmax(0, 1fr); }
+/* Choice questions carry more text: a smaller picture and question keep the three answers near the first screen. */
+#app:has(.choices) .pic { width: min(100%, 12rem); align-self: center; }
+#app:has(.choices) .text { font-size: 1.1rem; }
+.answers.choices button { flex-direction: row; align-items: flex-start; gap: 0.65rem; text-align: left; padding: 0.8rem; }
+.answers.choices span { font-size: 1rem; font-weight: 600; line-height: 1.4; }
+.source { margin: 0; font-size: 0.75rem; line-height: 1.5; color: var(--muted); text-align: left; }
 
 .feedback { border: 2px solid; border-radius: 0.5rem; padding: 0.9rem; background: var(--surface); text-align: left; }
 .feedback strong { display: flex; align-items: center; gap: 0.45rem; font-size: 1.1rem; }
 .feedback p { color: var(--ink); line-height: 1.5; margin: 0.5rem 0 0; }
-.feedback .speak { display: block; margin-top: 0.6rem; color: var(--amber); }
+.feedback .right { display: inline; font-size: inherit; }
+.feedback .speak { display: flex; margin-top: 0.6rem; }
 .good { color: var(--safe); }
 .bad { color: var(--danger); }
 
@@ -114,3 +135,13 @@ a { color: inherit; text-underline-offset: 0.15em; }
   .card-title { font-size: 1.05rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Staff mode (work.html): sign-in box and training status badges */
+.staff { display: grid; gap: 0.6rem; padding: 0.9rem; border: 1px solid var(--edge); border-radius: 0.5rem; background: var(--surface); text-align: left; }
+.staff p { margin: 0; }
+.staff label { display: grid; gap: 0.4rem; font-weight: 700; line-height: 1.3; }
+.staff input { font: inherit; min-height: 3rem; padding: 0.5rem 0.8rem; border-radius: 0.4rem; border: 2px solid var(--line); background: var(--navy); color: var(--ink); letter-spacing: 0.14em; text-transform: uppercase; }
+.staff .ghost { display: inline-flex; min-height: 2.4rem; padding: 0.3rem 0.7rem; margin-left: 0.5rem; font-size: 0.8rem; }
+.fine { font-size: 0.75rem; line-height: 1.5; color: var(--muted); }
+.badge { display: block; width: fit-content; margin-top: 0.4rem; padding: 0.2rem 0.45rem; border: 2px solid var(--amber); border-radius: 0.25rem; font-size: 0.72rem; font-weight: 800; line-height: 1.2; color: var(--amber); }
+.badge.overdue { background: var(--amber); color: var(--navy); }

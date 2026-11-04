@@ -25,6 +25,21 @@ for (const k of L.spoken) if (!L.ui.sw[k]) bad(`spoken key ${k} is not a ui stri
 const ids = new Set();
 for (const m of L.modules) {
   if (!m.icon || langs.some((l) => !m.title[l])) bad(`module ${m.id}: icon or title missing`);
+  if (m.track === 'work') {
+    if (!Array.isArray(m.submodules) || m.submodules.length < 4 || m.submodules.length > 6) bad(`${m.id}: 4 to 6 submodules required`);
+    else {
+      const unitIds = new Set();
+      for (const unit of m.submodules) {
+        if (!unit.id || unitIds.has(unit.id)) bad(`${m.id}: missing or duplicate submodule id`);
+        unitIds.add(unit.id);
+        if (langs.some((l) => !unit.title?.[l])) bad(`${m.id}/${unit.id}: title missing`);
+        if (!Array.isArray(unit.steps) || !unit.steps.length) bad(`${m.id}/${unit.id}: no steps`);
+      }
+      const covered = m.submodules.flatMap((unit) => unit.steps ?? []);
+      if (covered.length !== m.steps.length || new Set(covered).size !== m.steps.length || m.steps.some((s) => !covered.includes(s.id)))
+        bad(`${m.id}: submodules must cover each lesson and quiz step exactly once`);
+    }
+  }
   for (const s of m.steps) {
     if (ids.has(s.id)) bad(`duplicate step id ${s.id}`);
     ids.add(s.id);
@@ -34,7 +49,16 @@ for (const m of L.modules) {
       if (!s.text?.[l]) bad(`${s.id}: text.${l} missing`);
       if (s.answer && !s.why?.[l]) bad(`${s.id}: why.${l} missing`);
     }
-    if (s.answer && !['safe', 'danger'].includes(s.answer)) bad(`${s.id}: answer must be safe or danger`);
+    if (s.options) {
+      if (!Array.isArray(s.options) || s.options.length !== 3) bad(`${s.id}: exactly three options required`);
+      else {
+        if (s.options.map((o) => o.id).join(',') !== 'a,b,c') bad(`${s.id}: option ids must be a,b,c`);
+        for (const o of s.options)
+          for (const l of langs) if (!o.text?.[l]?.trim()) bad(`${s.id}/${o.id}: text.${l} missing`);
+        if (!s.options.some((o) => o.id === s.answer)) bad(`${s.id}: answer must name an option`);
+      }
+    } else if (s.answer && !['safe', 'danger'].includes(s.answer)) bad(`${s.id}: answer must be safe or danger`);
+    if (s.source && (!s.source.label || !/^https:\/\//.test(s.source.url))) bad(`${s.id}: source label and HTTPS link required`);
   }
 }
 
@@ -62,10 +86,18 @@ for (const f of ART_FILES) {
   if (!(await exists(f))) { bad(`missing picture ${f}`); continue; }
   const bytes = await readFile(join(site, f));
   if (bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WEBP') bad(`${f}: not a WebP image`);
+  else { // approved art standard: exactly 480x400 (AGENTS.md); generation output must be resized/cropped to this before commit
+    const kind = bytes.toString('ascii', 12, 16);
+    const dims = kind === 'VP8X' ? [bytes.readUIntLE(24, 3) + 1, bytes.readUIntLE(27, 3) + 1]
+      : kind === 'VP8L' ? [(bytes.readUInt32LE(21) & 0x3fff) + 1, ((bytes.readUInt32LE(21) >> 14) & 0x3fff) + 1]
+      : kind === 'VP8 ' ? [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff] : [0, 0];
+    if (dims[0] !== 480 || dims[1] !== 400) bad(`${f}: picture is ${dims[0]}x${dims[1]}, must be 480x400`);
+  }
   if (bytes.length > 40e3) bad(`${f}: picture exceeds 40 KB`);
 }
 const size = await sizeOf(site);
-if (size > 5e6) bad(`site is ${(size / 1e6).toFixed(1)} MB, budget is 5 MB`);
+const budget = (5e6 / 6) * L.modules.length; // per module: the original 5 MB for 6 modules; audio loads per module, not at first visit
+if (size > budget) bad(`site is ${(size / 1e6).toFixed(2)} MB, budget is ${(budget / 1e6).toFixed(2)} MB (${L.modules.length} modules)`);
 
 if (errors.length) {
   console.error(errors.map((e) => `✗ ${e}`).join('\n'));

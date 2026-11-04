@@ -1,12 +1,18 @@
 {
   "langs": { "sw": "Kiswahili", "en": "English" },
   "voices": { "sw": "sw-TZ-RehemaNeural", "en": "en-KE-AsiliaNeural" },
-  "spoken": ["intro", "disclaimer", "moduleDone", "allDone", "certReady"],
+  "spoken": ["hubIntro", "intro", "disclaimer", "moduleDone", "allDone", "certReady", "work_intro", "work_disclaimer", "work_allDone"],
   "ui": {
     "sw": {
+      "hubName": "Salama",
+      "hubTagline": "Mafunzo ya usalama kazini na barabarani",
+      "hubIntro": "Chagua mada kisha fungua somo dogo.",
+      "motorcycle": "Usalama wa Pikipiki",
+      "submodules": "Masomo madogo",
+      "topics": "Mada zote",
       "appName": "Endesha Salama",
       "tagline": "Mafunzo ya usalama wa pikipiki",
-      "intro": "Jifunze kuendesha pikipiki kwa usalama. Gusa somo, sikiliza, kisha chagua: Salama au Hatari?",
+      "intro": "Jifunze kuendesha pikipiki kwa usalama. Gusa somo, sikiliza, kisha chagua jibu bora kwa kila swali.",
       "next": "Endelea",
       "safe": "Salama",
       "danger": "Hatari",
@@ -26,12 +32,42 @@
       "disclaimerTitle": "Tahadhari",
       "disclaimer": "Haya ni mafunzo ya jumla tu. Hayachukui nafasi ya mafunzo rasmi ya udereva, leseni halali, wala sheria za barabarani za nchi yako. Akili bandia (AI) imetengeneza maneno na sauti za mafunzo haya. Hakuna mtaalamu wa usalama barabarani wala wa huduma ya kwanza aliyeyakagua.",
       "brand": "Imeletwa kwako na Masika Ventures",
-      "openSource": "Programu huria"
+      "openSource": "Programu huria",
+      "source": "Chanzo",
+      "work_appName": "Salama Kazini",
+      "work_tagline": "Mafunzo ya usalama kazini (HSSE)",
+      "work_intro": "Jifunze kukaa salama kazini. Gusa somo, sikiliza, kisha chagua jibu bora kwa kila swali.",
+      "work_certTitle": "Cheti cha Salama Kazini",
+      "work_certBody": "amekamilisha mafunzo ya usalama kazini (HSSE)",
+      "work_allDone": "Umemaliza masomo yote ya usalama kazini. Chukua cheti chako!",
+      "work_disclaimer": "Haya ni mafunzo ya jumla ya usalama kazini tu. Hayachukui nafasi ya sheria za eneo lako la kazi, maelekezo ya msimamizi wako, taratibu za HSSE za kampuni wala sheria za nchi. Akili bandia (AI) imetengeneza maneno na sauti za mafunzo haya. Hakuna mtaalamu wa HSSE aliyeyakagua.",
+      "staffPrompt": "Weka msimbo ulioupata kutoka kwa msimamizi wako",
+      "staffGo": "Ingia",
+      "staffBad": "Msimbo haujatambuliwa. Angalia na ujaribu tena.",
+      "staffHello": "Habari",
+      "staffOut": "Toka",
+      "staffDue": "Mwisho",
+      "staffOverdue": "Imechelewa",
+      "staffRefresh": "Rudia kabla ya",
+      "staffPrivacy": "Ukiingia, jina lako na matokeo ya mafunzo huhifadhiwa kwenye rekodi za HSSE za mwajiri wako.",
+      "staffOffline": "Imeshindikana kufikia seva. Angalia mtandao wako na ujaribu tena.",
+      "rightAnswer": "Jibu sahihi",
+      "locked": "Kwanza maliza somo lililotangulia",
+      "empPrompt": "Namba ya mfanyakazi (si lazima)",
+      "deptPrompt": "Idara (si lazima)",
+      "companyPrompt": "Kampuni (si lazima)",
+      "riderTrack": "Kwa wafanyakazi: ingia kwa msimbo wako kuhifadhi matokeo (si lazima)"
     },
     "en": {
+      "hubName": "Salama",
+      "hubTagline": "Workplace and motorcycle safety lessons",
+      "hubIntro": "Choose a topic and open a submodule.",
+      "motorcycle": "Motorcycle Safety",
+      "submodules": "Submodules",
+      "topics": "All topics",
       "appName": "Endesha Salama",
       "tagline": "Motorcycle safety lessons",
-      "intro": "Learn to ride a motorcycle safely. Tap a lesson, listen, then choose: Safe or Danger?",
+      "intro": "Learn to ride a motorcycle safely. Tap a lesson, listen, then choose the best answer to each question.",
       "next": "Next",
       "safe": "Safe",
       "danger": "Danger",
@@ -51,7 +87,31 @@
       "disclaimerTitle": "Disclaimer",
       "disclaimer": "This is general safety education only. It does not replace formal rider training, a valid licence, or the traffic laws of your country. AI made the words and voices. No road-safety or first-aid expert has checked these lessons.",
       "brand": "Brought to you by Masika Ventures",
-      "openSource": "Open source"
+      "openSource": "Open source",
+      "source": "Source",
+      "work_appName": "Salama Kazini",
+      "work_tagline": "HSSE safety lessons for work",
+      "work_intro": "Learn how to stay safe at work. Tap a lesson, listen, then choose the best answer to each question.",
+      "work_certTitle": "Salama Kazini Certificate",
+      "work_certBody": "has completed the HSSE work safety lessons",
+      "work_allDone": "You finished all the work safety lessons. Get your certificate!",
+      "work_disclaimer": "This is general workplace safety education only. It does not replace your site rules, your supervisor's instructions, company HSSE procedures or the law. AI made the words and voices. No HSSE professional has checked these lessons.",
+      "staffPrompt": "Enter the code from your supervisor",
+      "staffGo": "Sign in",
+      "staffBad": "Code not recognised. Check it and try again.",
+      "staffHello": "Hello",
+      "staffOut": "Sign out",
+      "staffDue": "Due",
+      "staffOverdue": "Overdue",
+      "staffRefresh": "Refresh by",
+      "staffPrivacy": "When you sign in, your name and training results are saved in your employer's HSSE records.",
+      "staffOffline": "Could not reach the server. Check your network and try again.",
+      "rightAnswer": "Correct answer",
+      "locked": "Finish the previous lesson first",
+      "empPrompt": "Employee ID (optional)",
+      "deptPrompt": "Department (optional)",
+      "companyPrompt": "Company (optional)",
+      "riderTrack": "For employees: sign in with your code to save results (optional)"
     }
   },
   "modules": [
@@ -59,80 +119,624 @@
       "id": "check",
       "icon": "🔧",
       "title": { "sw": "Kabla ya Kuondoka", "en": "Before You Ride" },
+      "hook": {"sw": "Pikipiki inaweza kuonekana sawa lakini isiwe salama.", "en": "A motorcycle can look fine and still be unsafe."},
       "steps": [
         { "id": "check-1", "pic": "🏍️🔍", "art": "bike-check", "text": { "sw": "Kabla ya kuondoka, kagua pikipiki yako kila siku.", "en": "Check your motorcycle every day before you ride." } },
         { "id": "check-2", "pic": "⭕💨", "art": "tyre-pressure", "text": { "sw": "Pima upepo wa matairi kwa kipima upepo. Matairi yasiwe yameisha au kuharibika.", "en": "Check the tyre pressure with a gauge. Do not ride on worn or damaged tyres." } },
         { "id": "check-3", "pic": "🛑", "art": "brake-test", "text": { "sw": "Jaribu breki za mbele na za nyuma.", "en": "Test the front and rear brakes." } },
         { "id": "check-4", "pic": "💡", "art": "lights-check", "text": { "sw": "Hakikisha taa ya mbele, taa ya nyuma, taa ya breki na taa za kuashiria zinafanya kazi.", "en": "Check that the headlight, tail light, brake light and indicators work." } },
-        { "id": "check-q1", "pic": "🛑❓", "art": "weak-brakes", "answer": "danger", "text": { "sw": "Dereva anaondoka na breki mbovu.", "en": "A rider leaves with weak brakes." }, "why": { "sw": "Hatari! Usiendeshe. Rekebisha breki kwanza.", "en": "Danger! Do not ride. Fix the brakes first." } },
-        { "id": "check-q2", "pic": "⛓️⛽", "art": "chain-fuel", "answer": "safe", "text": { "sw": "Dereva anakagua mnyororo na kuweka mafuta kabla ya safari.", "en": "A rider checks the chain and adds fuel before the trip." }, "why": { "sw": "Salama! Ukaguzi unakusaidia kuona tatizo kabla ya safari.", "en": "Safe! A check helps you find a problem before you ride." } }
+        { "id": "check-5", "pic": "🏍️", "art": "bike-check", "text": { "sw": "Takwimu za polisi Tanzania za mwaka 2025 zinaripoti vifo 287 na majeruhi 311 katika ajali za pikipiki. Hizi ni taarifa zilizorekodiwa na polisi, si hesabu ya kila ajali.", "en": "Tanzania police figures for 2025 report 287 deaths and 311 injuries in motorcycle crashes. These are police records, not a count of every crash." }, "source": { "label": "NBS / Tanzania Police, 2025, Table 3.5", "url": "https://www.nbs.go.tz/uploads/statistics/documents/en-1774441493-CRIME%20STATISTICS%20REPORT%20ENGLISH%202025.pdf#page=58" } },
+        { "id": "check-q2", "pic": "⛓️⛽", "art": "chain-fuel", "answer": "safe", "text": { "sw": "Dereva anakagua mnyororo na kuweka mafuta kabla ya safari.", "en": "A rider checks the chain and adds fuel before the trip." }, "why": { "sw": "Salama! Ukaguzi unakusaidia kuona tatizo kabla ya safari.", "en": "Safe! A check helps you find a problem before you ride." } },
+        { "id": "check-q1", "pic": "🏍️", "art": "weak-brakes", "text": { "sw": "Breki ya mbele ni dhaifu. Abiria anakulipa zaidi ukiondoka sasa. Ufanye nini?", "en": "Your front brake is weak. A passenger offers extra money if you leave now. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Tumia breki ya nyuma tu na uende polepole.", "en": "Use only the rear brake and ride slowly." } }, { "id": "b", "text": { "sw": "Usiondoke. Rekebisha breki kabla ya kuendesha.", "en": "Do not leave. Repair the brake before riding." } }, { "id": "c", "text": { "sw": "Mpeleke abiria kwanza, kisha urekebishe breki.", "en": "Take the passenger first, then repair the brake." } }], "answer": "b", "why": { "sw": "Breki zote mbili lazima zifanye kazi. Malipo ya ziada hayaondoi hatari.", "en": "Both brakes must work. Extra money does not remove the danger." } },
+        { "id": "check-q3", "pic": "🏍️", "art": "tyre-pressure", "text": { "sw": "Tairi limepungua upepo tena baada ya kulijaza jana. Safari ni fupi. Uamuzi bora ni upi?", "en": "Your tyre is low again after you inflated it yesterday. The trip is short. What is the best decision?" }, "options": [{ "id": "a", "text": { "sw": "Ongeza upepo na ukague tena kesho.", "en": "Add air and check again tomorrow." } }, { "id": "b", "text": { "sw": "Endesha polepole ili tairi lisipate moto.", "en": "Ride slowly so the tyre does not get hot." } }, { "id": "c", "text": { "sw": "Tafuta chanzo cha kupungua upepo na ukirekebishe kwanza.", "en": "Find and fix the air leak first." } }], "answer": "c", "why": { "sw": "Kupungua upepo tena kunaweza kuonyesha pancha au vali mbovu. Safari fupi pia inahitaji tairi salama.", "en": "Repeated pressure loss can mean a puncture or faulty valve. A short trip also needs a safe tyre." } },
+        { "id": "check-q4", "pic": "🏍️", "art": "bike-check", "text": { "sw": "Polisi waliripoti vifo 287 na majeruhi 311 katika ajali za pikipiki Tanzania mwaka 2025. Takwimu hizi zinatuambia nini?", "en": "Police reported 287 deaths and 311 injuries in motorcycle crashes in Tanzania in 2025. What do these figures tell us?" }, "source": { "label": "NBS / Tanzania Police, 2025, Table 3.5", "url": "https://www.nbs.go.tz/uploads/statistics/documents/en-1774441493-CRIME%20STATISTICS%20REPORT%20ENGLISH%202025.pdf#page=58" }, "options": [{ "id": "a", "text": { "sw": "Ajali zina madhara makubwa. Takwimu hizi hazitoi uwezekano wa ajali kwa safari yangu.", "en": "Crashes cause serious harm. These figures do not give the chance of a crash on my trip." } }, { "id": "b", "text": { "sw": "Safari yangu ni salama kwa sababu idadi ni ndogo.", "en": "My trip is safe because the numbers are small." } }, { "id": "c", "text": { "sw": "Takwimu hizi zinaonyesha uwezekano kamili wa kila dereva kupata ajali.", "en": "These figures show the exact chance of each rider having a crash." } }], "answer": "a", "why": { "sw": "Hizi ni taarifa za polisi za mwaka 2025. Hazilinganishi kazi za kampuni. Chukua tahadhari kila safari.", "en": "These are 2025 police records. They do not compare company tasks. Take care on every trip." } }
       ]
     },
     {
       "id": "gear",
       "icon": "⛑️",
       "title": { "sw": "Vifaa vya Kujikinga", "en": "Protective Gear" },
+      "hook": {"sw": "Huwezi kutabiri ajali. Unaweza kuamua kujilinda vizuri.", "en": "You cannot predict a crash. You can decide how well you protect yourself."},
       "steps": [
         { "id": "gear-1", "pic": "⛑️", "art": "helmet-on", "text": { "sw": "Vaa kofia ya pikipiki inayokutosha vizuri kila safari, hata safari fupi.", "en": "Wear a motorcycle helmet that fits you well on every trip, even a short one." } },
         { "id": "gear-2", "pic": "⛑️🔒", "art": "strap-closed", "text": { "sw": "Funga kamba ya kofia. Kofia isiyofungwa huruka wakati wa ajali.", "en": "Fasten the helmet strap. A helmet that is not fastened comes off in a crash." } },
-        { "id": "gear-3", "pic": "👕✨", "art": "vest", "text": { "sw": "Vaa jaketi la kuakisi mwanga ili madereva wengine wakuone.", "en": "Wear a reflective vest so other drivers can see you." } },
+        { "id": "gear-3", "pic": "👕✨", "art": "vest", "text": { "sw": "Vaa vesti inayoakisi mwanga ili madereva wengine wakuone.", "en": "Wear a reflective vest so other drivers can see you." } },
         { "id": "gear-4", "pic": "🧤🥾", "art": "boots-gloves", "text": { "sw": "Vaa glovu na viatu imara vinavyofunika vifundo vya miguu.", "en": "Wear gloves and sturdy shoes that cover your ankles." } },
+        { "id": "gear-5", "pic": "🏍️", "art": "night-ride", "text": { "sw": "Usiku, tumia kioo cha kofia kisicho na tint au miwani ya kujikinga isiyo na tint. Simama mahali salama kabla ya kubadilisha. Usitumie kioo cheusi usiku.", "en": "At night, use a clear visor or clear riding goggles. Stop safely before changing them. Do not use a dark visor at night." } },
+        { "id": "gear-6", "pic": "🏍️", "art": "helmet-on", "text": { "sw": "Kofia iliyopata pigo kwenye ajali inaweza kuharibika ndani bila kuonekana. Ibadilishe kabla ya kuendesha tena.", "en": "A helmet hit in a crash can have hidden damage. Replace it before riding again." } },
         { "id": "gear-q1", "pic": "⛑️🔓", "art": "strap-open", "answer": "danger", "text": { "sw": "Dereva amevaa kofia lakini kamba haijafungwa.", "en": "A rider wears a helmet but the strap is open." }, "why": { "sw": "Hatari! Funga kamba kila wakati.", "en": "Danger! Always fasten the strap." } },
-        { "id": "gear-q2", "pic": "👡", "art": "flip-flop", "answer": "danger", "text": { "sw": "Dereva anaendesha akiwa amevaa ndala.", "en": "A rider rides in flip-flops." }, "why": { "sw": "Hatari! Ndala hazilindi miguu. Vaa viatu imara vinavyofunika vifundo vya miguu.", "en": "Danger! Flip-flops do not protect your feet. Wear sturdy shoes that cover your ankles." } },
-        { "id": "gear-q3", "pic": "⛑️⛑️", "art": "two-helmets", "answer": "safe", "text": { "sw": "Dereva na abiria wote wamevaa kofia zilizofungwa.", "en": "The rider and the passenger both wear fastened helmets." }, "why": { "sw": "Salama! Abiria pia anahitaji kofia.", "en": "Safe! The passenger also needs a helmet." } }
+        { "id": "gear-q2", "pic": "🏍️", "art": "night-ride", "text": { "sw": "Safari yako imechelewa hadi usiku. Kofia ina kioo cheusi, na una miwani ya kujikinga isiyo na tint. Uamuzi bora ni upi?", "en": "Your trip runs late into the night. Your helmet has a dark visor, and you have clear riding goggles. What is the best decision?" }, "options": [{ "id": "a", "text": { "sw": "Endesha polepole huku kioo cheusi kikiwa chini.", "en": "Ride slowly with the dark visor down." } }, { "id": "b", "text": { "sw": "Simama, inua kioo cheusi na vaa miwani safi.", "en": "Stop safely, lift the dark visor and wear clear goggles." } }, { "id": "c", "text": { "sw": "Fuata gari kwa karibu ukitumia taa zake za nyuma.", "en": "Follow a car closely using its tail lights." } }], "answer": "b", "why": { "sw": "Unahitaji kuona vizuri na kulinda macho. Kioo cheusi hupunguza mwanga; kupunguza mwendo hakutatui tatizo hilo.", "en": "You need a clear view and protected eyes. A dark visor reduces light; slowing down does not solve that problem." } },
+        { "id": "gear-q3", "pic": "🏍️", "art": "night-ride", "text": { "sw": "Ni usiku. Kioo chako cheusi kinazuia kuona vizuri. Huna kioo wala miwani ya kujikinga isiyo na tint. Ufanye nini?", "en": "It is night. Your dark visor limits your view. You have no clear visor or clear riding goggles. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Inua kioo na uendelee bila kulinda macho.", "en": "Raise the visor and continue with no eye protection." } }, { "id": "b", "text": { "sw": "Funga kioo na ufuate mistari ya barabarani.", "en": "Close the visor and follow the road markings." } }, { "id": "c", "text": { "sw": "Simama salama na upange usafiri mwingine.", "en": "Stop safely and arrange other transport." } }], "answer": "c", "why": { "sw": "Usilazimishe safari bila kuona na kulinda macho. Vumbi, upepo na vitu vinavyorushwa vinaweza kuumiza macho.", "en": "Do not continue without a clear view and eye protection. Dust, wind and flying debris can harm your eyes." } },
+        { "id": "gear-q4", "pic": "🏍️", "art": "helmet-on", "text": { "sw": "Kofia yako iligonga barabara katika ajali jana. Nje inaonekana nzuri. Uamuzi bora ni upi?", "en": "Your helmet hit the road in a crash yesterday. It looks fine outside. What is the best decision?" }, "options": [{ "id": "a", "text": { "sw": "Ibadilishe kabla ya safari nyingine.", "en": "Replace it before another trip." } }, { "id": "b", "text": { "sw": "Itumie ikiwa kamba bado inafunga.", "en": "Use it if the strap still fastens." } }, { "id": "c", "text": { "sw": "Itumie kwa safari fupi tu.", "en": "Use it only for short trips." } }], "answer": "a", "why": { "sw": "Pigo linaweza kuharibu sehemu za ndani zinazolinda kichwa. Mwonekano mzuri hauhakikishi usalama.", "en": "An impact can damage the parts inside that protect your head. A good appearance does not prove it is safe." } }
       ]
     },
     {
       "id": "road",
       "icon": "🛣️",
       "title": { "sw": "Barabarani", "en": "On the Road" },
+      "hook": {"sw": "Endesha kulingana na hali, si kikomo cha mwendo tu.", "en": "Ride for the conditions, not just the speed limit."},
       "steps": [
         { "id": "road-1", "pic": "🐢", "art": "steady-speed", "text": { "sw": "Usizidi kikomo cha mwendo. Punguza zaidi mwendo barabara ikiwa mbaya au huoni vizuri.", "en": "Stay within the speed limit. Slow down more when the road is bad or you cannot see well." } },
         { "id": "road-2", "pic": "🏍️↔️🚗", "art": "following-gap", "text": { "sw": "Acha nafasi kubwa kati yako na gari lililo mbele.", "en": "Keep a big gap between you and the vehicle in front." } },
         { "id": "road-3", "pic": "🌧️", "art": "wet-road", "text": { "sw": "Maji, matope na changarawe vinaweza kufanya barabara iteleze. Punguza mwendo na tumia breki zote mbili taratibu.", "en": "Water, mud and loose gravel can make the road slippery. Slow down and use both brakes gently." } },
         { "id": "road-4", "pic": "🌙💡", "art": "night-ride", "text": { "sw": "Usiku, washa taa na endesha polepole zaidi.", "en": "At night, switch on your lights and ride more slowly." } },
-        { "id": "road-q1", "pic": "🚛🏍️", "art": "blind-overtake", "answer": "danger", "text": { "sw": "Dereva anapita lori kwenye kona bila kuona mbele.", "en": "A rider overtakes a lorry on a bend without seeing ahead." }, "why": { "sw": "Hatari! Pita tu mahali panaporuhusiwa na unapoona njia iko wazi mbele.", "en": "Danger! Overtake only where it is allowed and when you can see the road is clear ahead." } },
-        { "id": "road-q2", "pic": "✋👀", "art": "junction-stop", "answer": "safe", "text": { "sw": "Dereva anasimama na kuangalia kushoto na kulia kwenye makutano.", "en": "A rider stops and looks left and right at a junction." }, "why": { "sw": "Salama! Angalia pande zote, wape njia wenye haki ya kupita, kisha vuka njia ikiwa wazi.", "en": "Safe! Look both ways, let traffic with priority pass, then cross when the way is clear." } }
+        { "id": "road-5", "pic": "🏍️", "art": "steady-speed", "text": { "sw": "WHO ilikadiria vifo takriban elfu kumi katika ajali zote za barabarani Tanzania mwaka 2021. Makadirio haya yanahusu watumiaji wote wa barabara, si wa pikipiki pekee.", "en": "WHO estimated about ten thousand deaths from all road crashes in Tanzania in 2021. This estimate covers all road users, not only motorcyclists." }, "source": { "label": "WHO, 2023 profile (2021 data)", "url": "https://www.who.int/publications/m/item/road-safety-tza-2023-country-profile" } },
+        { "id": "road-q2", "pic": "✋👀", "art": "junction-stop", "answer": "safe", "text": { "sw": "Dereva anasimama na kuangalia kushoto na kulia kwenye makutano.", "en": "A rider stops and looks left and right at a junction." }, "why": { "sw": "Salama! Angalia pande zote, wape njia wenye haki ya kupita, kisha vuka njia ikiwa wazi.", "en": "Safe! Look both ways, let traffic with priority pass, then cross when the way is clear." } },
+        { "id": "road-q1", "pic": "🏍️", "art": "blind-overtake", "text": { "sw": "Lori linaenda polepole. Abiria anasema umpite, lakini kona inazuia kuona mbele. Uamuzi bora ni upi?", "en": "A truck is moving slowly. Your passenger urges you to overtake, but a bend blocks your view ahead. What is the best decision?" }, "options": [{ "id": "a", "text": { "sw": "Piga honi na upite haraka.", "en": "Sound the horn and overtake quickly." } }, { "id": "b", "text": { "sw": "Sogea karibu na lori kabla ya kupita.", "en": "Move close to the truck before overtaking." } }, { "id": "c", "text": { "sw": "Baki nyuma hadi uone njia wazi.", "en": "Stay back until the road is clear." } }], "answer": "c", "why": { "sw": "Honi haitafungua njia. Usipite bila kuona nafasi ya kutosha mbele.", "en": "A horn does not clear the road. Do not overtake unless you can see enough clear road ahead." } },
+        { "id": "road-q3", "pic": "🏍️", "art": "wet-road", "text": { "sw": "Mvua imeanza. Gari mbele yako linafunga breki mara kwa mara. Ufanye nini kwanza?", "en": "Rain starts. The car ahead keeps braking. What should you do first?" }, "options": [{ "id": "a", "text": { "sw": "Punguza mwendo taratibu na ongeza nafasi mbele yako.", "en": "Slow down gently and increase your following gap." } }, { "id": "b", "text": { "sw": "Fuata karibu ili kutumia njia yake kwenye maji.", "en": "Follow closely to use its track through the water." } }, { "id": "c", "text": { "sw": "Pita gari mara moja kabla mvua haijazidi.", "en": "Overtake immediately before the rain gets heavier." } }], "answer": "a", "why": { "sw": "Barabara yenye maji hupunguza mshiko wa matairi. Nafasi kubwa inakupa muda zaidi wa kusimama.", "en": "A wet road reduces tyre grip. A bigger gap gives you more time to stop." } },
+        { "id": "road-q4", "pic": "🏍️", "art": "steady-speed", "text": { "sw": "WHO ilikadiria vifo takriban elfu kumi katika ajali za barabarani Tanzania mwaka 2021. Kauli ipi inaeleza takwimu hii kwa usahihi?", "en": "WHO estimated about ten thousand road crash deaths in Tanzania in 2021. Which statement describes this figure correctly?" }, "source": { "label": "WHO, 2023 profile (2021 data)", "url": "https://www.who.int/publications/m/item/road-safety-tza-2023-country-profile" }, "options": [{ "id": "a", "text": { "sw": "Wote walikuwa waendesha pikipiki.", "en": "All were motorcycle riders." } }, { "id": "b", "text": { "sw": "Ni makadirio ya vifo vya watumiaji wote wa barabara kwa mwaka 2021.", "en": "It is an estimate of deaths among all road users for 2021." } }, { "id": "c", "text": { "sw": "Ni hesabu ya polisi ya vifo vya mwaka huu.", "en": "It is a police count of deaths this year." } }], "answer": "b", "why": { "sw": "WHO ilikadiria vifo 10,052. Mwaka, chanzo na kundi ni muhimu. Usichanganye makadirio haya na hesabu ya polisi ya mwaka mwingine.", "en": "WHO estimated 10,052 deaths. The year, source and group matter. Do not mix this estimate with a police count from another year." } }
       ]
     },
     {
       "id": "load",
       "icon": "🚶",
       "title": { "sw": "Abiria na Mzigo", "en": "Passengers and Loads" },
+      "hook": {"sw": "Uzito wa ziada huathiri mizani, breki na udhibiti wako.", "en": "Extra weight affects your balance, braking and control."},
       "steps": [
         { "id": "load-1", "pic": "☝️🚶", "art": "one-passenger", "text": { "sw": "Beba abiria mmoja tu.", "en": "Carry only one passenger." } },
-        { "id": "load-2", "pic": "🚶⛑️", "art": "passenger-helmet", "text": { "sw": "Abiria lazima avae kofia ngumu iliyofungwa.", "en": "The passenger must wear a fastened helmet." } },
+        { "id": "load-2", "pic": "🚶⛑️", "art": "passenger-helmet", "text": { "sw": "Abiria lazima avae kofia ya pikipiki iliyofungwa.", "en": "The passenger must wear a fastened helmet." } },
         { "id": "load-3", "pic": "📦🔗", "art": "secure-load", "text": { "sw": "Funga mzigo vizuri na usawa pande zote. Usizidishe uzito unaoruhusiwa kwa pikipiki.", "en": "Tie the load firmly and balance it on both sides. Do not go over the weight your motorcycle can carry." } },
-        { "id": "load-q1", "pic": "🚶🚶🚶", "art": "three-passengers", "answer": "danger", "text": { "sw": "Dereva amebeba abiria watatu.", "en": "A rider carries three passengers." }, "why": { "sw": "Hatari! Beba abiria mmoja tu.", "en": "Danger! Carry only one passenger." } },
-        { "id": "load-q2", "pic": "📦📦📦", "art": "wide-load", "answer": "danger", "text": { "sw": "Mzigo ni mpana kuliko pikipiki na unazuia vioo.", "en": "The load is wider than the motorcycle and blocks the mirrors." }, "why": { "sw": "Hatari! Punguza mzigo au tumia usafiri mwingine.", "en": "Danger! Make the load smaller or use other transport." } },
-        { "id": "load-q3", "pic": "🚶⛑️👍", "art": "passenger-footrests", "answer": "safe", "text": { "sw": "Abiria mmoja amevaa kofia iliyofungwa, ameshika vizuri na ameweka miguu kwenye sehemu za kukanyagia.", "en": "One passenger wears a fastened helmet, holds on well and keeps both feet on the footrests." }, "why": { "sw": "Salama! Kofia iliyofungwa na kukaa vizuri humlinda abiria.", "en": "Safe! A fastened helmet and good seating help protect the passenger." } }
+        { "id": "load-q3", "pic": "🚶⛑️👍", "art": "passenger-footrests", "answer": "safe", "text": { "sw": "Abiria mmoja amevaa kofia iliyofungwa, ameshika vizuri na ameweka miguu kwenye sehemu za kukanyagia.", "en": "One passenger wears a fastened helmet, holds on well and keeps both feet on the footrests." }, "why": { "sw": "Salama! Kofia iliyofungwa na kukaa vizuri humlinda abiria.", "en": "Safe! A fastened helmet and good seating help protect the passenger." } },
+        { "id": "load-q1", "pic": "🏍️", "art": "three-passengers", "text": { "sw": "Watu wawili wanataka kupanda pamoja kwa safari fupi. Wanatoa malipo ya ziada. Ufanye nini?", "en": "Two people want to ride together for a short trip. They offer extra money. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Beba mmoja tu; mwingine atumie usafiri mwingine.", "en": "Carry only one; the other must use other transport." } }, { "id": "b", "text": { "sw": "Wabebe wote ikiwa wote wana kofia.", "en": "Carry both if they both have helmets." } }, { "id": "c", "text": { "sw": "Wabebe wote lakini uende polepole.", "en": "Carry both but ride slowly." } }], "answer": "a", "why": { "sw": "Kofia na mwendo mdogo havifanyi kubeba abiria wawili kuwa salama. Beba mmoja tu.", "en": "Helmets and low speed do not make two passengers safe. Carry only one." } },
+        { "id": "load-q2", "pic": "🏍️", "art": "wide-load", "text": { "sw": "Mzigo umefungwa vizuri lakini unazuia vioo. Mteja anasema umfikishie hivyo hivyo. Ufanye nini?", "en": "A load is firmly tied but blocks your mirrors. The customer asks you to deliver it anyway. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Geuza kichwa mara nyingi badala ya kutumia vioo.", "en": "Turn your head often instead of using the mirrors." } }, { "id": "b", "text": { "sw": "Panga mzigo upya ili vioo viwe wazi.", "en": "Rearrange the load to clear the mirrors." } }, { "id": "c", "text": { "sw": "Endesha katikati ya barabara ili kuwa na nafasi.", "en": "Ride in the middle of the road to get more space." } }], "answer": "b", "why": { "sw": "Kufunga mzigo pekee hakutoshi. Lazima uweze kuona na kudhibiti pikipiki.", "en": "Tying the load is not enough. You must be able to see and control the motorcycle." } },
+        { "id": "load-q4", "pic": "🏍️", "art": "secure-load", "text": { "sw": "Ukiendesha, mzigo unaanza kusogea upande mmoja. Ufanye nini?", "en": "While riding, the load starts moving to one side. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Shika mzigo kwa mkono mmoja na uendelee.", "en": "Hold the load with one hand and continue." } }, { "id": "b", "text": { "sw": "Mwambie abiria ashikilie mzigo hadi ufike.", "en": "Ask the passenger to hold the load until you arrive." } }, { "id": "c", "text": { "sw": "Simama salama na funga mzigo upya.", "en": "Stop safely and secure the load again." } }], "answer": "c", "why": { "sw": "Mzigo unaosogea unaweza kukufanya ushindwe kudhibiti pikipiki. Rekebisha ukiwa umesimama.", "en": "A moving load can make you lose control. Fix it while stopped." } }
       ]
     },
     {
       "id": "habits",
       "icon": "🚫",
-      "title": { "sw": "Pombe, Simu na Uchovu", "en": "Alcohol, Phones and Tiredness" },
+      "title": { "sw": "Makini kwa Asilimia Mia", "en": "100% Focused" },
+      "hook": {"sw": "Kukosa umakini kwa sekunde moja kunaweza kusababisha ajali.", "en": "Lose focus for one second, and you may not have time to react before a crash."},
       "steps": [
+        { "id": "habits-0", "pic": "🏍️", "art": "rest-break", "text": { "sw": "Kuendesha kunahitaji umakini wako wote. Kabla ya safari, hakikisha hujalewa, huna usingizi na simu haitakuvuruga.", "en": "Riding needs your full attention. Before a trip, make sure you have not drunk alcohol, are not sleepy and will not be distracted by your phone." } },
         { "id": "habits-1", "pic": "🍺🚫", "art": "refuse-alcohol", "text": { "sw": "Usinywe pombe kabla ya kuendesha. Pombe hupunguza uwezo wa kuona na kuamua.", "en": "Do not drink alcohol before you ride. Alcohol makes you slow to see and to decide." } },
         { "id": "habits-2", "pic": "📱🚫", "art": "park-to-phone", "text": { "sw": "Usitumie simu ukiendesha. Simama kwanza mahali salama mbali na magari.", "en": "Do not use your phone while you ride. Stop first in a safe place away from traffic." } },
         { "id": "habits-3", "pic": "😴", "art": "rest-break", "text": { "sw": "Ukichoka, pumzika. Usingizi unaweza kuja ghafla.", "en": "If you are tired, rest. Sleep can come suddenly." } },
-        { "id": "habits-q1", "pic": "📱🏍️", "art": "phone-riding", "answer": "danger", "text": { "sw": "Dereva anaongea na simu huku akiendesha.", "en": "A rider talks on the phone while riding." }, "why": { "sw": "Hatari! Simama mahali salama mbali na magari kabla ya kupokea simu.", "en": "Danger! Stop in a safe place away from traffic before you answer." } },
-        { "id": "habits-q2", "pic": "🍺🍺", "art": "two-beers", "answer": "danger", "text": { "sw": "Dereva amekunywa bia mbili tu na anasema yuko sawa.", "en": "A rider had only two beers and feels fine." }, "why": { "sw": "Hatari! Hata pombe kidogo ni hatari. Usiendeshe.", "en": "Danger! Even a little alcohol is dangerous. Do not ride." } },
-        { "id": "habits-q3", "pic": "😴☕", "art": "safe-rest", "answer": "safe", "text": { "sw": "Dereva aliyechoka anasimama mahali salama kupumzika.", "en": "A tired rider stops in a safe place to rest." }, "why": { "sw": "Salama! Endelea tu ukiwa macho na makini. Ukiwa na usingizi, lala kwanza.", "en": "Safe! Ride on only when you are awake and alert. If you are sleepy, sleep first." } }
+        { "id": "habits-q3", "pic": "😴☕", "art": "safe-rest", "answer": "safe", "text": { "sw": "Dereva aliyechoka anasimama mahali salama kupumzika.", "en": "A tired rider stops in a safe place to rest." }, "why": { "sw": "Salama! Endelea tu ukiwa macho na makini. Ukiwa na usingizi, lala kwanza.", "en": "Safe! Ride on only when you are awake and alert. If you are sleepy, sleep first." } },
+        { "id": "habits-q1", "pic": "🏍️", "art": "phone-riding", "text": { "sw": "Simu ya msimamizi inaita ukiendesha kwenye magari mengi. Uamuzi bora ni upi?", "en": "Your supervisor calls while you ride in busy traffic. What is the best decision?" }, "options": [{ "id": "a", "text": { "sw": "Pokea kwa kifaa cha masikioni huku ukiendesha.", "en": "Answer through an earpiece while riding." } }, { "id": "b", "text": { "sw": "Pokea gari mbele linaposimama kwenye foleni.", "en": "Answer when the car ahead stops in the queue." } }, { "id": "c", "text": { "sw": "Acha iite. Simama salama, kisha mpigie.", "en": "Let it ring. Stop safely, then call back." } }], "answer": "c", "why": { "sw": "Hata mazungumzo bila kushika simu yanaweza kuvuruga umakini. Simu ya kazi inaweza kusubiri hadi usimame salama.", "en": "Even a hands-free conversation can distract you. A work call can wait until you stop safely." } },
+        { "id": "habits-q2", "pic": "🏍️", "art": "two-beers", "text": { "sw": "Umekunywa bia na unajisikia sawa. Rafiki anasema kahawa itakusaidia kuendesha. Ufanye nini?", "en": "You drank beer and feel fine. A friend says coffee will make you fit to ride. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Usiendeshe. Tumia dereva asiyekunywa.", "en": "Do not ride. Use a sober driver." } }, { "id": "b", "text": { "sw": "Kunywa kahawa kali, kisha uendeshe.", "en": "Drink strong coffee, then ride." } }, { "id": "c", "text": { "sw": "Kula chakula na uende polepole.", "en": "Eat a meal and ride slowly." } }], "answer": "a", "why": { "sw": "Kahawa na chakula haviondoi athari ya pombe. Kujisikia sawa hakuthibitishi kuwa uko salama kuendesha.", "en": "Coffee and food do not remove alcohol impairment. Feeling fine does not prove you are fit to ride." } },
+        { "id": "habits-q4", "pic": "🏍️", "art": "rest-break", "text": { "sw": "Unapiga miayo na unashindwa kukumbuka sehemu ya safari. Umebakiza dakika kumi kufika. Ufanye nini?", "en": "You are yawning and cannot remember part of the trip. You are ten minutes from home. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Ongeza mwendo ufike kabla usingizi haujazidi.", "en": "Speed up to arrive before you get sleepier." } }, { "id": "b", "text": { "sw": "Simama salama na lala kwanza.", "en": "Stop safely and sleep first." } }, { "id": "c", "text": { "sw": "Fungua kioo cha kofia ili upepo ukuamshe.", "en": "Open the visor so the wind wakes you up." } }], "answer": "b", "why": { "sw": "Hizi ni dalili za usingizi hatari. Upepo na safari fupi havizuii kulala ghafla.", "en": "These are warning signs of dangerous sleepiness. Wind and a short journey do not prevent sudden sleep." } }
       ]
     },
     {
       "id": "crash",
       "icon": "🚑",
       "title": { "sw": "Ajali Ikitokea", "en": "If a Crash Happens" },
+      "hook": {"sw": "Ajali ikitokea, unachofanya kinaweza kuokoa maisha.", "en": "In a crash, what you do next could save a life."},
       "steps": [
         { "id": "crash-1", "pic": "⚠️", "art": "warn-traffic", "text": { "sw": "Kwanza, jilinde. Weka alama ya hatari ili magari mengine yapunguze mwendo.", "en": "First, keep yourself safe. Warn other traffic so they slow down." } },
-        { "id": "crash-2", "pic": "📞", "art": "emergency-call", "text": { "sw": "Piga namba ya dharura ya nchi yako, kama 1 1 2 au 9 9 9. Sema mahali ulipo na idadi ya majeruhi.", "en": "Call your country's emergency number, such as 1 1 2 or 9 9 9. Say where you are and how many people are hurt." } },
-        { "id": "crash-3", "pic": "⛑️✋", "art": "leave-helmet", "text": { "sw": "Usimvue kofia mtu aliyejeruhiwa. Unaweza kuumiza shingo yake. Mvue tu kama hapumui.", "en": "Do not take off an injured person's helmet. You can hurt their neck. Take it off only if they are not breathing." } },
+        { "id": "crash-2", "pic": "📞", "art": "emergency-call", "text": { "sw": "Tanzania, jaribu 1 1 5 kwa ambulansi au 1 1 2 kwa polisi. Sema mahali ulipo na idadi ya majeruhi. Ukiwa nchi nyingine, tumia namba ya dharura ya huko.", "en": "In Tanzania, try 1 1 5 for an ambulance or 1 1 2 for police. Say where you are and how many people are hurt. Elsewhere, use the local emergency number." }, "source": { "label": "TCRA / ITU, 2022", "url": "https://www.ituob.org/issues/1248-en/" } },
+        { "id": "crash-3", "pic": "⛑️✋", "art": "leave-helmet", "text": { "sw": "Usimvue kofia majeruhi isipokuwa lazima ili kumsaidia apumue au kufufua moyo na mapafu. Tafuta msaada wa mtu aliyefunzwa au maelekezo ya mhudumu wa dharura mara moja.", "en": "Leave the helmet on unless removal is needed for life-saving airway care or CPR. Seek a trained helper or emergency instructions immediately." } },
         { "id": "crash-4", "pic": "🔴🤲", "art": "cloth-pressure", "text": { "sw": "Damu ikitoka sana, bonyeza jeraha kwa kitambaa safi na uendelee kubonyeza. Kitu kikiwa kimekwama kwenye jeraha, usikitoe.", "en": "If there is a lot of bleeding, press on the wound with a clean cloth and keep pressing. If something is stuck in the wound, leave it there." } },
-        { "id": "crash-q1", "pic": "🤕🏃", "art": "neck-still", "answer": "danger", "text": { "sw": "Watu wanamwinua haraka mtu aliyeumia shingo.", "en": "People quickly lift a person with a neck injury." }, "why": { "sw": "Hatari! Usimsogeze bila sababu. Msogeze tu kama kuna moto au hatari kubwa, au ili kumsaidia apumue.", "en": "Danger! Do not move them without a reason. Move them only if there is fire or serious danger, or to help them breathe." } },
-        { "id": "crash-q2", "pic": "📞🚑", "art": "location-call", "answer": "safe", "text": { "sw": "Mtu anapiga namba ya dharura na kueleza mahali ajali ilipotokea.", "en": "Someone calls the emergency number and says where the crash is." }, "why": { "sw": "Salama! Kujua mahali ajali ilipotokea huwasaidia wahudumu kufika.", "en": "Safe! Knowing where the crash is helps the emergency workers get there." } }
+        { "id": "crash-5", "pic": "🏍️", "art": "location-call", "text": { "sw": "Ambulansi isipopatikana au haiwezi kufika mapema, tafuta msaada wa usafiri unaofaa kwenda hospitali ya karibu. Omba msaada wa madereva wanaopita na piga simu hospitalini kwa maelekezo ikiwezekana.", "en": "If an ambulance is unavailable or cannot arrive soon, seek help with suitable transport to the nearest hospital. Ask passing drivers for help and call the hospital for advice if possible." } },
+        { "id": "crash-6", "pic": "🏍️", "art": "neck-still", "text": { "sw": "Usiwainue majeruhi kwa haraka. Tafuta mtu aliyefunzwa akusaidie kuwahamisha. Punguza kusogea kwa kichwa na shingo. Msaidizi aangalie kupumua na aendelee kuzuia damu njiani.", "en": "Do not lift injured people hastily. Seek a trained helper to assist with moving them. Minimise head and neck movement. A helper should watch their breathing and keep controlling bleeding during transport." } },
+        { "id": "crash-q1", "pic": "🤕🏃", "art": "neck-still", "answer": "danger", "text": { "sw": "Watu wanamwinua haraka mtu aliyeumia shingo.", "en": "People quickly lift a person with a neck injury." }, "why": { "sw": "Hatari! Usimwinue au kumsogeza bila sababu. Kusogeza kunaweza kuhitajika kwa hatari ya papo hapo, huduma ya kuokoa maisha au usafiri wa lazima. Tafuta msaada wa mtu aliyefunzwa na punguza kusogea kwa kichwa na shingo.", "en": "Danger! Do not lift or move them without a reason. Movement may be necessary for immediate danger, life-saving care or essential transport. Seek a trained helper and minimise head and neck movement." } },
+        { "id": "crash-q2", "pic": "🏍️", "art": "warn-traffic", "text": { "sw": "Ajali imetokea kwenye barabara yenye magari yanayopita haraka. Watu wanakimbilia majeruhi. Hatua yako ya kwanza ni ipi?", "en": "A crash happens on a road with fast traffic. People rush toward the injured person. What is your first action?" }, "options": [{ "id": "a", "text": { "sw": "Jilinde, waonye madereva na omba simu.", "en": "Stay safe, warn drivers, and get someone to call." } }, { "id": "b", "text": { "sw": "Simama katikati ya barabara kuzuia magari.", "en": "Stand in the middle of the road to stop vehicles." } }, { "id": "c", "text": { "sw": "Inua majeruhi kabla ya kuangalia magari.", "en": "Lift the injured person before checking traffic." } }], "answer": "a", "why": { "sw": "Usiwe majeruhi mwingine. Usalama wa eneo na kuomba msaada ni hatua za kwanza.", "en": "Do not become another casualty. Scene safety and getting help come first." } },
+        { "id": "crash-q3", "pic": "🏍️", "art": "cloth-pressure", "text": { "sw": "Damu nyingi inatoka kwenye jeraha la mguu. Hakuna kitu kilichokwama kwenye jeraha. Mtu mwingine anapiga simu kwa msaada. Ufanye nini sasa?", "en": "A leg wound is bleeding heavily. Nothing is stuck in the wound. Someone else is calling for help. What should you do now?" }, "options": [{ "id": "a", "text": { "sw": "Mpe maji kabla ya kugusa jeraha.", "en": "Give them water before touching the wound." } }, { "id": "b", "text": { "sw": "Bonyeza jeraha kwa kitambaa safi na uendelee kubonyeza.", "en": "Press on the wound with a clean cloth and keep pressing." } }, { "id": "c", "text": { "sw": "Subiri usafiri ufike ndipo uzuie damu.", "en": "Wait until transport arrives before controlling the bleeding." } }], "answer": "b", "why": { "sw": "Kuzuia damu nyingi hakuwezi kusubiri. Tumia glovu au kinga ya mikono ikiwa inapatikana.", "en": "Heavy bleeding cannot wait. Use gloves or a hand barrier if available." } },
+        { "id": "crash-q4", "pic": "🏍️", "art": "location-call", "text": { "sw": "Majeruhi anahitaji hospitali. Ambulansi haiwezi kufika mapema. Gari limesimama kusaidia. Uamuzi bora ni upi?", "en": "An injured person needs hospital care. An ambulance cannot arrive soon. A vehicle stops to help. What is the best decision?" }, "options": [{ "id": "a", "text": { "sw": "Subiri tu bila kutoa huduma au kutafuta msaada mwingine.", "en": "Only wait, without giving care or seeking other help." } }, { "id": "b", "text": { "sw": "Mwinue haraka na mwache dereva aende naye peke yake.", "en": "Lift them quickly and let the driver take them alone." } }, { "id": "c", "text": { "sw": "Tumia usafiri unaofaa; hamisha kwa uangalifu.", "en": "Use suitable transport; move them carefully." } }], "answer": "c", "why": { "sw": "Usisubiri bila kuchukua hatua. Omba maelekezo hospitalini ikiwezekana. Punguza kusogea kwa kichwa na shingo, na msaidizi aangalie kupumua na damu njiani.", "en": "Do not wait without taking action. Ask the hospital for advice if possible. Minimise head and neck movement, and have a helper monitor breathing and bleeding on the way." } }
+      ]
+    },
+    {
+      "id": "fire",
+      "icon": "🔥",
+      "track": "work",
+      "title": { "sw": "Moto na Gesi", "en": "Fire and Gas" },
+      "submodules": [
+        {
+          "id": "exits",
+          "title": {
+            "sw": "Njia za kutoka na vifaa vya moto",
+            "en": "Exits and fire equipment"
+          },
+          "steps": [
+            "fire-1",
+            "fire-3",
+            "fire-q2"
+          ]
+        },
+        {
+          "id": "gas",
+          "title": {
+            "sw": "Mitungi ya gesi",
+            "en": "Gas cylinders"
+          },
+          "steps": [
+            "fire-2",
+            "fire-q1",
+            "fire-q4"
+          ]
+        },
+        {
+          "id": "hot-work",
+          "title": {
+            "sw": "Kuchomelea na kukata chuma",
+            "en": "Welding and cutting"
+          },
+          "steps": [
+            "fire-4"
+          ]
+        },
+        {
+          "id": "alarm",
+          "title": {
+            "sw": "Kengele ya moto na kuondoka",
+            "en": "Fire alarm and evacuation"
+          },
+          "steps": [
+            "fire-5",
+            "fire-q3"
+          ]
+        }
+      ],
+      "steps": [
+        { "id": "fire-1", "pic": "🧯🚪", "art": "fire-find-exit", "text": { "sw": "Kabla ya kuanza kazi, tafuta kizima moto na mlango wa karibu wa kutokea.", "en": "Before you start work, find the fire extinguisher and the nearest exit." } },
+        { "id": "fire-2", "pic": "⛓️🛢️", "art": "gas-chained", "text": { "sw": "Weka mitungi ya gesi wima. Funga kila mtungi kwa mnyororo au kamba.", "en": "Keep gas cylinders upright. Fasten each one with a chain or a strap." } },
+        { "id": "fire-3", "pic": "🚪✅", "art": "exit-clear", "text": { "sw": "Acha milango ya kutokea na njia wazi. Usiweke pallet wala masanduku mbele ya mlango wa kutokea au kizima moto.", "en": "Keep exits and walkways clear. Never put pallets or boxes in front of an exit or an extinguisher." } },
+        { "id": "fire-4", "pic": "🔥⚒️", "art": "hot-work", "text": { "sw": "Kabla ya kuchomelea au kukata chuma, pata ruhusa ya msimamizi, ondoa vitu vinavyoweza kuwaka, weka kizima moto karibu na tenganisha eneo.", "en": "Before welding or cutting metal, get your supervisor's permission, clear away everything that can burn, keep an extinguisher near and mark the area off." } },
+        { "id": "fire-5", "pic": "🔔🚶", "art": "assembly-point", "text": { "sw": "Moto ukitokea, piga kelele, bonyeza kengele na tembea hadi eneo la kukusanyika. Usirudi kuchukua vitu vyako.", "en": "If there is a fire, shout, press the alarm and walk to the assembly point. Do not go back for your things." } },
+        { "id": "fire-q1", "pic": "🛢️", "art": "gas-loose", "answer": "danger", "text": { "sw": "Mtungi wa gesi umesimama peke yake ukutani. Hauna mnyororo wala kamba.", "en": "A gas cylinder stands by the wall on its own. It has no chain and no strap." }, "why": { "sw": "Hatari! Mtungi unaoanguka unaweza kuvunja valvu na kutoa gesi.", "en": "Danger! A cylinder that falls can break its valve and let gas out." } },
+        { "id": "fire-q2", "pic": "📦🚪", "art": "pallets-exit", "text": { "sw": "Pallet zimerundikwa mbele ya mlango wa kutokea wakati wa moto. Mwenzako anasema hakuna mahali pengine pa kuziweka. Ufanye nini?", "en": "Pallets are stacked in front of the fire exit. A colleague says there is nowhere else to put them. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Ziache. Watu wanaweza kuzipanda moto ukitokea.", "en": "Leave them. People can climb over them in a fire." } }, { "id": "b", "text": { "sw": "Weka alama kwenye pallet.", "en": "Put a sign on the pallets." } }, { "id": "c", "text": { "sw": "Ziondoe mbele ya mlango na umwambie msimamizi.", "en": "Move them away from the exit and tell your supervisor." } }], "answer": "c", "why": { "sw": "Mlango wa kutokea lazima uwe wazi wakati wote. Moto ukitokea hakuna muda wa kuondoa pallet.", "en": "An exit must be clear all the time. In a fire there is no time to move pallets." } },
+        { "id": "fire-q3", "pic": "🔔", "art": "alarm-sounds", "text": { "sw": "Kengele ya moto inalia ukiwa katikati ya kazi. Ufanye nini?", "en": "The fire alarm sounds while you are in the middle of a job. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Toka sasa na uende eneo la kukusanyika.", "en": "Leave now and go to the assembly point." } }, { "id": "b", "text": { "sw": "Maliza kazi kwanza.", "en": "Finish the job first." } }, { "id": "c", "text": { "sw": "Rudi kuchukua simu na mkoba wako.", "en": "Go back for your phone and bag." } }], "answer": "a", "why": { "sw": "Toka mara moja. Kazi, simu au mkoba si vya thamani kuliko maisha yako.", "en": "Leave at once. A job, a phone or a bag is not worth your life." } },
+        { "id": "fire-q4", "pic": "💨🛢️", "art": "gas-hiss", "text": { "sw": "Unasikia harufu ya gesi karibu na mtungi na mlio wa kuvuja. Ufanye nini kwanza?", "en": "You smell gas near a cylinder and hear a hiss. What should you do first?" }, "options": [{ "id": "a", "text": { "sw": "Washa taa uone mahali panapovuja.", "en": "Switch on the light to see the leak." } }, { "id": "b", "text": { "sw": "Waondoe watu, mwambie msimamizi.", "en": "Move people away and tell your supervisor." } }, { "id": "c", "text": { "sw": "Beba mtungi nje peke yako.", "en": "Carry the cylinder outside by yourself." } }], "answer": "b", "why": { "sw": "Cheche ndogo inaweza kuwasha gesi. Kaa mbali na utafute msaada.", "en": "A small spark can set gas on fire. Stay away and get help." } }
+      ]
+    },
+    {
+      "id": "lift",
+      "icon": "📦",
+      "track": "work",
+      "title": { "sw": "Kuinua na Kuhamisha", "en": "Lifting and Moving" },
+      "submodules": [
+        {
+          "id": "lifting",
+          "title": {
+            "sw": "Kuinua kwa usalama",
+            "en": "Safe lifting"
+          },
+          "steps": [
+            "lift-1",
+            "lift-2",
+            "lift-q1",
+            "lift-q3"
+          ]
+        },
+        {
+          "id": "loads",
+          "title": {
+            "sw": "Kuhamisha mizigo",
+            "en": "Moving loads"
+          },
+          "steps": [
+            "lift-3",
+            "lift-q2"
+          ]
+        },
+        {
+          "id": "equipment",
+          "title": {
+            "sw": "Vifaa vya kuhamisha mizigo",
+            "en": "Pallet jacks and forklifts"
+          },
+          "steps": [
+            "lift-4"
+          ]
+        },
+        {
+          "id": "paths",
+          "title": {
+            "sw": "Njia zilizo wazi na kavu",
+            "en": "Clear and dry paths"
+          },
+          "steps": [
+            "lift-5",
+            "lift-q4"
+          ]
+        }
+      ],
+      "steps": [
+        { "id": "lift-1", "pic": "📦🙋", "art": "lift-help", "text": { "sw": "Tazama mzigo kwanza. Ukiwa mzito sana, omba msaada au tumia kigari au pallet jack.", "en": "Look at the load first. If it is too heavy, ask for help or use a trolley or a pallet jack." } },
+        { "id": "lift-2", "pic": "🦵📦", "art": "lift-knees", "text": { "sw": "Inua kwa miguu, si kwa mgongo. Pinda magoti, shika mzigo karibu na mwili na uweke mgongo ulionyooka.", "en": "Lift with your legs, not your back. Bend your knees, keep the load close to your body and keep your back straight." } },
+        { "id": "lift-3", "pic": "⚠️🦶", "art": "under-load", "text": { "sw": "Usisimame wala kuweka mikono au miguu chini ya mzigo unaohamishwa au kushushwa.", "en": "Never stand or put your hands or feet under a load that is being moved or lowered." } },
+        { "id": "lift-4", "pic": "🚜👀", "art": "pallet-jack", "text": { "sw": "Ukitumia pallet jack, tembea na tazama unakokwenda; usipande juu yake. Forklift iendeshwe na mtu aliyefunzwa na kuruhusiwa tu. Waweke watu wengine mbali.", "en": "With a pallet jack, walk and look where you are going; do not ride on it. Only a trained and authorised person may drive a forklift. Keep other people away." } },
+        { "id": "lift-5", "pic": "🧹💧", "art": "tidy-floor", "text": { "sw": "Weka sakafu na njia safi na kavu. Rudisha zana mahali pake. Safisha maji, nta au mafuta mara moja.", "en": "Keep floors and paths clear and dry. Put tools away. Clean up water, wax or oil at once." } },
+        { "id": "lift-q1", "pic": "🪣", "art": "bad-lift", "answer": "danger", "text": { "sw": "Mfanyakazi anainua ndoo nzito kutoka sakafuni kwa miguu iliyonyooka na mgongo uliopinda.", "en": "A worker lifts a heavy bucket from the floor with straight legs and a bent back." }, "why": { "sw": "Hatari! Mgongo uliopinda unaweza kuumia vibaya. Pinda magoti na uweke mgongo ulionyooka.", "en": "Danger! A bent back can be badly hurt. Bend your knees and keep your back straight." } },
+        { "id": "lift-q2", "pic": "📦🦶", "art": "ibc-foot", "text": { "sw": "Chombo kizito cha IBC kinashushwa kwenye pallet. Mguu wa mwenzako uko karibu na pallet. Ufanye nini?", "en": "A heavy IBC container is being lowered onto a pallet. A colleague's foot is close to the pallet. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Usiseme chochote. Dereva anaona.", "en": "Say nothing. The driver can see." } }, { "id": "b", "text": { "sw": "Piga kelele asimame; mwenzako aondoke.", "en": "Shout stop and move your colleague away." } }, { "id": "c", "text": { "sw": "Sukuma mguu wa mwenzako kwa mkono wako.", "en": "Push your colleague's foot away with your hand." } }], "answer": "b", "why": { "sw": "Mzigo unaweza kuponda mguu kwa sekunde moja. Simamisha kazi kwanza, kisha waondoe watu.", "en": "A load can crush a foot in a second. Stop the work first, then move people away." } },
+        { "id": "lift-q3", "pic": "🎒", "art": "heavy-sack", "text": { "sw": "Gunia ni zito kuliko unavyoweza kuinua kwa urahisi. Hakuna mtu mwingine karibu. Ufanye nini?", "en": "A sack is heavier than you can lift easily. No one else is near. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Liinue haraka kabla mgongo haujahisi uzito.", "en": "Lift it fast before your back feels the weight." } }, { "id": "b", "text": { "sw": "Liinue nusu na uliegeshe kwenye goti.", "en": "Lift it halfway and rest it on your knee." } }, { "id": "c", "text": { "sw": "Tumia kigari, au subiri mwenzako muinue pamoja.", "en": "Use a trolley, or wait for a colleague and lift together." } }], "answer": "c", "why": { "sw": "Kusubiri dakika chache ni bora kuliko jeraha la mgongo linalodumu miezi.", "en": "Waiting a few minutes is better than a back injury that lasts for months." } },
+        { "id": "lift-q4", "pic": "💧🚶", "art": "wet-walkway", "text": { "sw": "Unaona maji kwenye njia ya kutembea na una haraka. Ufanye nini?", "en": "You see water on a walkway and you are in a hurry. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Yafute au weka alama ya tahadhari.", "en": "Clean it up or mark it with a warning." } }, { "id": "b", "text": { "sw": "Yaruke na uendelee.", "en": "Step over it and carry on." } }, { "id": "c", "text": { "sw": "Waambie wengine watembee upande wa kushoto.", "en": "Tell the others to walk on the left." } }], "answer": "a", "why": { "sw": "Mtu mwingine anaweza asiyaone maji. Yasafishe au yawekee alama ili mtu asiteleze.", "en": "Someone else may not see the water. Clean it or mark it so nobody slips." } }
+      ]
+    },
+    {
+      "id": "ppe",
+      "icon": "🦺",
+      "track": "work",
+      "title": { "sw": "Vifaa vya Kinga Kazini", "en": "Protective Gear at Work" },
+      "submodules": [
+        {
+          "id": "feet",
+          "title": {
+            "sw": "Linda miguu yako",
+            "en": "Protect your feet"
+          },
+          "steps": [
+            "ppe-1",
+            "ppe-q1"
+          ]
+        },
+        {
+          "id": "eyes",
+          "title": {
+            "sw": "Linda macho yako",
+            "en": "Protect your eyes"
+          },
+          "steps": [
+            "ppe-2",
+            "ppe-q2"
+          ]
+        },
+        {
+          "id": "hearing",
+          "title": {
+            "sw": "Linda usikivu wako",
+            "en": "Protect your hearing"
+          },
+          "steps": [
+            "ppe-3",
+            "ppe-q3"
+          ]
+        },
+        {
+          "id": "hands-heat",
+          "title": {
+            "sw": "Mikono na sehemu zenye joto",
+            "en": "Hands and hot surfaces"
+          },
+          "steps": [
+            "ppe-4",
+            "ppe-q4"
+          ]
+        },
+        {
+          "id": "check",
+          "title": {
+            "sw": "Kagua vifaa vyako vya kinga",
+            "en": "Check your protective gear"
+          },
+          "steps": [
+            "ppe-5"
+          ]
+        }
+      ],
+      "steps": [
+        { "id": "ppe-1", "pic": "🥾", "art": "safety-shoes", "text": { "sw": "Vaa viatu vya usalama vilivyofungwa kazini. Kandambili na sandali havilindi miguu yako.", "en": "Wear closed safety shoes at work. Slippers and sandals do not protect your feet." } },
+        { "id": "ppe-2", "pic": "🥽", "art": "goggles", "text": { "sw": "Vaa miwani ya usalama unapokata, unaposaga au kugonga. Vipande vidogo vinaweza kuumiza macho.", "en": "Wear safety glasses when you cut, grind or hammer. Small pieces can hurt your eyes." } },
+        { "id": "ppe-3", "pic": "🎧🔊", "art": "ear-muffs", "text": { "sw": "Vaa vifunika masikio au vizibo vya masikio kwenye chumba chenye kelele nyingi. Kelele kubwa huharibu usikivu polepole.", "en": "Wear ear muffs or ear plugs in a loud room. Loud noise slowly damages your hearing." } },
+        { "id": "ppe-4", "pic": "🧤", "art": "work-gloves", "text": { "sw": "Vaa glavu sahihi kwa mbao mbaya, vitu vya moto na ncha kali. Usivae glavu karibu na sehemu zinazozunguka; zinaweza kunaswa.", "en": "Wear the right gloves for rough wood, hot things and sharp edges. Do not wear gloves near spinning parts; they can be caught." } },
+        { "id": "ppe-5", "pic": "🦺🔍", "art": "gear-check", "text": { "sw": "Kagua vifaa vyako kabla ya kila zamu. Mwambie msimamizi ikiwa vimechanika, vimevunjika au havipo. Usifanye kazi bila hivyo.", "en": "Check your gear before every shift. Tell your supervisor if it is torn, broken or missing. Do not work without it." } },
+        { "id": "ppe-q1", "pic": "🥾🧤", "art": "shoes-gloves", "answer": "safe", "text": { "sw": "Mfanyakazi anahamisha ndoo ghalani. Amevaa viatu vya usalama vilivyofungwa na glavu.", "en": "A worker moves buckets in the warehouse. They wear closed safety shoes and gloves." }, "why": { "sw": "Salama! Viatu na glavu hulinda miguu na mikono dhidi ya vitu vizito na vyenye ncha kali.", "en": "Safe! Shoes and gloves protect feet and hands from heavy and rough things." } },
+        { "id": "ppe-q2", "pic": "🔪", "art": "knife-cut", "text": { "sw": "Unatakiwa kukata kipande cha nta kwa kisu. Miwani ya usalama iko stoo, umbali wa dakika mbili. Ufanye nini?", "en": "You must cut a block of wax with a knife. The safety glasses are in the store, two minutes away. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Nenda ukachukue miwani ya usalama na uivae kabla ya kukata.", "en": "Go and get the safety glasses and wear them before you cut." } }, { "id": "b", "text": { "sw": "Kata kwa uangalifu. Ni kazi fupi.", "en": "Cut with care. It is a short job." } }, { "id": "c", "text": { "sw": "Funga jicho moja unapokata.", "en": "Close one eye while you cut." } }], "answer": "a", "why": { "sw": "Kazi fupi pia huumiza macho. Dakika mbili ni gharama ndogo kwa kuona kwako.", "en": "Short jobs hurt eyes too. Two minutes is a small price for your sight." } },
+        { "id": "ppe-q3", "pic": "🔊🤕", "art": "loud-room", "text": { "sw": "Chumba cha mashine kina kelele nyingi na kichwa kinakuuma baada ya saa moja. Una vifunika masikio. Ufanye nini?", "en": "The machine room is very loud and your head hurts after an hour. You have ear muffs. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Viondoe ili uzungumze na wenzako.", "en": "Take them off so you can talk with colleagues." } }, { "id": "b", "text": { "sw": "Acha mlango wazi na uendelee kufanya kazi.", "en": "Leave the door open and keep working." } }, { "id": "c", "text": { "sw": "Vaa vifunika masikio na mwambie msimamizi.", "en": "Wear ear muffs and tell your supervisor." } }], "answer": "c", "why": { "sw": "Kinga ya masikio inafanya kazi ukiivaa tu. Maumivu ya kichwa yanaweza kuwa onyo.", "en": "Ear protection only works when you wear it. Headaches can be a warning sign." } },
+        { "id": "ppe-q4", "pic": "♨️", "art": "hot-steam", "text": { "sw": "Mvuke wa moto unatoka kwenye sufuria au bomba karibu nawe. Ufanye nini?", "en": "Hot steam is coming from a pot or a pipe near you. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Weka mkono wako juu yake kuzuia mvuke.", "en": "Put your hand over it to stop the steam." } }, { "id": "b", "text": { "sw": "Rudi nyuma, waweke watu wengine mbali na umwambie msimamizi. Usiguse hadi iwe salama.", "en": "Step back, keep other people away and tell your supervisor. Do not touch it until it is safe." } }, { "id": "c", "text": { "sw": "Ufunike kwa kitambaa na uendelee.", "en": "Cover it with a cloth and carry on." } }], "answer": "b", "why": { "sw": "Mvuke huunguza ngozi haraka sana. Kaa mbali hadi mtu mwenye mafunzo auweke salama.", "en": "Steam burns skin very fast. Stay back until a trained person makes it safe." } }
+      ]
+    },
+    {
+      "id": "report",
+      "icon": "📣",
+      "track": "work",
+      "title": { "sw": "Ripoti na Msaada", "en": "Report and Help" },
+      "submodules": [
+        {
+          "id": "hazards",
+          "title": {
+            "sw": "Tambua na ripoti hatari",
+            "en": "Spot and report hazards"
+          },
+          "steps": [
+            "report-1",
+            "report-q1"
+          ]
+        },
+        {
+          "id": "near-misses",
+          "title": {
+            "sw": "Ripoti ajali zilizokaribia kutokea",
+            "en": "Report near misses"
+          },
+          "steps": [
+            "report-2",
+            "report-q2",
+            "report-q4"
+          ]
+        },
+        {
+          "id": "reporting",
+          "title": {
+            "sw": "Jinsi ya kutoa ripoti",
+            "en": "How to make a report"
+          },
+          "steps": [
+            "report-3"
+          ]
+        },
+        {
+          "id": "help",
+          "title": {
+            "sw": "Ita msaada na huduma ya kwanza",
+            "en": "Call for help and first aid"
+          },
+          "steps": [
+            "report-4",
+            "report-5",
+            "report-q3"
+          ]
+        }
+      ],
+      "steps": [
+        { "id": "report-1", "pic": "⚠️👀", "art": "spot-hazard", "text": { "sw": "Hatari ni kitu chochote kinachoweza kumdhuru mtu. Ukiiona, iripoti. Iripoti hata ukiirekebisha mwenyewe.", "en": "A hazard is anything that can hurt someone. If you see one, report it. Report it even if you fix it yourself." } },
+        { "id": "report-2", "pic": "📦😮", "art": "box-falls", "text": { "sw": "Karibu kutokea ajali ni wakati kitu kilikaribia kumdhuru mtu. Ripoti pia matukio haya. Yanaonyesha ajali itatokea wapi baadaye.", "en": "A near miss is when something almost hurt someone. Report near misses too. They show where an accident will happen next." } },
+        { "id": "report-3", "pic": "📱🔳", "art": "scan-report", "text": { "sw": "Mwambie msimamizi wako au skani msimbo kwenye ubao wa usalama. Eleza uliona nini, kiko wapi na kilitokea lini.", "en": "Tell your supervisor or scan the code on the safety board. Say what you saw, where it is and when it happened." } },
+        { "id": "report-4", "pic": "🆘🧑‍⚕️", "art": "hurt-help", "text": { "sw": "Mtu akijeruhiwa, tulia na uite msaada na mtoa huduma ya kwanza. Usimsogeze ukidhani shingo au mgongo wake umeumia.", "en": "If someone is hurt, stay calm and call for help and a first aider. Do not move them if you think their neck or back is hurt." } },
+        { "id": "report-5", "pic": "➕📦", "art": "first-aid-box", "text": { "sw": "Jua kisanduku cha huduma ya kwanza kilipo. Kiweke mahali pa kufikika haraka, kikiwa na vifaa na bila kufungwa kwa ufunguo. Mwambie msimamizi kitu kinapoisha.", "en": "Know where the first aid box is. Keep it easy to reach fast, stocked and not locked. Tell your supervisor when something runs out." } },
+        { "id": "report-q1", "pic": "🌀", "art": "loose-fan", "answer": "safe", "text": { "sw": "Mfanyakazi anaona feni ya darini inayolegea. Anamwambia msimamizi na kuweka alama ya tahadhari.", "en": "A worker sees a loose ceiling fan. They tell the supervisor and put up a warning sign." }, "why": { "sw": "Salama! Hatari imeripotiwa na watu wameonywa.", "en": "Safe! The hazard is reported and people are warned." } },
+        { "id": "report-q2", "pic": "📦", "art": "box-falls", "text": { "sw": "Sanduku linaanguka kutoka kwenye rafu na kutua karibu nawe. Hakuna aliyeumia. Ufanye nini?", "en": "A box falls from a shelf and lands next to you. Nobody is hurt. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Lisahau. Hakuna aliyeumia.", "en": "Forget it. Nobody was hurt." } }, { "id": "b", "text": { "sw": "Rudisha sanduku na usiseme chochote.", "en": "Put the box back and say nothing." } }, { "id": "c", "text": { "sw": "Liripoti kama karibu kutokea ajali.", "en": "Report it as a near miss." } }], "answer": "c", "why": { "sw": "Mara nyingine mtu anaweza kuwa chini ya sanduku. Karibu kutokea ajali ni onyo la bure.", "en": "Next time someone may be under the box. A near miss is a free warning." } },
+        { "id": "report-q3", "pic": "🐝", "art": "bee-sting", "text": { "sw": "Mwenzako ameumwa na nyuki wengi na ana shida ya kupumua. Ufanye nini?", "en": "A colleague is stung by many bees and has trouble breathing. What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Subiri uone kama hali itaboreka.", "en": "Wait and see if it gets better." } }, { "id": "b", "text": { "sw": "Mwondoe kwa nyuki, ita msaada na mpeleke hospitali.", "en": "Move them from the bees, call help, and go to hospital." } }, { "id": "c", "text": { "sw": "Mpe maji na umrudishe kazini.", "en": "Give them water and send them back to work." } }], "answer": "b", "why": { "sw": "Shida ya kupumua baada ya kuumwa inaweza kuwa dharura. Usisubiri.", "en": "Trouble breathing after stings can be an emergency. Do not wait." } },
+        { "id": "report-q4", "pic": "💧😬", "art": "wet-walkway", "text": { "sw": "Unateleza kwenye sakafu yenye maji na karibu uanguke. Mwenzako anasema, \"Usiripoti, italeta matatizo.\" Ufanye nini?", "en": "You slip on a wet floor and nearly fall. A colleague says, \"Do not report it, it will cause trouble.\" What should you do?" }, "options": [{ "id": "a", "text": { "sw": "Mwambie msimamizi wako. Weka alama ya tahadhari ukiweza.", "en": "Report it to your supervisor. Put up a warning sign if you can." } }, { "id": "b", "text": { "sw": "Usiseme chochote. Ilikuwa kuteleza kidogo tu.", "en": "Say nothing. It was only a small slip." } }, { "id": "c", "text": { "sw": "Waambie marafiki zako tu.", "en": "Tell only your friends." } }], "answer": "a", "why": { "sw": "Mtu anayefuata anaweza kuanguka na kuumia vibaya. Kuripoti kunalinda kila mtu.", "en": "The next person may fall and be badly hurt. Reporting protects everyone." } }
+      ]
+    },
+    {
+      "id": "height",
+      "icon": "🪜",
+      "track": "work",
+      "title": {"sw": "Kufanya Kazi Juu na Ngazi", "en": "Working at Height and Ladders"},
+      "submodules": [
+            {
+                  "id": "ladders",
+                  "title": {
+                        "sw": "Kagua ngazi",
+                        "en": "Check the ladder"
+                  },
+                  "steps": [
+                        "height-1",
+                        "height-q1"
+                  ]
+            },
+            {
+                  "id": "climbing",
+                  "title": {
+                        "sw": "Panda kwa usalama",
+                        "en": "Climb safely"
+                  },
+                  "steps": [
+                        "height-2",
+                        "height-3",
+                        "height-q2"
+                  ]
+            },
+            {
+                  "id": "roofs",
+                  "title": {
+                        "sw": "Paa na majukwaa",
+                        "en": "Roofs and platforms"
+                  },
+                  "steps": [
+                        "height-4",
+                        "height-q3"
+                  ]
+            },
+            {
+                  "id": "below",
+                  "title": {
+                        "sw": "Linda watu walio chini",
+                        "en": "Protect people below"
+                  },
+                  "steps": [
+                        "height-5",
+                        "height-q4"
+                  ]
+            }
+      ],
+      "steps": [
+        {"id": "height-1", "pic": "🪜🔍", "art": "ladder-check", "text": {"sw": "Kabla ya kupanda, kagua ngazi. Ikiwa imepasuka, inalegea au imelowa mafuta, usiitumie. Mwambie msimamizi.", "en": "Before you climb, check the ladder. If it is cracked, loose or oily, do not use it. Tell your supervisor."}},
+        {"id": "height-2", "pic": "🧗", "art": "ladder-climb", "text": {"sw": "Panda ukiitazama ngazi. Shika kwa mikono miwili na uweke sehemu tatu za mwili kwenye ngazi. Usibebe mzigo mkononi.", "en": "Climb facing the ladder. Hold on with both hands and keep three points of contact. Do not carry a load in your hands."}},
+        {"id": "height-3", "pic": "🪜", "art": "ladder-angle", "text": {"sw": "Weka ngazi kwenye ardhi imara. Juu yake ifunge au mwenzako aishike. Usijinyooshe mbali; shuka na uisogeze ngazi.", "en": "Put the ladder on firm ground. Tie the top or have a colleague hold it. Do not lean far out; climb down and move the ladder."}},
+        {"id": "height-4", "pic": "🏠", "art": "roof-guard", "text": {"sw": "Usipande paa au jukwaa bila ruhusa ya msimamizi. Kaa mbali na ukingo. Paa dhaifu linaweza kudidimia.", "en": "Do not climb on a roof or platform without your supervisor’s permission. Keep away from the edge. A weak roof can give way."}},
+        {"id": "height-5", "pic": "⛑️", "art": "tools-secure", "text": {"sw": "Ukiwa juu, funga zana zako. Usiwaruhusu watu kusimama chini yako. Kaa mbali na eneo la chini au liweke alama.", "en": "When you work above, secure your tools. Do not let people stand below you. Keep people away or mark the area below."}},
+        {"id": "height-q1", "pic": "🪜", "art": "ladder-cracked", "answer": "danger", "text": {"sw": "Ngazi ina hatua iliyopasuka. Mfanyakazi anaamua kuitumia kwa kazi fupi tu.", "en": "A ladder has a cracked step. A worker decides to use it for a short job only."}, "why": {"sw": "Hatari! Ngazi iliyoharibika inaweza kuvunjika ukiwa juu. Ripoti na usiitumie.", "en": "Danger! A damaged ladder can break while you are up there. Report it and do not use it."}},
+        {"id": "height-q2", "pic": "🪣", "art": "carry-climb", "text": {"sw": "Unahitaji kupanda ngazi ukiwa na ndoo. Ufanye nini?", "en": "You need to climb a ladder with a bucket. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Ipandishe kwa kamba ukishafika juu.", "en": "Hoist it up on a rope."}}, {"id": "b", "text": {"sw": "Beba ndoo kwa mkono mmoja na upande.", "en": "Carry it in one hand as you climb."}}, {"id": "c", "text": {"sw": "Weka ndoo mdomoni upande haraka.", "en": "Hold the handle in your teeth and climb fast."}}], "answer": "a", "why": {"sw": "Mikono lazima ishike ngazi. Vifaa vipandishwe kwa kamba au njia nyingine salama.", "en": "Your hands must hold the ladder. Hoist tools up on a rope or by another safe method."}},
+        {"id": "height-q3", "pic": "🪜", "art": "ladder-reach", "text": {"sw": "Kipande unachokihitaji kiko mbali upande wa ngazi. Ufanye nini?", "en": "The part you need is far to the side of the ladder. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Jinyooshe mbali ukishika kwa mkono mmoja.", "en": "Stretch far out holding with one hand."}}, {"id": "b", "text": {"sw": "Simama kwenye hatua ya juu kabisa.", "en": "Stand on the very top step."}}, {"id": "c", "text": {"sw": "Shuka na usogeze ngazi.", "en": "Climb down and move the ladder."}}], "answer": "c", "why": {"sw": "Kujinyoosha mbali kunaweza kuangusha ngazi. Kuishogeza huchukua dakika moja.", "en": "Leaning far out can topple the ladder. Moving it takes a minute."}},
+        {"id": "height-q4", "pic": "🔧", "art": "work-below", "text": {"sw": "Unafanya kazi juu. Mwenzako anatembea chini yako. Ufanye nini kwanza?", "en": "You are working above. A colleague walks below you. What should you do first?"}, "options": [{"id": "a", "text": {"sw": "Endelea. Uko makini na zana zako.", "en": "Carry on. You are careful with tools."}}, {"id": "b", "text": {"sw": "Mwambie aondoke na uweke alama.", "en": "Move them away and mark the area."}}, {"id": "c", "text": {"sw": "Mtupie zana anayohitaji chini.", "en": "Drop the tool they need down to them."}}], "answer": "b", "why": {"sw": "Zana inayoanguka inaweza kuumiza vibaya. Linda eneo la chini kwanza.", "en": "A falling tool can cause a bad injury. Make the area below safe first."}}
+      ]
+    },
+    {
+      "id": "power",
+      "icon": "⚡",
+      "track": "work",
+      "title": {"sw": "Umeme na Kufunga Mashine", "en": "Electricity and Lockout"},
+      "submodules": [
+            {
+                  "id": "cables",
+                  "title": {
+                        "sw": "Tazama nyaya",
+                        "en": "Check cables"
+                  },
+                  "steps": [
+                        "power-1",
+                        "power-q1"
+                  ]
+            },
+            {
+                  "id": "water",
+                  "title": {
+                        "sw": "Umeme na maji",
+                        "en": "Electricity and water"
+                  },
+                  "steps": [
+                        "power-2",
+                        "power-q2"
+                  ]
+            },
+            {
+                  "id": "lockout",
+                  "title": {
+                        "sw": "Zima na funga mashine",
+                        "en": "Switch off and lock the machine"
+                  },
+                  "steps": [
+                        "power-3",
+                        "power-4",
+                        "power-q3"
+                  ]
+            },
+            {
+                  "id": "repair",
+                  "title": {
+                        "sw": "Matengenezo ya wataalamu tu",
+                        "en": "Expert repairs only"
+                  },
+                  "steps": [
+                        "power-5",
+                        "power-q4"
+                  ]
+            }
+      ],
+      "steps": [
+        {"id": "power-1", "pic": "🔌🔍", "art": "cable-check", "text": {"sw": "Kabla ya kutumia kifaa cha umeme, tazama waya na plagi. Ikiwa waya umekatika au plagi imevunjika, usikitumie. Mwambie msimamizi.", "en": "Before using electrical equipment, look at the cable and plug. If the cable is cut or the plug is broken, do not use it. Tell your supervisor."}},
+        {"id": "power-2", "pic": "💧⚡", "art": "wet-switch", "text": {"sw": "Umeme na maji ni hatari vikichanganyika. Mikono na sakafu viwe vikavu. Usishike swichi kwa mikono yenye maji.", "en": "Electricity and water together are dangerous. Keep hands and floors dry. Never touch a switch with wet hands."}},
+        {"id": "power-3", "pic": "🔒", "art": "machine-off", "text": {"sw": "Kabla ya kusafisha au kuirekebisha mashine, izime na uiondoe kwenye umeme. Weka kufuli na alama yenye jina lako.", "en": "Before cleaning or adjusting a machine, switch it off and unplug it. Put on a lock and a tag with your name."}},
+        {"id": "power-4", "pic": "🏷️", "art": "lock-tag", "text": {"sw": "Kufuli ya mwenzako isiondolewe na mtu mwingine. Mtu aliyeiweka tu ndiye anayeiondoa, baada ya kuhakikisha eneo ni salama.", "en": "Never remove a colleague’s lock. Only the person who put it on may remove it, after checking the area is safe."}},
+        {"id": "power-5", "pic": "🧑‍🔧", "art": "electrician", "text": {"sw": "Matengenezo ya umeme ni kazi ya mtu aliyefunzwa na kuruhusiwa tu. Ikiwa hujafunzwa, ripoti hitilafu na usiifungue mashine.", "en": "Electrical repairs are only for a trained and authorised person. If you are not trained, report the fault and do not open the machine."}},
+        {"id": "power-q1", "pic": "🔌", "art": "cable-taped", "answer": "danger", "text": {"sw": "Waya umekatika. Mfanyakazi ameufunga kwa tepu na anaendelea kuutumia.", "en": "A cable is cut. A worker wraps it in tape and keeps using it."}, "why": {"sw": "Hatari! Tepu siyo ukarabati salama. Ondoa kifaa kazini na uripoti.", "en": "Danger! Tape is not a safe repair. Take the equipment out of use and report it."}},
+        {"id": "power-q2", "pic": "💧", "art": "wet-hands", "text": {"sw": "Umetoka kunawa mikono na unahitaji kuwasha mashine. Ufanye nini?", "en": "You have just washed your hands and need to switch a machine on. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Washa kwa mikono yenye maji. Ni kazi fupi.", "en": "Switch it on with wet hands. It is quick."}}, {"id": "b", "text": {"sw": "Kausha mikono kwanza, kisha washa.", "en": "Dry your hands first, then switch it on."}}, {"id": "c", "text": {"sw": "Washa kwa kutumia kitambaa chenye maji.", "en": "Use a wet cloth to press the switch."}}], "answer": "b", "why": {"sw": "Maji hupitisha umeme. Kausha mikono kila wakati kabla ya kugusa swichi.", "en": "Water carries electricity. Always dry your hands before touching a switch."}},
+        {"id": "power-q3", "pic": "🔒", "art": "lock-removed", "text": {"sw": "Mwenzako anakuomba uondoe kufuli yake kwenye mashine ili amalize mapema. Ufanye nini?", "en": "A colleague asks you to remove their lock from a machine so they can finish early. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Iondoe. Unamjua vizuri.", "en": "Remove it. You know them well."}}, {"id": "b", "text": {"sw": "Iondoe ikiwa mashine imesimama.", "en": "Remove it if the machine is stopped."}}, {"id": "c", "text": {"sw": "Kataa. Aiondoe mwenyewe baada ya kukagua.", "en": "Refuse. They must remove it after checking."}}], "answer": "c", "why": {"sw": "Kufuli hulinda mtu anayefanya kazi kwenye mashine. Usiondoe kufuli ya mtu mwingine.", "en": "A lock protects the person working on the machine. Never remove someone else’s lock."}},
+        {"id": "power-q4", "pic": "🌀", "art": "fan-repair", "text": {"sw": "Feni ya mashine inalegea na hujafunzwa kuitengeneza. Ufanye nini?", "en": "A machine fan is loose and you are not trained to repair it. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Ripoti kwa msimamizi na uweke alama.", "en": "Report it and put up a warning."}}, {"id": "b", "text": {"sw": "Ifungue na ujaribu kuikaza.", "en": "Open it and try to tighten it."}}, {"id": "c", "text": {"sw": "Piga feni kwa nyundo irudi mahali pake.", "en": "Hit the fan with a hammer to seat it."}}], "answer": "a", "why": {"sw": "Kuripoti huzuia jeraha. Matengenezo ni kwa waliofunzwa tu.", "en": "Reporting prevents injury. Repairs are for trained people only."}}
+      ]
+    },
+    {
+      "id": "chem",
+      "icon": "🧪",
+      "track": "work",
+      "title": {"sw": "Kemikali na Mafuta", "en": "Chemicals and Fuels"},
+      "submodules": [
+            {
+                  "id": "labels",
+                  "title": {
+                        "sw": "Soma lebo",
+                        "en": "Read the label"
+                  },
+                  "steps": [
+                        "chem-1",
+                        "chem-q1"
+                  ]
+            },
+            {
+                  "id": "storage",
+                  "title": {
+                        "sw": "Hifadhi kwa usalama",
+                        "en": "Store safely"
+                  },
+                  "steps": [
+                        "chem-2",
+                        "chem-3",
+                        "chem-q2"
+                  ]
+            },
+            {
+                  "id": "spills",
+                  "title": {
+                        "sw": "Kemikali ikimwagika",
+                        "en": "When chemicals spill"
+                  },
+                  "steps": [
+                        "chem-4",
+                        "chem-q3"
+                  ]
+            },
+            {
+                  "id": "body",
+                  "title": {
+                        "sw": "Linda mwili wako",
+                        "en": "Protect your body"
+                  },
+                  "steps": [
+                        "chem-5",
+                        "chem-q4"
+                  ]
+            }
+      ],
+      "steps": [
+        {"id": "chem-1", "pic": "🏷️", "art": "chem-label", "text": {"sw": "Soma lebo kabla ya kutumia kemikali. Usitumie kemikali kutoka kwenye chombo kisicho na lebo. Usihifadhi kemikali kwenye chupa ya kinywaji.", "en": "Read the label before using a chemical. Never use a chemical from an unlabelled container. Never keep chemicals in a drink bottle."}},
+        {"id": "chem-2", "pic": "🛢️", "art": "chem-store", "text": {"sw": "Weka kemikali wima, zimefungwa vizuri, mbali na chakula na joto. Zirudishe mahali pake baada ya kazi.", "en": "Keep chemicals upright and tightly closed, away from food and heat. Put them back in their place after the job."}},
+        {"id": "chem-3", "pic": "⛽", "art": "fuel-store", "text": {"sw": "Mafuta kama dizeli huhifadhiwa kwenye vyombo sahihi mbali na kuchomelea na moto. Usivute sigara karibu na mafuta.", "en": "Fuels such as diesel belong in proper containers away from welding and flames. Do not smoke near fuel."}},
+        {"id": "chem-4", "pic": "⚠️", "art": "spill", "text": {"sw": "Kemikali ikimwagika, waweke watu mbali na mwambie msimamizi. Usiimwage kwa maji kwenye mtaro. Safisha kwa njia uliyofunzwa tu.", "en": "If a chemical spills, keep people away and tell your supervisor. Do not wash it into a drain. Clean it only the way you were trained."}},
+        {"id": "chem-5", "pic": "🧤", "art": "wash-hands", "text": {"sw": "Vaa kinga uliyoelekezwa kwa kemikali hiyo. Ikikugusa ngozi, osha kwa maji mengi. Ikikugusa macho, suuza kwa maji safi na utafute msaada.", "en": "Wear the protection shown for that chemical. If it touches skin, wash with plenty of water. In eyes, rinse with clean water and get help."}},
+        {"id": "chem-q1", "pic": "🍶", "art": "drink-bottle", "answer": "danger", "text": {"sw": "Kemikali imehifadhiwa kwenye chupa ya maji ya kunywa yenye lebo ya kinywaji.", "en": "A chemical is stored in a drinking-water bottle with a drink label on it."}, "why": {"sw": "Hatari! Mtu anaweza kuinywa. Kemikali ziwekwe kwenye vyombo vyake vyenye lebo sahihi.", "en": "Danger! Someone may drink it. Chemicals belong in their own correctly labelled containers."}},
+        {"id": "chem-q2", "pic": "🥫", "art": "food-store", "text": {"sw": "Unahitaji kuhifadhi kemikali. Rafu ya karibu iko juu ya chakula cha wafanyakazi. Ufanye nini?", "en": "You need to store a chemical. The nearest shelf is above workers’ food. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Iweke hapo. Chombo kimefungwa.", "en": "Put it there. The container is closed."}}, {"id": "b", "text": {"sw": "Hifadhi mbali na chakula.", "en": "Store it away from food."}}, {"id": "c", "text": {"sw": "Iweke sakafuni karibu na chakula.", "en": "Put it on the floor near the food."}}], "answer": "b", "why": {"sw": "Kemikali na chakula havichanganyiki. Tumia eneo lililoteuliwa kuhifadhia kemikali.", "en": "Chemicals and food must never mix. Use the designated chemical storage area."}},
+        {"id": "chem-q3", "pic": "💦", "art": "spill-hose", "text": {"sw": "Dizeli imemwagika sakafuni. Mwenzako anachukua bomba la maji kuisafisha. Ufanye nini?", "en": "Diesel has spilled on the floor. A colleague gets a water hose to wash it away. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Msaidie kuimwaga haraka.", "en": "Help them wash it away fast."}}, {"id": "b", "text": {"sw": "Funika kwa vumbi na uendelee na kazi.", "en": "Cover it with dust and carry on working."}}, {"id": "c", "text": {"sw": "Simamisha, waondoe watu na ripoti.", "en": "Stop them, clear people and report."}}], "answer": "c", "why": {"sw": "Maji hueneza mafuta na kuyaingiza miferejini. Simamisha, tenganisha eneo na ripoti.", "en": "Water spreads fuel and carries it to drains. Stop, separate the area and report it."}},
+        {"id": "chem-q4", "pic": "👁️", "art": "chem-eyes", "text": {"sw": "Kemikali imeingia machoni mwa mwenzako. Ufanye nini kwanza?", "en": "A chemical gets into a colleague’s eyes. What should you do first?"}, "options": [{"id": "a", "text": {"sw": "Mpe kitambaa ajifute macho.", "en": "Give them a cloth to rub their eyes."}}, {"id": "b", "text": {"sw": "Subiri aone kama maumivu yatapungua.", "en": "Wait to see if the pain eases."}}, {"id": "c", "text": {"sw": "Suuza kwa maji mengi na pata msaada.", "en": "Rinse with water and get help."}}], "answer": "c", "why": {"sw": "Kusuza haraka kwa maji hulinda kuona. Usisugue macho.", "en": "Fast rinsing with water protects sight. Do not rub the eyes."}}
+      ]
+    },
+    {
+      "id": "heat",
+      "icon": "☀️",
+      "track": "work",
+      "title": {"sw": "Joto, Maji na Ustawi", "en": "Heat, Water and Welfare"},
+      "submodules": [
+            {
+                  "id": "signs",
+                  "title": {
+                        "sw": "Tambua dalili za joto",
+                        "en": "Know the signs of heat"
+                  },
+                  "steps": [
+                        "heat-1",
+                        "heat-q1"
+                  ]
+            },
+            {
+                  "id": "drink-rest",
+                  "title": {
+                        "sw": "Kunywa maji na kupumzika",
+                        "en": "Drink water and rest"
+                  },
+                  "steps": [
+                        "heat-2",
+                        "heat-3",
+                        "heat-q2"
+                  ]
+            },
+            {
+                  "id": "hygiene",
+                  "title": {
+                        "sw": "Usafi wa mikono na maji",
+                        "en": "Clean hands and water"
+                  },
+                  "steps": [
+                        "heat-4",
+                        "heat-q3"
+                  ]
+            },
+            {
+                  "id": "collapse",
+                  "title": {
+                        "sw": "Mtu akizimia kwa joto",
+                        "en": "When someone faints from heat"
+                  },
+                  "steps": [
+                        "heat-5",
+                        "heat-q4"
+                  ]
+            }
+      ],
+      "steps": [
+        {"id": "heat-1", "pic": "🌡️", "art": "heat-signs", "text": {"sw": "Joto kali linaweza kusababisha maumivu ya kichwa, kizunguzungu, kichefuchefu na udhaifu. Ukiona dalili hizi, mwambie msimamizi na upumzike kwenye kivuli.", "en": "Severe heat can cause headache, dizziness, nausea and weakness. If you feel these signs, tell your supervisor and rest in the shade."}},
+        {"id": "heat-2", "pic": "🚰", "art": "drink-water", "text": {"sw": "Kunywa maji safi mara kwa mara ukifanya kazi kwenye joto. Usisubiri kiu kikubwa. Tumia kikombe chako safi.", "en": "Drink clean water often when you work in heat. Do not wait until you are very thirsty. Use your own clean cup."}},
+        {"id": "heat-3", "pic": "🌳", "art": "shade-rest", "text": {"sw": "Pumzika kwenye kivuli unapohisi joto limezidi. Kazi nzito inapowezekana ifanywe wakati wa baridi zaidi. Usilazimishe kuendelea ukizidiwa.", "en": "Rest in the shade when the heat gets too much. Where possible, heavy work belongs in cooler hours. Do not force yourself on when you are overcome."}},
+        {"id": "heat-4", "pic": "🧼", "art": "handwash", "text": {"sw": "Nawa mikono kwa sabuni baada ya choo na kabla ya kula. Weka maji ya kunywa yamefunikwa na safi kwa kila mtu.", "en": "Wash hands with soap after the toilet and before eating. Keep drinking water covered and clean for everyone."}},
+        {"id": "heat-5", "pic": "🚑", "art": "faint", "text": {"sw": "Mtu akizimia au kuchanganyikiwa kwa joto, mpeleke kwenye kivuli, legeza nguo na mpoze kwa maji na upepo. Ita mtoa huduma ya kwanza. Asipopona haraka, mpeleke hospitali.", "en": "If someone faints or is confused from heat, move them to shade, loosen clothing, and cool them with water and air. Call the first aider. If they do not recover fast, get them to hospital."}},
+        {"id": "heat-q1", "pic": "🚰", "art": "water-break", "answer": "safe", "text": {"sw": "Mfanyakazi anayefanya kazi juani anakunywa maji safi na kupumzika kivulini kwa muda mfupi.", "en": "A worker in the sun drinks clean water and rests briefly in the shade."}, "why": {"sw": "Salama! Maji na mapumziko ya kivuli huzuia kuugua kwa joto.", "en": "Safe! Water and shade breaks prevent heat illness."}},
+        {"id": "heat-q2", "pic": "🤕", "art": "dizzy", "text": {"sw": "Unafanya kazi juani. Kichwa kinakuuma na unahisi kizunguzungu. Ufanye nini?", "en": "You are working in the sun. Your head hurts and you feel dizzy. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Endelea. Kazi inakaribia kuisha.", "en": "Carry on. The job is nearly done."}}, {"id": "b", "text": {"sw": "Pumzika kivulini na unywe maji.", "en": "Rest in the shade and drink water."}}, {"id": "c", "text": {"sw": "Kunywa kahawa na uendelee haraka.", "en": "Drink coffee and push on faster."}}], "answer": "b", "why": {"sw": "Dalili za joto huzidi haraka. Simama mapema, pumzika na unywe maji.", "en": "Heat signs get worse fast. Stop early, rest and drink water."}},
+        {"id": "heat-q3", "pic": "🍲", "art": "hands-food", "text": {"sw": "Ni wakati wa chakula cha mchana baada ya choo. Ufanye nini kwanza?", "en": "It is lunchtime after using the toilet. What should you do first?"}, "options": [{"id": "a", "text": {"sw": "Nawa mikono kwa sabuni kabla ya kula.", "en": "Wash your hands with soap before eating."}}, {"id": "b", "text": {"sw": "Kula kwanza. Utawanawa baadaye.", "en": "Eat first. Wash afterwards."}}, {"id": "c", "text": {"sw": "Futa mikono kwenye nguo zako.", "en": "Wipe your hands on your clothes."}}], "answer": "a", "why": {"sw": "Mikono safi huzuia magonjwa. Nawa kwa sabuni kila wakati kabla ya kula.", "en": "Clean hands stop disease. Always wash with soap before eating."}},
+        {"id": "heat-q4", "pic": "😵", "art": "collapse", "text": {"sw": "Mwenzako anazimia kazini kwenye joto na anaonekana kuchanganyikiwa. Ufanye nini?", "en": "A colleague faints at work in the heat and seems confused. What should you do?"}, "options": [{"id": "a", "text": {"sw": "Mpoze kivulini na ita msaada.", "en": "Cool them in shade and call for help."}}, {"id": "b", "text": {"sw": "Mpe kazi nyepesi aendelee.", "en": "Give them light work to continue."}}, {"id": "c", "text": {"sw": "Subiri hadi azinduke mwenyewe.", "en": "Wait until they wake up alone."}}], "answer": "a", "why": {"sw": "Kuzimia na kuchanganyikiwa kwa joto ni dharura. Poza mtu na upate msaada haraka.", "en": "Fainting and confusion from heat are an emergency. Cool the person and get help fast."}}
       ]
     }
+
   ]
 }

@@ -1,5 +1,6 @@
 {
   "style": "Use the supplied image ONLY as the approved VISUAL STYLE reference, not as the scene to repeat. Create a NEW single educational illustration for Endesha Salama, adult East African/eastern DRC motorcycle-taxi safety. STYLE: slightly cartoony adult comic-strip ink illustration, confident rounded flowing off-white #e9eef3 contours, bold flat navy/slate shadow shapes, simplified friendly natural forms, little texture, no dense hatching or realism. Solid dark navy #0f2a44 background, optional quiet darker/lighter navy simple shapes. Exactly ONE amber #ffb300 focal object/detail specified below, very restrained glow. ALL other colors neutral navy/slate/off-white; skin dark slate, no colored skin tones. No red/green. Real adult proportions and anatomically correct hands, no big eyes, exaggerated expressions, mascots or childish bodies. Motorcycles MUST be small ordinary 100–150cc spoked-wheel commuter boda-boda bikes, no racing superbikes; all worn helmets full-face with solid chin bar. COMPOSITION: wide 6:5 panel intended to display at 280 pixels wide; teaching detail must be LARGE and unmistakable, sparse background, simplify secondary objects, allow breathing room. NO TEXT, letters, numbers, labels, ticks, crosses, badges, watermarks or explanatory judgements. No gore, blood, visible injuries or bodies on the ground.",
+  "work_style": "Use the supplied image ONLY as the approved VISUAL STYLE reference, not as the scene to repeat. Create a NEW single educational illustration for Endesha Salama, adult East African workplace safety at Masika Ventures in Tanzania. STYLE: slightly cartoony adult comic-strip ink illustration, confident rounded flowing off-white #e9eef3 contours, bold flat navy/slate shadow shapes, simplified friendly natural forms, little texture, no dense hatching or realism. Solid dark navy #0f2a44 background, optional quiet darker/lighter navy simple shapes. Exactly ONE amber #ffb300 focal object/detail specified below, very restrained glow. ALL other colors neutral navy/slate/off-white; skin dark slate, no colored skin tones. No red/green. Real adult proportions and anatomically correct hands, no big eyes, exaggerated expressions, mascots or childish bodies. Workers wear ordinary navy/slate work clothes and safety shoes; hard hats only where the task requires them. Settings are a Tanzanian warehouse, workshop or factory with wax, buckets, pallets, IBC containers, gas cylinders or a machine room. No motorcycles or motorcycle helmets. COMPOSITION: wide 6:5 panel intended to display at 280 pixels wide; teaching detail must be LARGE and unmistakable, sparse background, simplify secondary objects, allow breathing room. NO TEXT, letters, numbers, labels, ticks, crosses, badges, watermarks or explanatory judgements. No gore, blood, visible injuries or bodies on the ground.",
   "scenes": [
     {
       "id": "check-1",
@@ -185,6 +186,356 @@
       "id": "crash-q2",
       "art": "location-call",
       "prompt": "Non-graphic adult African helper using a phone beside a distinctive roadside junction and simple unlettered direction sign, gesturing to explain the location. Small neutral outline of an emergency van approaching in far background, NO cross logo or flashing colored lights. ONE amber phone. No phone digits or words, no blood, injury or victims, no approving symbols.\nFinal correction: Correct this illustration so the emergency caller is unmistakably standing safely off the road, NOT riding or sitting on a motorcycle while on the phone. Remove the foreground motorcycle under the caller and show the caller standing with both feet on the roadside shoulder. Put a small parked commuter motorcycle on its stand BEHIND the caller. Retain the junction and unlettered direction sign and distant neutral emergency van, the pointing gesture, the full-face helmet, adult African rider, simplified bold comic ink style. ONLY the phone is amber #ffb300; all else off-white and dark navy/slate. No red cross logo, no text, no injury, no victims, no tick/cross symbols."
+    },
+    {
+      "id": "fire-1",
+      "art": "fire-find-exit",
+      "prompt": "Adult warehouse worker points toward an accessible open exit; a wall-mounted fire extinguisher is large in the middle foreground. ONE amber object: the extinguisher. Plain doorway, no exit sign or text. All paths clear. Worker in navy work clothes and safety shoes, no hard hat needed.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "fire-2",
+      "art": "gas-chained",
+      "prompt": "One large upright industrial gas cylinder secured to a solid warehouse wall with a correctly attached chain encircling its upper body and anchored on BOTH sides. ONE amber object: this single continuous securing chain. Wall anchor plates, cylinder and valve neutral navy/slate, not amber. Close view, chain attachment unmistakable. No people, labels or symbols.\nNo workers shown."
+    },
+    {
+      "id": "fire-3",
+      "art": "exit-clear",
+      "prompt": "Wide empty clear warehouse walkway leading to an open exit doorway, pallets and boxes stored well to each side, visibly outside the walking route. ONE amber detail: the plain unlettered rectangular lintel above the doorway. No sign icons. No person.\nNo workers shown."
+    },
+    {
+      "id": "fire-4",
+      "art": "hot-work",
+      "prompt": "Adult metalworker behind a plain navy barrier cord, preparing to grind a metal piece on a clean steel workbench. No combustibles nearby. Wearing a clear face shield, gloves, safety shoes and fitted sleeves. ONE amber detail: a small single coherent cluster of sparks at the grinder contact point. Grinder anatomically held with two hands, no extra limbs.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "fire-5",
+      "art": "assembly-point",
+      "prompt": "Three adult coworkers in ordinary work clothes and safety shoes walking together into an outdoor factory assembly area, building in quiet navy background. ONE amber object: a single plain standing assembly marker with an abstract group of off-white human silhouettes, no arrows, crosses, text or letters. No worker carries belongings.\nGender: one woman and two men, all walking together in the same work clothes and safety shoes."
+    },
+    {
+      "id": "fire-q1",
+      "art": "gas-loose",
+      "prompt": "Question situation only: one upright gas cylinder beside a warehouse wall stands unsecured, no strap and no chain. Nearby empty wall anchors visible. ONE amber object: the cylinder. A worker standing neutrally some distance away, not fixing it or pointing. No outcome or judgement.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "fire-q2",
+      "art": "pallets-exit",
+      "prompt": "Question situation only: stacked pallets and boxes block the full width of a warehouse exit doorway. ONE amber detail: plain unlettered lintel above the partly visible doorway. One worker at the side looking at the obstruction, not moving boxes. No arrows, exit text or answer symbols.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "fire-q3",
+      "art": "alarm-sounds",
+      "prompt": "Question situation only: adult worker pauses midway through handling a neutral wax block at a factory workbench. A large wall-mounted fire alarm bell above the work area is sounding, shown by just two off-white vibration arcs. ONE amber object: the alarm bell. Worker stays at the bench, not evacuating or pressing alarm.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "fire-q4",
+      "art": "gas-hiss",
+      "prompt": "Question situation only: upright secured gas cylinder with a small valve leak suggested by a single coherent amber wispy hissing plume from the valve. ONE amber detail: the hissing gas plume. Cylinder, chain and valve neutral navy. Adult worker nearby notices it, hands down, not handling the valve, calling or evacuating. No fire.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "lift-1",
+      "art": "lift-help",
+      "prompt": "Warehouse worker calmly assesses a large bulky box on the floor; a hand trolley stands nearby and a second adult coworker approaches. ONE amber object: the bulky box. No one yet lifts the box. Natural adults, safety shoes, ordinary fitted work clothes. Large clear box and trolley.\nGender: man assessing the load and woman coworker, same work clothes and safety shoes."
+    },
+    {
+      "id": "lift-2",
+      "art": "lift-knees",
+      "prompt": "Side view of an adult warehouse worker demonstrating a careful squat lift of a compact box kept close against the shins and torso. Knees deeply bent, heels on floor, back neutral and straight, both hands grasp box sides naturally. ONE amber object: the box. Clear whole-body silhouette, no hard hat needed.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "lift-3",
+      "art": "under-load",
+      "prompt": "Heavy caged IBC container suspended above an empty pallet by two neutral lifting slings that run UNDER its rigid base, up outside its sides, and join a crane hook above. Do not attach hooks to the light cage rails. Clear empty space beneath the load. No people. ONE amber detail: single oval floor exclusion outline around the pallet. Neutral navy warehouse, no symbols, labels or text.\nNo workers shown."
+    },
+    {
+      "id": "lift-4",
+      "art": "pallet-jack",
+      "prompt": "Adult worker walking beside and pulling a manual pallet jack with one hand on its upright handle; forks visibly slide beneath a pallet carrying securely stacked neutral boxes. Both feet on floor, not riding. ONE amber object: the pallet jack. Clear empty route ahead, no other people. Critical: worker's face and eyes look LEFT, forward along the walking path in the same direction as the leading foot, never backwards toward the load.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "lift-5",
+      "art": "tidy-floor",
+      "prompt": "Tidy factory aisle after cleaning: tools stored on a wall rack, a neutral bucket and mop at the side, worker finishes wiping a small remaining neutral damp patch. ONE amber object: plain folding floor barrier standing beside the cleaning area, absolutely blank with no exclamation mark or symbol. Floor otherwise uncluttered.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "lift-q1",
+      "art": "bad-lift",
+      "prompt": "Question situation only: side view of adult warehouse worker bent steeply at waist with straight knees and rounded back, both hands grasping the handle of a heavy floor bucket. ONE amber object: bucket. Show the incorrect posture plainly without corrective inset, helper, arrows, ticks or crosses. Natural anatomy, safety shoes.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "lift-q2",
+      "art": "ibc-foot",
+      "prompt": "Question situation only: caged industrial IBC suspended a few centimetres above a pallet on proper lifting slings. Adult coworker stands at the side, one shoe dangerously near the pallet edge and lowering container, clearly visible but not crushed or injured. ONE amber detail: that single shoe toe. Other footwear neutral. No arrows or intervention.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "lift-q3",
+      "art": "heavy-sack",
+      "prompt": "Question situation only: a very bulky heavy tied sack sits on a warehouse floor. Lone adult worker looks at it with arms relaxed; a neutral hand trolley is parked in distant background, not being used. ONE amber object: sack. No lifting, helper, advice, arrows or judgement.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "lift-q4",
+      "art": "wet-walkway",
+      "prompt": "Question situation shared by water-in-path and near-slip lessons: broad shiny puddle across a warehouse walkway, adult worker with one foot sliding slightly and arms naturally raised for balance, stays upright and unhurt. ONE amber detail: the single puddle. No mop, sign, helper, reporting phone or outcome. Show a near slip, no fall or body on ground.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "ppe-1",
+      "art": "safety-shoes",
+      "prompt": "Large detailed close view of a pair of closed industrial safety boots on an adult worker feet, sturdy thick soles, reinforced toe caps and laces clearly visible. ONE amber detail: reinforced toe cap of the foreground boot only. Other boot entirely navy/slate/off-white. No labels, floating inset or symbols.\nGender: man worker; only his trouser legs and boots visible, normal adult proportions."
+    },
+    {
+      "id": "ppe-2",
+      "art": "goggles",
+      "prompt": "Close portrait of adult East African factory worker wearing clear close-fitting protective safety goggles with side protection, calm natural face, dark slate skin. ONE amber object: the connected goggle frame. Lenses clear neutral. Navy work shirt, no hard hat or other amber clothing. Goggles large and unmistakable.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "ppe-3",
+      "art": "ear-muffs",
+      "prompt": "Close three-quarter portrait of adult worker wearing correctly fitted over-ear industrial hearing protection with a connected headband; quiet machine silhouettes behind. ONE amber object: the single connected pair of ear muffs. Natural adult face, navy work clothes, no hard hat.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "ppe-4",
+      "art": "work-gloves",
+      "prompt": "Close view of two gloved hands attached to normal sleeved adult forearms holding rough timber with a visible splintered edge. Natural five-finger glove anatomy. ONE amber object: foreground glove only. Other glove neutral slate. Large teaching detail, no bare fingers, no injury.\nGender: woman worker; only her gloved hands and forearms visible, normal adult proportions."
+    },
+    {
+      "id": "ppe-5",
+      "art": "gear-check",
+      "prompt": "Adult worker at PPE rack checking a visibly torn seam in one work glove held naturally in the hands before a shift. Safety boots and clear goggles stored on neutral rack nearby. ONE amber object: the single damaged glove. Tear shown by fabric seam only, no skin, icons, ticks or crosses.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "ppe-q1",
+      "art": "shoes-gloves",
+      "prompt": "Question situation only: adult worker walking through warehouse carrying a bucket with both hands, visibly wearing closed safety boots and fitted gloves. ONE amber object: bucket. Gloves and both boots entirely neutral, no approving symbols or signs. Whole body and feet clearly shown, no extra limbs.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "ppe-q2",
+      "art": "knife-cut",
+      "prompt": "Question situation only: close workbench view of a neutral bare knife placed beside a large block of wax ready to cut; one adult worker in navy clothes standing behind bench, safety glasses absent. Hands resting naturally clear of blade. ONE amber object: wax block. No glasses, intervention, answer or injury.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "ppe-q3",
+      "art": "loud-room",
+      "prompt": "Question situation only: adult worker in noisy factory machine room, one hand near temple indicating headache, ears uncovered. An unused neutral pair of ear muffs hangs on a nearby hook. ONE amber detail: coherent vibration arcs immediately beside the machine casing. No worker wearing muffs, no corrective action, no text.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "ppe-q4",
+      "art": "hot-steam",
+      "prompt": "Question situation only: a single coherent tall steam plume rises from a large neutral industrial pot at a factory workstation; adult worker stands nearby observing, hands down, no injury. ONE amber detail: the steam plume. No answering action, protective demonstration, arrows or warning sign.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "report-1",
+      "art": "spot-hazard",
+      "prompt": "Adult worker notices a damaged ladder leaning beside a factory wall and gestures toward it from a safe distance. ONE amber detail: the single visibly broken rung; all other ladder parts neutral. No text, warning symbols or repair, calm adult worker with normal hands.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "report-2",
+      "art": "box-falls",
+      "prompt": "Shared near-miss and question situation: a box falling from a warehouse shelf lands immediately beside an upright adult worker without hitting them. ONE amber object: that single falling box. Other boxes neutral and shelf readable. Worker startled with natural hands raised, no injury, no reporting action or symbols.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "report-3",
+      "art": "scan-report",
+      "prompt": "Close over-shoulder view of an adult hand holding a smartphone toward a large generic QR-like pattern on a factory safety board. ONE amber object: phone casing. Board and screen patterns neutral off-white/navy abstract squares, no encoded staff data, readable text, numbers, labels or extra icons. Natural hand anatomy.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "report-4",
+      "art": "hurt-help",
+      "prompt": "Adult worker sitting upright supported against a workshop wall, clothed and conscious, unhurt-looking, no visible injury. A calm coworker kneels nearby calling for help using a neutral phone, without moving the seated worker. ONE amber object: closed plain first-aid bag on the floor, absolutely no cross symbol. No blood.\nGender: woman first aider kneeling and calling for help; man sitting supported against wall. Same ordinary work clothes."
+    },
+    {
+      "id": "report-5",
+      "art": "first-aid-box",
+      "prompt": "Adult worker points toward a large closed wall-mounted first-aid cabinet; nearby neutral key hangs visibly on a simple accessible hook. ONE amber object: the cabinet. Cabinet is plain with no cross, letters, labels or logo. Neutral outline of a bandage roll visible in a small clear window suggests purpose. No injury.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "report-q1",
+      "art": "loose-fan",
+      "prompt": "Question situation only: loose ceiling fan with tilted mounting bracket and visible gap at ceiling attachment above factory floor. Worker observes from the side, no repair. ONE amber detail: central fan hub. A blank neutral folding barrier stands below, no letters or warning symbols. Blades clearly connected to hub.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "report-q3",
+      "art": "bee-sting",
+      "prompt": "Question situation only: adult worker standing outdoors beside stacked hive-like wooden storage boxes, one hand near chest with expression of breathing discomfort; a few small bees nearby. ONE amber object: one foreground bee, all other bees neutral. No swelling, wounds, treatment, phone, medicine or visible injury. Normal adult anatomy, no gore.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "height-1",
+      "art": "ladder-check",
+      "prompt": "Adult worker inspects a tall straight ladder leaning against a warehouse wall before climbing, one hand on a rung, looking closely. ONE amber detail: one middle rung. Sparse warehouse wall, no one on the ladder.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "height-2",
+      "art": "ladder-climb",
+      "prompt": "Adult worker climbs a straight ladder facing it, both hands gripping side rails, one foot on a low rung, three points of contact clear and large. ONE amber detail: one hand grip on the rail. No load in hands.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "height-3",
+      "art": "ladder-angle",
+      "prompt": "Side view of a straight ladder on firm flat ground at a safe angle, top tied with a rope to a fixed point, colleague holding the base. ONE amber detail: the tie rope at the top.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "height-4",
+      "art": "roof-guard",
+      "prompt": "Adult worker stands back from the edge of a flat industrial roof behind a simple guard rail, looking at a visibly weaker patched roof section nearby. ONE amber detail: the patched roof section. No climbing.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "height-5",
+      "art": "tools-secure",
+      "prompt": "Worker on a raised platform with tools secured in a closed tool belt, looking down toward a marked empty area below with a plain barrier. ONE amber detail: the tool belt. No people below.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "height-q1",
+      "art": "ladder-cracked",
+      "prompt": "Question situation only: close view of a straight ladder with one clearly cracked middle step, leaning unused against a wall. One adult worker stands beside it only observing. ONE amber detail: the cracked step. No climbing, no repair action.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "height-q2",
+      "art": "carry-climb",
+      "prompt": "Question situation only: adult worker at the foot of a ladder holding a bucket in one hand, about to climb, other hand free. ONE amber detail: the bucket. No rope, no hoisting action shown.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "height-q3",
+      "art": "ladder-reach",
+      "prompt": "Question situation only: adult worker high on a ladder leaning far sideways with one hand reaching toward a distant wall fitting, body stretched out. ONE amber detail: the distant wall fitting. No fall shown.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "height-q4",
+      "art": "work-below",
+      "prompt": "Question situation only: worker on a scaffold platform above while another worker walks directly below carrying a box, looking ahead. ONE amber detail: a wrench resting unsecured at the platform edge. No falling object, no injury.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "power-1",
+      "art": "cable-check",
+      "prompt": "Close view of adult hands holding a plug and inspecting a thick electrical cable on a work bench, cable insulation intact in view. ONE amber detail: the plug. No sparks, no damage shown as answer.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "power-2",
+      "art": "wet-switch",
+      "prompt": "Adult worker stands before a wall switch with visibly wet hands raised and paused, a wash basin nearby, floor dry in foreground. ONE amber detail: water droplets on one hand. No touching the switch.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "power-3",
+      "art": "machine-off",
+      "prompt": "Adult worker places a padlock through the isolator switch of a workshop machine that is switched off, a plain blank tag hanging beside it with absolutely no letters. ONE amber detail: the padlock. Machine still and safe.\nGender: woman worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "power-4",
+      "art": "lock-tag",
+      "prompt": "Close view of two different padlocks locked on one machine isolator, each with a plain blank tag, no letters or numbers anywhere. ONE amber detail: one padlock in front. Hands away from locks.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "power-5",
+      "art": "electrician",
+      "prompt": "Trained adult technician with insulated gloves and safety glasses works calmly on an open electrical panel with tools laid out, machine isolated. ONE amber detail: the insulated gloves. No sparks.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "power-q1",
+      "art": "cable-taped",
+      "prompt": "Question situation only: close view of an electrical cable with a cut wrapped messily in tape, plugged into a workshop socket, worker hand reaching toward the equipment switch. ONE amber detail: the taped section. No sparks or injury.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "power-q2",
+      "art": "wet-hands",
+      "prompt": "Question situation only: adult worker with dripping wet hands reaching toward a machine start switch in a wash area. ONE amber detail: the start switch button. Hand not yet touching it.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "power-q3",
+      "art": "lock-removed",
+      "prompt": "Question situation only: adult worker points at a colleagues padlock on a machine isolator and asks, second worker stands back with arms crossed not touching it. ONE amber detail: the padlock. No removal action, no tools on the lock.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "power-q4",
+      "art": "fan-repair",
+      "prompt": "Question situation only: loose machine fan guard visibly tilted on a workshop machine, adult worker observing from the side with hands down. ONE amber detail: the tilted fan guard hub. No repair, no open panel.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "chem-1",
+      "art": "chem-label",
+      "prompt": "Adult worker reads a large plain label shape on a chemical drum held at waist height, completely blank label with absolutely no letters, words, symbols or pictograms. ONE amber detail: the drum lid.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "chem-2",
+      "art": "chem-store",
+      "prompt": "Neat warehouse shelf with upright closed chemical containers spaced apart on a low designated shelf, food crates stored far away on a separate distant shelf. ONE amber detail: one container cap. No text on containers.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "chem-3",
+      "art": "fuel-store",
+      "prompt": "Proper closed fuel canisters upright in a ventilated store corner away from a distant welding area, no flames nearby. ONE amber detail: one canister handle. No smoking, no text.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "chem-4",
+      "art": "spill",
+      "prompt": "Adult worker stands back from a dark spill spreading on a warehouse floor, gesturing others away, supervisor approaching in background. ONE amber detail: the spill pool edge nearest viewer. No hose, no cleaning action.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "chem-5",
+      "art": "wash-hands",
+      "prompt": "Close view of adult hands being washed under running water at a basin with soap foam, sleeves rolled up. ONE amber detail: the tap. Clean simple background.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "chem-q1",
+      "art": "drink-bottle",
+      "prompt": "Question situation only: a clear drink bottle with a familiar drink-label shape (absolutely no letters) filled with coloured-looking liquid standing among chemical drums on a bench. Adult worker observes it. ONE amber detail: the bottle cap. No drinking.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "chem-q2",
+      "art": "food-store",
+      "prompt": "Question situation only: adult worker holding a chemical container pauses beside shelves where worker food crates sit directly below an empty upper shelf in a store room. ONE amber detail: the chemical container. Not placed yet.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "chem-q3",
+      "art": "spill-hose",
+      "prompt": "Question situation only: dark fuel spill on concrete with one worker holding a water hose pointed toward it, about to spray, second worker raising a hand in pause gesture. ONE amber detail: the hose nozzle. No water spray yet.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "chem-q4",
+      "art": "chem-eyes",
+      "prompt": "Question situation only: adult worker beside chemical drums holding their face with one hand, eyes closed in discomfort, colleague reaching for a clean water jug nearby. ONE amber detail: the water jug. No injury detail, no rubbing shown as treatment.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "heat-1",
+      "art": "heat-signs",
+      "prompt": "Adult worker sitting in shade at a factory rest area holding their head with one hand, looking tired, water container nearby untouched. ONE amber detail: a cloth on the forehead. No collapse.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "heat-2",
+      "art": "drink-water",
+      "prompt": "Adult worker drinks clean water from their own cup at a covered drinking-water station in shade during a break. ONE amber detail: the cup. Calm rest scene.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "heat-3",
+      "art": "shade-rest",
+      "prompt": "Workers rest seated in the shade of a large tree beside a warehouse during a hot midday break, hats off, relaxed. ONE amber detail: one workers wide hat resting beside them. No work happening.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "heat-4",
+      "art": "handwash",
+      "prompt": "Adult worker washes hands with soap at an outdoor handwashing stand, a covered drinking-water container standing clean nearby. ONE amber detail: the soap bar. No food shown.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "heat-5",
+      "art": "faint",
+      "prompt": "Adult worker lies safely on their side in shade on a clean mat while a calm colleague kneels fanning air with a plain board, first-aid bag nearby closed with no cross symbol. ONE amber detail: the first-aid bag. No injury or distress detail.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "heat-q1",
+      "art": "water-break",
+      "prompt": "Question situation only: worker in bright sun at an outdoor work area pauses holding a cup of water near a shaded rest bench. ONE amber detail: the cup. Neutral scene, no judgement symbols.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "heat-q2",
+      "art": "dizzy",
+      "prompt": "Question situation only: adult worker standing in bright sun wipes their forehead and holds a post for balance, looking unwell, tools set down. ONE amber detail: the forehead cloth. No collapse, no treatment yet.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
+    },
+    {
+      "id": "heat-q3",
+      "art": "hands-food",
+      "prompt": "Question situation only: adult worker walks from a plain toilet block door toward an outdoor eating area carrying a lunch container, hands visibly unwashed, handwash stand visible in between. ONE amber detail: the lunch container. No eating yet.\nGender: man worker performing the described task; ordinary practical work clothes, natural adult proportions."
+    },
+    {
+      "id": "heat-q4",
+      "art": "collapse",
+      "prompt": "Question situation only: adult worker has fainted lying on the ground in a sunny yard, one colleague kneeling beside them loosening the collar area, another running toward them. ONE amber detail: a water bottle held by the kneeling colleague. No injury, no panic faces exaggerated.\nGender: woman worker performing the described task; ordinary practical work clothes and the same PPE as a man, natural adult proportions."
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
-  "name": "Endesha Salama",
-  "short_name": "Endesha Salama",
-  "description": "Mafunzo ya usalama wa pikipiki / Motorcycle safety lessons",
+  "name": "Salama — Usalama Kazini na Barabarani",
+  "short_name": "Salama",
+  "description": "Mafunzo ya usalama kazini na barabarani / Workplace and motorcycle safety lessons",
   "lang": "sw",
   "start_url": "./",
   "display": "standalone",

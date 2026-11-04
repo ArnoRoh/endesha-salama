@@ -6,11 +6,16 @@ export function audioItems(L) {
     const out = [];
     const add = (name, text) => out.push({ lang, name, file: audioPath(lang, name), text });
     L.spoken.forEach((k) => add(`ui-${k}`, L.ui[lang][k]));
-    for (const m of L.modules)
+    for (const m of L.modules) {
+      if (m.hook) add(`${m.id}-hook`, m.hook[lang]);
       for (const s of m.steps) {
-        add(s.id, s.text[lang]);
-        if (s.why) add(`${s.id}-why`, s.why[lang]);
+        add(s.id, [s.text[lang], ...(s.options ?? []).map((o) => `${o.id.toUpperCase()}. ${o.text[lang]}`)].join(' '));
+        if (s.why) {
+          const correct = s.options?.find((o) => o.id === s.answer);
+          add(`${s.id}-why`, [correct ? `${correct.id.toUpperCase()}. ${correct.text[lang]}` : '', s.why[lang]].filter(Boolean).join(' '));
+        }
       }
+    }
     return out;
   });
 }

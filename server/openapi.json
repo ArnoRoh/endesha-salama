@@ -1,0 +1,44 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Endesha Salama ERP/HRM API", "version": "1.0.0", "description": "Kiswahili-first HSSE training for East Africa. Connect Odoo, ERPNext, SAP or any HRM. See docs/API.md." },
+  "servers": [{ "url": "https://{host}", "variables": { "host": { "default": "example.org" } } }],
+  "security": [{ "ApiKey": [] }],
+  "components": {
+    "securitySchemes": { "ApiKey": { "type": "apiKey", "in": "header", "name": "X-API-Key", "description": "es_live_ key from /admin (Admin role). Also accepted as Authorization: Bearer." } },
+    "schemas": {
+      "EmployeeInput": { "type": "object", "required": ["name"], "properties": {
+        "name": { "type": "string" }, "odoo_login": { "type": "string" }, "odoo_employee_id": { "type": "integer" },
+        "external_system": { "type": "string", "example": "erpnext" }, "external_id": { "type": "string", "example": "KE-001" },
+        "email": { "type": "string" }, "department": { "type": "string" }, "site": { "type": "string" },
+        "country": { "type": "string", "default": "TZ", "example": "KE" }, "language": { "type": "string", "enum": ["sw", "en"], "default": "sw" } } },
+      "Error": { "type": "object", "properties": { "error": { "type": "string" } } }
+    }
+  },
+  "paths": {
+    "/api/v1/health": { "get": { "security": [], "summary": "Liveness", "responses": { "200": { "description": "OK" } } } },
+    "/api/v1/modules": { "get": { "summary": "Modules and work submodules", "responses": { "200": { "description": "OK" } } } },
+    "/api/v1/employees": {
+      "get": { "summary": "List people (filters: country, department, site, language, active, q; paging: limit, offset)", "responses": { "200": { "description": "OK" }, "401": { "description": "Bad key" } } },
+      "post": { "summary": "Create/update one person or {rows:[...]} (write scope)", "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/EmployeeInput" } } } }, "responses": { "201": { "description": "Created/updated; new people include code once" } } }
+    },
+    "/api/v1/employees/{id}": {
+      "get": { "summary": "One person with assignments", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "OK" }, "404": { "description": "No such employee" } } },
+      "patch": { "summary": "Update a person (write scope)", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "OK" } } }
+    },
+    "/api/v1/assignments": {
+      "get": { "summary": "Assignment status (filters: employee_id, module, status, country)", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Assign a module (write scope)", "responses": { "201": { "description": "Assigned" } } },
+      "delete": { "summary": "Unassign (write scope)", "responses": { "200": { "description": "Removed" } } }
+    },
+    "/api/v1/completions": {
+      "get": { "summary": "Completions (filters: employee_id, module, since, until)", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Record a completion; same employee+module+completed_at is idempotent (write scope)", "responses": { "201": { "description": "Recorded" }, "200": { "description": "Already recorded" } } }
+    },
+    "/api/v1/status": { "get": { "summary": "Counts by status, module and country", "responses": { "200": { "description": "OK" } } } },
+    "/api/v1/webhooks": {
+      "get": { "summary": "List webhooks (admin scope)", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Create webhook; secret shown once (admin scope)", "responses": { "201": { "description": "Created" } } }
+    },
+    "/api/v1/webhooks/{id}": { "delete": { "summary": "Delete webhook (admin scope)", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "Deleted" } } } }
+  }
+}

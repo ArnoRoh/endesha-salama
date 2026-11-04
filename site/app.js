@@ -1,14 +1,23 @@
 import { audioItems, audioPath } from './content.js';
 import { ART } from './art.js';
 
+// Both entry pages show the shared topic list. Lessons and staff requests keep their own track.
+const TRACK = document.documentElement.dataset.track ?? 'ride';
 const L = await fetch('lessons.json').then((r) => r.json());
 const app = document.getElementById('app');
 const lang = () => (localStorage.lang in L.langs ? localStorage.lang : 'sw');
 const t = (o) => o[lang()] ?? o.sw;
-const u = (k) => L.ui[lang()][k] ?? L.ui.sw[k];
+const u = (k) => L.ui[lang()][`${TRACK}_${k}`] ?? L.ui[lang()][k] ?? L.ui.sw[k];
+const ui = (k) => `ui-${L.ui.sw[`${TRACK}_${k}`] ? `${TRACK}_` : ''}${k}`; // audio clip name of an interface string
+const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const done = () => JSON.parse(localStorage.done || '[]');
-const allDone = () => L.modules.every((m) => done().includes(m.id));
+const inTrack = (m) => (m.track ?? 'ride') === TRACK;
+const allDone = () => L.modules.filter(inTrack).every(isDone);
+const requestedTopic = new URLSearchParams(location.search).get('topic');
+const topic = requestedTopic === 'ride' && TRACK === 'ride' ? 'ride'
+  : L.modules.find((m) => m.id === requestedTopic && inTrack(m))?.id;
 let pos = [0, 0];
+let currentUnit = null;
 
 // ponytail: media served from the service worker cache may not play offline on iOS Safari (no Range support); Android Chrome is the target.
 const player = new Audio();
@@ -42,39 +51,169 @@ function beep(ok) {
   o.stop(now + 0.35);
 }
 
+// Staff mode. A personal code from the admin portal links this phone to an employee record.
+// Work track: completions are queued and sent when online. Rider track: anonymous by default and
+// nothing is sent; an employee may opt in (riderTrack flag) to save refresher results for HSSE.
+let staff = JSON.parse(localStorage.staff || 'null');
+const riderOptIn = () => localStorage.riderTrack === '1';
+const code = () => (TRACK === 'work' || riderOptIn() ? localStorage.staffCode : null);
+const assigned = (m) => staff?.assignments.find((a) => a.module === m.id);
+const isDone = (m) => { const a = assigned(m); return a ? ['current', 'due_soon'].includes(a.status) : done().includes(m.id); };
+// Rider refresher enforcement: a rider module unlocks only after the previous rider module is done.
+const isLocked = (m) => { if ((m.track ?? 'ride') !== 'ride' || !m.id) return false; const r = L.modules.filter((x) => (x.track ?? 'ride') === 'ride'); const i = r.findIndex((x) => x.id === m.id); return i > 0 && !isDone(r[i - 1]); };
+const unitKey = (m, unit) => `${code() ?? 'local'}/${m.id}/${unit.id}/${assigned(m)?.next_due ?? assigned(m)?.due_date ?? ''}`;
+const unitsDone = () => JSON.parse(localStorage.submodulesDone || '[]');
+const isUnitDone = (m, unit) => isDone(m) || unitsDone().includes(unitKey(m, unit));
+const unitSteps = (m) => currentUnit === null ? m.steps : m.submodules[currentUnit].steps.map((id) => m.steps.find((s) => s.id === id));
+const day = (d) => new Date(d.slice(0, 10)).toLocaleDateString(lang(), { dateStyle: 'medium' });
+function badge(m) {
+  const a = assigned(m);
+  const text = !a ? '' : a.status === 'overdue' ? u('staffOverdue') : a.status === 'pending' && a.due_date ? `${u('staffDue')} ${day(a.due_date)}`
+    : a.status === 'due_soon' ? `${u('staffRefresh')} ${day(a.next_due)}` : '';
+  return text ? `<span class="badge ${a.status}">${esc(text)}</span>` : '';
+}
+function staffBox() {
+  if (TRACK === 'ride' && topic !== 'ride') return '';
+  if (staff && code()) {
+    const sc = staff.scenario, sm = sc && L.modules.find((x) => x.id === sc.module), ss = sm?.steps.find((x) => x.id === sc.step);
+    const scenario = ss ? `<p><strong>${esc(sc.month)}</strong> · ${esc(t(sm.title))}: ${esc(t(ss.text))}</p><button class="ghost" ${(sm.track ?? 'ride') === 'ride' ? `data-mod="${L.modules.indexOf(sm)}"` : `data-topic="${sm.id}"`}>${u('next')}</button>` : '';
+    return `<section class="staff"><p><strong>${u('staffHello')}, ${esc(staff.name)}</strong> <button class="ghost" data-go="signout">${u('staffOut')}</button></p>${scenario}<p class="fine">${u('staffPrivacy')}</p></section>`;
+  }
+  return `<form class="staff" data-form="signin">${TRACK === 'ride' ? `<p class="fine">${u('riderTrack')}</p>` : ''}<label>${u('staffPrompt')}<input name="code" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12" required></label>
+    <button class="big">${u('staffGo')}</button><p class="fine" id="staff-msg" role="alert"></p><p class="fine">${u('staffPrivacy')}</p></form>`;
+}
+const api = (path, body) => fetch(path, { method: body ? 'POST' : 'GET', headers: { 'X-Staff-Code': code() }, body: body && JSON.stringify(body) });
+function signOut() {
+  // Queued completions/answers stay on the phone, tagged to their employee; they are
+  // sent only when that same person signs in again. Personal certificate fields go.
+  for (const k of ['staffCode', 'staff', 'riderTrack', 'name', 'empId', 'dept', 'company']) localStorage.removeItem(k);
+  staff = null;
+  if (app.querySelector('.grid')) home();
+}
+async function sync() {
+  if (!code()) return;
+  try {
+    // Queues are tagged with the employee code that earned them. On a shared phone,
+    // another person's results stay queued untouched until that person signs in again.
+    const mine = (x) => !x.for || x.for === code();
+    for (const p of JSON.parse(localStorage.pending || '[]').filter(mine)) {
+      const r = await api('api/complete', p);
+      if (!r.ok && r.status !== 400) throw r; // 400 = module no longer exists: drop it
+      localStorage.pending = JSON.stringify(JSON.parse(localStorage.pending).filter((x) => x !== p && !(x.at === p.at && x.module === p.module && x.for === p.for)));
+    }
+    let quiz = JSON.parse(localStorage.pendingQuiz || '[]').filter(mine);
+    while (quiz.length) {
+      const batch = quiz.slice(0, 50); // bounded batches: a long offline queue is never lost at once
+      const r = await api('api/quiz', { results: batch });
+      if (!r.ok && r.status !== 400) throw r;
+      localStorage.pendingQuiz = JSON.stringify(JSON.parse(localStorage.pendingQuiz || '[]').filter((x) => !batch.includes(x)));
+      quiz = JSON.parse(localStorage.pendingQuiz || '[]').filter(mine);
+      if (!r.ok) break; // 400 batch dropped (e.g. a removed step); continue with the rest
+    }
+    const r = await api('api/me');
+    if (!r.ok) throw r;
+    staff = await r.json();
+    localStorage.staff = JSON.stringify(staff);
+    if (app.querySelector('.grid')) home();
+  } catch (e) {
+    if (e?.status === 401) signOut(); // code was reset or the person was deactivated; offline or server errors just retry later
+  }
+}
+async function signIn(value) {
+  if (TRACK === 'ride') localStorage.riderTrack = '1'; // explicit opt-in: only now may the rider app send results
+  const next = value.toUpperCase().replace(/\s/g, '');
+  if (localStorage.staffCode && localStorage.staffCode !== next) staff = null; // never show the previous person's name or assignments
+  localStorage.staffCode = next;
+  const button = app.querySelector('[data-form="signin"] button');
+  if (button) button.disabled = true;
+  await sync();
+  if (staff) return;
+  const bad = !code(); // sync() signs out on 401; anything else is network or server trouble
+  localStorage.removeItem('staffCode');
+  if (TRACK === 'ride') localStorage.removeItem('riderTrack');
+  const msg = app.querySelector('#staff-msg');
+  if (msg) msg.textContent = u(bad ? 'staffBad' : 'staffOffline');
+  if (button) button.disabled = false;
+}
+function startStaff() { // sign-in form, retry when back online, and the personal link work.html?c=CODE
+  app.addEventListener('submit', (e) => {
+    if (e.target.dataset.form !== 'signin') return;
+    e.preventDefault();
+    signIn(new FormData(e.target).get('code'));
+  });
+  window.addEventListener('online', sync);
+  const link = new URLSearchParams(location.search).get('c');
+  if (link && TRACK === 'work') { history.replaceState(null, '', location.pathname); signIn(link); }
+}
+function record(mi) {
+  if (!code()) return;
+  const m = L.modules[mi], a = assigned(m), at = new Date().toISOString();
+  if (a) { a.status = 'current'; a.last_completed = at; localStorage.staff = JSON.stringify(staff); }
+  localStorage.pending = JSON.stringify([...JSON.parse(localStorage.pending || '[]'), { module: m.id, at, for: code() }]);
+  sync();
+}
+
 function home() {
-  const d = done();
+  currentUnit = null;
+  const riding = L.modules.filter((m) => (m.track ?? 'ride') === 'ride');
+  const work = L.modules.filter((m) => m.track === 'work');
+  const selected = L.modules.find((m) => m.id === topic);
+  const cards = !topic ? [{ title: Object.fromEntries(Object.keys(L.langs).map((l) => [l, L.ui[l].motorcycle])), steps: riding[0].steps, target: 'data-topic="ride"', count: riding.length, complete: riding.every(isDone) },
+    ...work.map((m) => ({ ...m, target: `data-topic="${m.id}"`, count: m.submodules.length, complete: isDone(m) }))]
+    : selected ? selected.submodules.map((unit, i) => ({ ...unit, steps: unit.steps.map((id) => selected.steps.find((s) => s.id === id)),
+      target: `data-unit="${L.modules.indexOf(selected)}:${i}"`, complete: isUnitDone(selected, unit) }))
+    : riding.map((m) => ({ ...m, target: `data-mod="${L.modules.indexOf(m)}"`, complete: isDone(m) }));
   app.innerHTML = `
+    ${topic ? `<button class="ghost" data-go="topics">${icon('home')} ${u('topics')}</button>` : ''}
     <header class="top">
-      <h1>${u('appName')}</h1>
-      <p class="tag">${u('tagline')}</p>
+      <h1>${!topic ? u('hubName') : selected ? t(selected.title) : u('appName')}</h1>
+      <p class="tag">${!topic ? u('hubTagline') : selected ? `${selected.submodules.length} ${u('submodules')}` : u('tagline')}</p>
       <nav class="langs">${Object.entries(L.langs)
         .map(([k, v]) => `<button data-lang="${k}" aria-pressed="${k === lang()}">${v}</button>`).join('')}</nav>
     </header>
-    <section class="intro">${speaker('ui-intro')}<p>${u('intro')}</p></section>
-    <section class="grid">${L.modules.map((m, i) => `
-      <button class="card${d.includes(m.id) ? ' done' : ''}" data-mod="${i}" aria-label="${t(m.title)}${d.includes(m.id) ? '. ' + u('moduleDone') : ''}">
-        <span class="card-picture">${ART[m.steps[0].art]?.() ?? m.icon}<span class="card-number" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></span>
-        <span class="card-title">${t(m.title)}</span>${d.includes(m.id) ? `<span class="tick" aria-hidden="true">${icon('check')}</span>` : ''}
+    <section class="intro">${speaker(ui(topic ? 'intro' : 'hubIntro'))}<p>${u(topic ? 'intro' : 'hubIntro')}</p></section>
+    ${staffBox()}
+    <section class="grid">${cards.map((m, n) => `
+      <button class="card${m.complete ? ' done' : ''}" ${m.target} ${isLocked(m) ? 'disabled' : ''} aria-label="${t(m.title)}${m.complete ? '. ' + u('moduleDone') : ''}">
+        <span class="card-picture">${ART[m.steps[0].art]?.() ?? m.icon}<span class="card-number" aria-hidden="true">${String(n + 1).padStart(2, '0')}</span></span>
+        <span class="card-title">${t(m.title)}${m.count ? `<span class="card-count">${m.count} ${u('submodules')}</span>` : ''}${isLocked(m) ? `<span class="card-count">${u('locked')}</span>` : ''}${badge(m)}</span>${m.complete ? `<span class="tick" aria-hidden="true">${icon('check')}</span>` : ''}
       </button>`).join('')}</section>
-    ${allDone() ? `<button class="big" data-go="cert">${icon('award')} ${u('getCert')}</button>` : ''}
+    ${topic && allDone() ? `<button class="big" data-go="cert">${icon('award')} ${u('getCert')}</button>` : ''}
     ${navigator.share ? `<button class="ghost" data-go="share-site">${icon('share')} ${u('shareSite')}</button>` : ''}
     <footer>
-      <p>${speaker('ui-disclaimer')} <strong>${u('disclaimerTitle')}:</strong> ${u('disclaimer')}</p>
+      <p>${speaker(ui('disclaimer'))} <strong>${u('disclaimerTitle')}:</strong> ${u('disclaimer')}</p>
       <p>${u('brand')} · <a href="https://github.com/Masika-Ventures/endesha-salama">${u('openSource')}</a></p>
     </footer>`;
 }
 
-function step(mi, si) {
-  const m = L.modules[mi], s = m.steps[si];
-  if (!s) return finish(mi);
-  pos = [mi, si];
+function hook(mi) { // opening line: capture attention before the first lesson step
+  const m = L.modules[mi];
+  if (!m.hook) return step(mi, 0);
+  currentUnit = null;
+  pos = [mi, 0];
+  scrollTo(0, 0);
   app.innerHTML = `
     <header class="bar"><button data-go="home" aria-label="${u('home')}">${icon('home')}</button><span>${t(m.title)}</span></header>
-    <div class="dots">${m.steps.map((_, i) => `<i class="${i < si ? 'past' : i === si ? 'now' : ''}"></i>`).join('')}</div>
+    <div class="pic" aria-hidden="true">${ART[m.steps[0].art]?.() ?? m.icon}</div>
+    <section class="lesson-copy"><p class="text">${t(m.hook)}</p>${speaker(`${m.id}-hook`)}</section>
+    <button class="big" data-hookstart="${mi}">${u('next')} ${icon('next')}</button>`;
+  say(`${m.id}-hook`);
+}
+
+function step(mi, si) {
+  const m = L.modules[mi], steps = unitSteps(m), s = steps[si];
+  if (!s) return finish(mi);
+  pos = [mi, si];
+  scrollTo(0, 0);
+  app.innerHTML = `
+    <header class="bar"><button data-go="home" aria-label="${u('home')}">${icon('home')}</button><span>${t(currentUnit === null ? m.title : m.submodules[currentUnit].title)}</span></header>
+    <div class="dots">${steps.map((_, i) => `<i class="${i < si ? 'past' : i === si ? 'now' : ''}"></i>`).join('')}</div>
     <div class="pic" aria-hidden="true">${ART[s.art]?.() ?? s.pic}</div>
     <section class="lesson-copy"><p class="text">${t(s.text)}</p>${speaker(s.id)}</section>
-    ${s.answer ? `<div class="answers">
+    ${s.source ? `<p class="source">${u('source')}: <a href="${s.source.url}" target="_blank" rel="noopener">${s.source.label}</a></p>` : ''}
+    ${s.answer ? s.options ? `<div class="answers choices">
+        ${s.options.map((o) => `<button data-answer="${o.id}"><strong>${o.id.toUpperCase()}.</strong><span>${t(o.text)}</span></button>`).join('')}
+      </div>` : `<div class="answers">
         <button class="safe" data-answer="safe">${icon('check')}<span>${u('safe')}</span></button>
         <button class="danger" data-answer="danger">${icon('cross')}<span>${u('danger')}</span></button>
       </div>` : `<button class="big" data-go="next">${u('next')} ${icon('next')}</button>`}`;
@@ -82,27 +221,56 @@ function step(mi, si) {
 }
 
 function answer(choice) {
-  const s = L.modules[pos[0]].steps[pos[1]], ok = choice === s.answer;
+  const s = unitSteps(L.modules[pos[0]])[pos[1]], ok = choice === s.answer;
+  if (code()) { // opted-in employee: queue the quiz result for HSSE tracking (never for anonymous riders)
+    localStorage.pendingQuiz = JSON.stringify([...JSON.parse(localStorage.pendingQuiz || '[]'),
+      { module: L.modules[pos[0]].id, step: s.id, correct: ok, at: new Date().toISOString(), for: code() }]);
+  }
   beep(ok);
   app.querySelector('.answers').outerHTML = `
-    <div class="feedback ${ok ? 'good' : 'bad'}">
+    <div class="feedback ${ok ? 'good' : 'bad'}" role="status">
       <strong>${icon(ok ? 'check' : 'cross')} ${u(ok ? 'correct' : 'wrong')}</strong>
+      ${s.options ? `<p><strong class="right">${u('rightAnswer')}:</strong> ${s.answer.toUpperCase()}. ${t(s.options.find((o) => o.id === s.answer).text)}</p>` : ''}
       <p>${t(s.why)} ${speaker(s.id + '-why')}</p>
     </div>
     <button class="big" data-go="next">${u('next')} ${icon('next')}</button>`;
+  app.querySelector('[data-go="next"]').focus();
   setTimeout(() => say(s.id + '-why'), 400);
 }
 
 function finish(mi) {
+  if (currentUnit !== null) return finishUnit(mi);
+  scrollTo(0, 0);
   localStorage.done = JSON.stringify([...new Set([...done(), L.modules[mi].id])]);
-  const next = L.modules[mi + 1];
+  record(mi);
+  const ni = L.modules.findIndex((m, i) => i > mi && inTrack(m)), next = L.modules[ni];
   app.innerHTML = `
     <div class="pic party" aria-hidden="true">${icon('award')}</div>
     <h2>${u('moduleDone')}</h2>
     ${allDone() ? `<p class="text">${u('allDone')}</p><button class="big" data-go="cert">${icon('award')} ${u('getCert')}</button>`
-      : next ? `<button class="big" data-mod="${mi + 1}">${t(next.title)} ${icon('next')}</button>` : ''}
+      : next ? `<button class="big" data-mod="${ni}">${t(next.title)} ${icon('next')}</button>` : ''}
     <button class="ghost" data-go="home">${icon('home')} ${u('home')}</button>`;
-  say(allDone() ? 'ui-allDone' : 'ui-moduleDone');
+  say(allDone() ? ui('allDone') : ui('moduleDone'));
+}
+
+function finishUnit(mi) {
+  const m = L.modules[mi], unit = m.submodules[currentUnit];
+  localStorage.submodulesDone = JSON.stringify([...new Set([...unitsDone(), unitKey(m, unit)])]);
+  const complete = m.submodules.every((s) => isUnitDone(m, s));
+  if (complete) {
+    localStorage.done = JSON.stringify([...new Set([...done(), m.id])]);
+    record(mi);
+  }
+  const next = m.submodules[currentUnit + 1];
+  scrollTo(0, 0);
+  app.innerHTML = `
+    <div class="pic party" aria-hidden="true">${icon('award')}</div>
+    <h2>${u('moduleDone')}</h2>
+    <p class="text">${t(unit.title)}</p>
+    ${complete && allDone() ? `<button class="big" data-go="cert">${icon('award')} ${u('getCert')}</button>`
+      : next ? `<button class="big" data-unit="${mi}:${currentUnit + 1}">${t(next.title)} ${icon('next')}</button>` : ''}
+    <button class="ghost" data-go="home">${icon('home')} ${t(m.title)}</button>`;
+  say(ui('moduleDone'));
 }
 
 const canvas = Object.assign(document.createElement('canvas'), { width: 1080, height: 1080 });
@@ -110,7 +278,7 @@ let certBlob;
 function draw() {
   const c = canvas.getContext('2d'), W = 1080;
   const line = (txt, y, size, color = '#fff', weight = '') => {
-    c.font = `${weight} ${size}px system-ui, sans-serif`;
+    c.font = `${weight} ${size}px Overpass, system-ui, sans-serif`;
     c.fillStyle = color;
     c.fillText(txt, W / 2, y, W - 120);
   };
@@ -134,9 +302,12 @@ function draw() {
   };
   mark('award', 465, 95, 150);
   line(u('certTitle'), 350, 60, '#fff', 'bold');
-  line(localStorage.name || '', 480, 84, '#ffb300', 'bold');
+  line(localStorage.name || staff?.name || '', 480, 84, '#ffb300', 'bold');
+  const idLine = [localStorage.empId, localStorage.dept, localStorage.company].filter(Boolean).join(' · ');
+  if (idLine) line(idLine, 532, 30);
   line(u('certBody'), 570, 40);
-  L.modules.forEach((_, i) => mark('check', 240 + i * 110, 645, 48));
+  const marks = L.modules.filter(inTrack);
+  marks.forEach((_, i) => mark('check', 540 - ((marks.length - 1) * 110 + 48) / 2 + i * 110, 645, 48));
   line(new Date().toLocaleDateString(lang(), { dateStyle: 'long' }), 800, 36);
   line(u('brand'), 930, 34, '#ffb300');
   line(location.host + location.pathname.replace(/index\.html$/, ''), 990, 30);
@@ -148,13 +319,22 @@ function cert() {
   app.innerHTML = `
     <header class="bar"><button data-go="home" aria-label="${u('home')}">${icon('home')}</button><span>${u('certTitle')}</span></header>
     <label class="name">${u('namePrompt')} <input id="name" autocomplete="name" maxlength="40"></label>
+    <label class="name">${u('empPrompt')} <input id="empId" maxlength="40"></label>
+    <label class="name">${u('deptPrompt')} <input id="dept" maxlength="60"></label>
+    <label class="name">${u('companyPrompt')} <input id="company" maxlength="60"></label>
     <img id="cert" class="cert" alt="${u('certTitle')}">
     <button class="big" data-go="share-cert">${icon('share')} ${u('shareCert')}</button>`;
   const input = app.querySelector('#name');
-  input.value = localStorage.name || '';
+  input.value = localStorage.name || staff?.name || '';
   input.oninput = () => { localStorage.name = input.value; draw(); };
-  draw();
-  say('ui-certReady');
+  for (const k of ['empId', 'dept', 'company']) {
+    const el = app.querySelector(`#${k}`);
+    el.value = localStorage[k] || '';
+    el.oninput = () => { localStorage[k] = el.value; draw(); };
+  }
+  // Canvas text does not wait for web fonts; load Overpass first or the certificate falls back.
+  document.fonts.load('bold 60px Overpass').finally(draw);
+  say(ui('certReady'));
 }
 
 function shareCert() {
@@ -165,8 +345,13 @@ function shareCert() {
   Object.assign(document.createElement('a'), { href: URL.createObjectURL(certBlob), download: file.name }).click();
 }
 
-// Warm the offline cache with every clip in the current language.
-const prefetch = () => audioItems(L).filter((a) => a.lang === lang()).forEach((a) => fetch(a.file).catch(() => {}));
+// Warm only the selected module and shared interface clips, after offline caching is ready.
+async function prefetch(mi) {
+  const clips = audioItems({ ...L, modules: [L.modules[mi]] }).filter((a) => a.lang === lang());
+  if (navigator.serviceWorker && !navigator.serviceWorker.controller)
+    await new Promise((resolve) => navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }));
+  clips.forEach((a) => fetch(a.file).catch(() => {}));
+}
 
 app.addEventListener('click', (e) => {
   const b = e.target.closest('button');
@@ -175,19 +360,24 @@ app.addEventListener('click', (e) => {
   if (d.lang) {
     localStorage.lang = document.documentElement.lang = d.lang;
     home();
-    say('ui-intro');
-    prefetch();
+    say(ui(topic ? 'intro' : 'hubIntro'));
   } else if (d.say) say(d.say);
-  else if (d.mod) step(+d.mod, 0);
+  else if (d.topic) location.href = `${d.topic === 'ride' ? 'index.html' : 'work.html'}?topic=${d.topic}`;
+  else if (d.unit) { const [mi, si] = d.unit.split(':').map(Number); currentUnit = si; prefetch(mi); step(mi, 0); }
+  else if (d.mod) { if (isLocked(L.modules[+d.mod])) return; currentUnit = null; prefetch(+d.mod); hook(+d.mod); }
+  else if (d.hookstart !== undefined) step(+d.hookstart, 0);
   else if (d.answer) answer(d.answer);
   else if (d.go === 'next') step(pos[0], pos[1] + 1);
-  else if (d.go === 'home') { player.pause(); home(); }
-  else if (d.go === 'cert') cert();
+  else if (d.go === 'home') { player.pause(); home(); scrollTo(0, 0); }
+  else if (d.go === 'topics') location.href = location.pathname;
+  else if (d.go === 'cert') { cert(); scrollTo(0, 0); }
+  else if (d.go === 'signout') signOut();
   else if (d.go === 'share-cert') shareCert();
   else if (d.go === 'share-site') navigator.share({ title: u('appName'), text: u('tagline'), url: location.origin + location.pathname }).catch(() => {});
 });
 
 document.documentElement.lang = lang();
+startStaff();
 home();
-prefetch();
+sync();
 navigator.serviceWorker?.register('sw.js');
