@@ -101,6 +101,12 @@ async function sync() {
       if (!r.ok && r.status !== 400) throw r; // 400 = module no longer exists: drop it
       localStorage.pending = JSON.stringify(JSON.parse(localStorage.pending).filter((x) => x !== p && !(x.at === p.at && x.module === p.module && x.for === p.for)));
     }
+    for (const v of JSON.parse(localStorage.pendingViva || '[]').filter(mine)) {
+      const r = await api('api/viva', v.self ? { module: v.module, self: v.self } : { module: v.module, audio_b64: v.audio, secs: v.secs });
+      if (r.status === 503 || r.status === 429) break; // no Meta key / daily cap: keep the recording queued, try later
+      if (!r.ok && r.status !== 400) throw r;
+      localStorage.pendingViva = JSON.stringify(JSON.parse(localStorage.pendingViva || '[]').filter((x) => x !== v));
+    }
     let quiz = JSON.parse(localStorage.pendingQuiz || '[]').filter(mine);
     while (quiz.length) {
       const batch = quiz.slice(0, 50); // bounded batches: a long offline queue is never lost at once
@@ -200,6 +206,62 @@ function hook(mi) { // opening line: capture attention before the first lesson s
   say(`${m.id}-hook`);
 }
 
+const queueViva = (item) => { localStorage.pendingViva = JSON.stringify([...JSON.parse(localStorage.pendingViva || '[]'), { ...item, for: code(), at: new Date().toISOString() }]); sync(); };
+function vivaThanks() {
+  app.innerHTML = `<header class="bar"><button data-go="home" aria-label="${u('home')}">${icon('home')}</button><span>${u('vivaTitle')}</span></header>
+    <div class="pic" aria-hidden="true">🎤</div><section class="lesson-copy"><p class="text">${u('vivaThanks')}</p></section>
+    <button class="big" data-go="home">${u('home')}</button>`;
+}
+function viva(mi) {
+  const m = L.modules[mi];
+  if (!m.viva) return home();
+  pos = [mi, m.steps.length - 1]; currentUnit = null; vivaState = null;
+  const signed = !!code();
+  const canRecord = signed && !!navigator.mediaDevices?.getUserMedia && typeof AudioContext !== 'undefined';
+  app.innerHTML = `
+    <header class="bar"><button data-go="home" aria-label="${u('home')}">${icon('home')}</button><span>${u('vivaTitle')} · ${t(m.title)}</span></header>
+    <div class="pic" aria-hidden="true">${ART[m.steps[0].art]?.() ?? m.icon}</div>
+    <section class="lesson-copy"><p class="text">${t(m.viva.q)}</p>${speaker(`${m.id}-viva`)}
+    <p class="fine">${u('vivaIntro')}</p><p class="fine">${signed ? u('vivaConsent') : u('vivaPractice')}</p></section>
+    ${canRecord ? `<button class="big" data-vivarec="1">🎤 ${u('vivaRecord')}</button><p class="text" id="viva-status" role="status"></p><div id="viva-review"></div>`
+      : `<p class="text">${u('vivaListenModel')} ${speaker(`${m.id}-viva-model`)}</p><p class="text">${u('vivaSelfQ')}</p>
+         <div class="answers"><button class="answer" data-vivaself="good">${u('vivaGood')}</button><button class="answer" data-vivaself="learning">${u('vivaLearning')}</button></div>`}`;
+  say(`${m.id}-viva`);
+}
+function encodeWav(chunks, rate) { // mono 16-bit WAV, resampled to 16 kHz for the speech API
+  const flat = chunks.flatMap((c) => [...c]);
+  const ratio = rate / 16000, out = [];
+  for (let i = 0; i < flat.length; i += ratio) out.push(flat[Math.floor(i)]);
+  const buf = new ArrayBuffer(44 + out.length * 2), v = new DataView(buf);
+  const wstr = (o, s) => [...s].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+  wstr(0, 'RIFF'); v.setUint32(4, 36 + out.length * 2, true); wstr(8, 'WAVEfmt '); v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, 16000, true); v.setUint32(28, 32000, true);
+  v.setUint16(32, 2, true); v.setUint16(34, 16, true); wstr(36, 'data'); v.setUint32(40, out.length * 2, true);
+  out.forEach((s, i) => v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, s)) * 32767, true));
+  return new Blob([buf], { type: 'audio/wav' });
+}
+async function vivaRecord() {
+  const status = app.querySelector('#viva-status'), btn = app.querySelector('[data-vivarec]');
+  if (vivaState) { // stop
+    clearTimeout(vivaState.timer); vivaState.node.disconnect(); vivaState.stream.getTracks().forEach((tr) => tr.stop());
+    const blob = encodeWav(vivaState.chunks, vivaState.ctx.sampleRate), secs = Math.max(1, Math.round((Date.now() - vivaState.started) / 1000));
+    vivaState.ctx.close(); vivaState = { blob, secs };
+    app.querySelector('#viva-review').innerHTML = `<audio controls src="${URL.createObjectURL(blob)}" style="width:100%"></audio>
+      <button class="big" data-vivasend="1">${u('vivaSend')}</button><button class="big ghost" data-viva="${pos[0]}">${u('vivaAgain')}</button>`;
+    btn.remove(); status.textContent = '';
+    return;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const ctx = new AudioContext(), src = ctx.createMediaStreamSource(stream), node = ctx.createScriptProcessor(4096, 1, 1);
+    const chunks = [];
+    node.onaudioprocess = (e) => chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+    src.connect(node); node.connect(ctx.destination);
+    vivaState = { ctx, node, stream, chunks, started: Date.now(), timer: setTimeout(() => vivaRecord(), 20000) };
+    btn.textContent = `⏹ ${u('vivaStop')}`; status.textContent = '●';
+  } catch { status.textContent = u('vivaPractice'); }
+}
+
 function step(mi, si) {
   const m = L.modules[mi], steps = unitSteps(m), s = steps[si];
   if (!s) return finish(mi);
@@ -247,6 +309,7 @@ function finish(mi) {
   app.innerHTML = `
     <div class="pic party" aria-hidden="true">${icon('award')}</div>
     <h2>${u('moduleDone')}</h2>
+    ${L.modules[mi].viva ? `<button class="big" data-viva="${mi}">🎤 ${u('vivaTitle')}</button>` : ''}
     ${allDone() ? `<p class="text">${u('allDone')}</p><button class="big" data-go="cert">${icon('award')} ${u('getCert')}</button>`
       : next ? `<button class="big" data-mod="${ni}">${t(next.title)} ${icon('next')}</button>` : ''}
     <button class="ghost" data-go="home">${icon('home')} ${u('home')}</button>`;
@@ -267,6 +330,7 @@ function finishUnit(mi) {
     <div class="pic party" aria-hidden="true">${icon('award')}</div>
     <h2>${u('moduleDone')}</h2>
     <p class="text">${t(unit.title)}</p>
+    ${complete && m.viva ? `<button class="big" data-viva="${mi}">🎤 ${u('vivaTitle')}</button>` : ''}
     ${complete && allDone() ? `<button class="big" data-go="cert">${icon('award')} ${u('getCert')}</button>`
       : next ? `<button class="big" data-unit="${mi}:${currentUnit + 1}">${t(next.title)} ${icon('next')}</button>` : ''}
     <button class="ghost" data-go="home">${icon('home')} ${t(m.title)}</button>`;
@@ -366,6 +430,10 @@ app.addEventListener('click', (e) => {
   else if (d.unit) { const [mi, si] = d.unit.split(':').map(Number); currentUnit = si; prefetch(mi); step(mi, 0); }
   else if (d.mod) { if (isLocked(L.modules[+d.mod])) return; currentUnit = null; prefetch(+d.mod); hook(+d.mod); }
   else if (d.hookstart !== undefined) step(+d.hookstart, 0);
+  else if (d.viva !== undefined) viva(+d.viva);
+  else if (d.vivarec) vivaRecord();
+  else if (d.vivasend) { const blob = vivaState?.blob; if (!blob) return; blob.arrayBuffer().then((ab) => { let bin = ''; const bytes = new Uint8Array(ab); for (let i = 0; i < bytes.length; i += 8192) bin += String.fromCharCode(...bytes.subarray(i, i + 8192)); queueViva({ module: L.modules[pos[0]].id, audio: btoa(bin), secs: vivaState.secs }); vivaThanks(); }); }
+  else if (d.vivaself) { if (code()) queueViva({ module: L.modules[pos[0]].id, self: d.vivaself }); vivaThanks(); }
   else if (d.answer) answer(d.answer);
   else if (d.go === 'next') step(pos[0], pos[1] + 1);
   else if (d.go === 'home') { player.pause(); home(); scrollTo(0, 0); }

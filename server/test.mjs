@@ -183,6 +183,12 @@ try {
   await adm('employees/delete', { id: gone.id });
   assert.equal((await overview())['Erase Me'], undefined, 'erasure removes the person and cascades their records');
 
+  const vivaSelf = await fetch(`${base}/api/viva`, { method: 'POST', headers: { 'X-Staff-Code': juma.code }, body: JSON.stringify({ module: 'check', self: 'learning' }) });
+  assert.equal((await vivaSelf.json()).status, 'self', 'voice self-mark is recorded without any Meta key');
+  const vivaAudio = await fetch(`${base}/api/viva`, { method: 'POST', headers: { 'X-Staff-Code': juma.code }, body: JSON.stringify({ module: 'check', audio_b64: 'AAAA', secs: 5 }) });
+  assert.equal(vivaAudio.status, 503, 'voice grading without a Meta key returns 503 so the phone keeps the recording queued');
+  assert.equal((await (await adm('viva')).json())[0].self_mark, 'learning', 'HSSE can see voice results in the portal API');
+
   const aiDraft = await fetch(`${base}/admin/api/ai-scenario`, { method: 'POST', headers: { Authorization: `Bearer ${adminToken}` }, body: JSON.stringify({ module: 'fire' }) });
   assert.equal(aiDraft.status, 503, 'Muse draft endpoint says so when no Meta API key is configured');
   assert.equal((await aiDraft.json()).code, 'no_meta_key');

@@ -8,6 +8,7 @@ export function audioItems(L) {
     L.spoken.forEach((k) => add(`ui-${k}`, L.ui[lang][k]));
     for (const m of L.modules) {
       if (m.hook) add(`${m.id}-hook`, m.hook[lang]);
+      if (m.viva) { add(`${m.id}-viva`, m.viva.q[lang]); add(`${m.id}-viva-model`, m.viva.model[lang]); }
       for (const s of m.steps) {
         add(s.id, [s.text[lang], ...(s.options ?? []).map((o) => `${o.id.toUpperCase()}. ${o.text[lang]}`)].join(' '));
         if (s.why) {

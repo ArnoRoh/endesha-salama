@@ -36,7 +36,7 @@ th { color: var(--mute); font-weight: 600; font-size: 13px; } tr.off td { opacit
 const $ = (s) => document.querySelector(s);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const LABEL = { overdue: 'Overdue', due_soon: 'Due soon', pending: 'Assigned', current: 'Current' };
-let token = sessionStorage.token, mods = [], people = [], msg = '', links = [], filter = '', status = '', me = null, keys = [], hooks = [], users = [], auditRows = [], quizStats = null, reminderRows = [], scenarioNow = null;
+let token = sessionStorage.token, mods = [], people = [], msg = '', links = [], filter = '', status = '', me = null, keys = [], hooks = [], users = [], auditRows = [], quizStats = null, reminderRows = [], scenarioNow = null, vivaRows = [];
 
 async function call(path, opts = {}) {
   const r = await fetch('/admin/api/' + path, { ...opts, headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' } });
@@ -75,6 +75,7 @@ async function load() {
   quizStats = await (await call('quiz-stats'))?.json().catch(() => null) ?? null;
   reminderRows = await (await call('reminders'))?.json().catch(() => []) ?? [];
   scenarioNow = await (await call('scenario'))?.json().catch(() => null) ?? null;
+  vivaRows = await (await call('viva'))?.json().catch(() => []) ?? [];
   if (me?.role === 'admin') {
     keys = await (await call('api-keys'))?.json().catch(() => []) ?? [];
     hooks = await (await call('webhooks'))?.json().catch(() => []) ?? [];
@@ -134,6 +135,8 @@ function render() {
     <p class="small">Automatic: weekly cron reminds everyone overdue or due soon (not repeated within 14 days); on the 1st the monthly scenario is generated from the most-missed question and distributed. Mail sends through the configured EMAIL_WEBHOOK_URL; with no mail provider every due reminder is logged as <b>no_provider</b> so nobody is silently missed. Current scenario: <b>${esc(scenarioNow?.month ?? '-')}</b> ${esc(scenarioNow?.module ?? '')}/${esc(scenarioNow?.step ?? '')}</p>
     <div class="row">${can('hsse', 'admin') ? '<button id="runremind">Run reminders now</button><button class="ghost" id="dryremind">Preview (dry run)</button><button class="ghost" id="runscenario">Generate & distribute scenario</button><button class="ghost" id="aiscenario">Draft new scenario with Muse (Meta AI)</button>' : ''}</div><p class="msg" id="remindmsg"></p><div id="aiout"></div>
     <div class="scroll"><table><thead><tr><th>When</th><th>Employee</th><th>Module</th><th>Kind</th><th>Status</th></tr></thead><tbody>${reminderRows.slice(0, 30).map((r) => `<tr><td>${esc(r.created_at)}</td><td>${esc(r.name)}</td><td>${esc(r.module)}</td><td>${esc(r.kind)}</td><td>${esc(r.status)}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
+  ${quizStats ? `<section><h2>Voice answers (Maswali ya Sauti)</h2><p class="small">Spoken answers graded by Meta AI against key points (0-3), or self-marked. Recordings are never stored, only transcripts. Kiswahili speech recognition is not yet a validated Muse language: check transcripts before acting on a low score.</p>
+    <div class="scroll"><table><thead><tr><th>When</th><th>Employee</th><th>Module</th><th>Result</th><th>Transcript</th></tr></thead><tbody>${vivaRows.map((r) => `<tr><td>${esc(r.created_at)}</td><td>${esc(r.name)}</td><td>${esc(r.module)}</td><td>${r.status === 'graded' ? esc(r.score) + '/3' : esc(r.status) + (r.self_mark ? ' (' + esc(r.self_mark) + ')' : '')}</td><td>${esc(r.transcript ?? '')}<div class="small">${esc(r.feedback_sw ?? '')}</div></td></tr>`).join('')}</tbody></table></div></section>` : ''}
   ${me?.role === 'admin' ? `<section><h2>ERP / HRM API keys (Admin)</h2><p class="small">Keys connect external systems to <code>/api/v1</code> (see docs/API.md). A key is shown once. Scopes: read, write, admin.</p>
     <div class="row"><label>Name<input id="keyname" placeholder="Odoo production"></label><label>Scopes<input id="keyscopes" value="read,write"></label><button id="newkey">Create key</button></div><div id="newkeyout"></div>
     <div class="scroll"><table><thead><tr><th>Name</th><th>Scopes</th><th>Last used</th><th></th></tr></thead><tbody>${keys.map((k) => `<tr><td>${esc(k.name)}</td><td>${esc(k.scopes)}${k.revoked ? ' (revoked)' : ''}</td><td>${esc(k.last_used_at ?? 'never')}</td><td>${k.revoked ? '' : `<button class="ghost" data-revoke="${k.id}">Revoke</button>`}</td></tr>`).join('')}</tbody></table></div></section>

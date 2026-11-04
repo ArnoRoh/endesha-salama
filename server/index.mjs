@@ -436,6 +436,12 @@ async function admin(req, env, path, actor) {
       const { results } = await env.DB.prepare('select id, webhook_id, event, status, response_code, created_at from webhook_delivery order by id desc limit 100').all();
       return json(results);
     }
+    case 'GET viva': {
+      requireRole(actor, 'hr', 'hsse', 'admin');
+      const { results } = await env.DB.prepare(`select v.id, e.name, v.module, v.status, v.score, v.self_mark, v.transcript, v.feedback_sw, v.created_at
+        from viva_result v join employee e on e.id = v.employee_id order by v.id desc limit 50`).all();
+      return json(results);
+    }
     case 'GET quiz-stats': {
       requireRole(actor, 'hr', 'hsse', 'admin');
       const { results: perModule } = await env.DB.prepare(`select module, count(*) as attempts, sum(correct) as correct from quiz_result group by module order by module`).all();
@@ -521,6 +527,43 @@ async function api(req, env, path) {
     if (Number.isNaN(+at) || +at > Date.now() || +at < Date.now() - 90 * 864e5) at = new Date();
     await recordCompletion(env, who.id, b.module, at.toISOString(), 'staff');
     return json({});
+  }
+  if (req.method === 'POST' && path === 'viva') {
+    const b = await body(req);
+    const mod = lessons.modules.find((m) => m.id === b.module);
+    if (!mod?.viva) throw fail(400, 'module has no voice question');
+    if (b.self) {
+      if (!['good', 'learning'].includes(b.self)) throw fail(400, 'self must be good or learning');
+      await env.DB.prepare("insert into viva_result(employee_id, module, status, self_mark) values (?,?,'self',?)").bind(who.id, mod.id, b.self).run();
+      return json({ status: 'self' });
+    }
+    // Cost guard: the key never leaves the server, callers need a personal code, and
+    // caps bound the spend even if a code leaks (ASR is ~$3 per 1000 minutes).
+    if (!env.MODEL_API_KEY) throw Object.assign(fail(503, 'Meta Model API key not configured'), { code: 'no_meta_key' });
+    const mineToday = (await env.DB.prepare("select count(*) as n from viva_result where employee_id = ? and status = 'graded' and created_at > strftime('%Y-%m-%dT%H:%M:%fZ','now','start of day')").bind(who.id).first()).n;
+    if (mineToday >= 6) throw fail(429, 'daily voice-question limit reached');
+    const cap = Number(env.VIVA_DAILY_CAP ?? 200);
+    const allToday = (await env.DB.prepare("select count(*) as n from viva_result where status = 'graded' and created_at > strftime('%Y-%m-%dT%H:%M:%fZ','now','start of day')").first()).n;
+    if (allToday >= cap) throw Object.assign(fail(503, 'daily voice-question budget reached'), { code: 'viva_cap' });
+    const secs = Number(b.secs ?? 0);
+    if (!b.audio_b64 || secs < 1 || secs > 30 || String(b.audio_b64).length > 1400000) throw fail(400, 'send audio_b64 (WAV, up to 30 seconds)');
+    const wav = Uint8Array.from(atob(String(b.audio_b64)), (c) => c.charCodeAt(0));
+    const form = new FormData();
+    form.append('request', new Blob([JSON.stringify({ mode: 'ENDPOINTING', model: env.ASR_MODEL ?? 'muse-voice-transcribe-1.0', audioEncoding: 'WAV', keywords: ['pikipiki', 'ngazi', 'kufuli', 'kizima moto', 'msimamizi', 'forklift', 'matairi'] })], { type: 'application/json' }));
+    form.append('audio', new Blob([wav], { type: 'audio/wav' }), 'answer.wav');
+    const asr = await fetch(`https://api.meta.ai/v1/asr/transcribe?sessionId=viva-${who.id}-${Date.now()}`, { method: 'POST', headers: { Authorization: `Bearer ${env.MODEL_API_KEY}` }, body: form, signal: AbortSignal.timeout(45000) });
+    if (!asr.ok) throw fail(502, `speech API returned HTTP ${asr.status}`);
+    const transcript = String((await asr.json()).transcript ?? '').trim();
+    if (!transcript) { await env.DB.prepare("insert into viva_result(employee_id, module, status, secs) values (?,?,'no_speech',?)").bind(who.id, mod.id, secs).run(); return json({ status: 'no_speech' }); }
+    const keys = mod.viva.points.map((pt, i) => `${i + 1}. ${pt.en}`).join('\n');
+    const grade = await fetch(`${env.MODEL_API_URL ?? 'https://api.meta.ai/v1'}/chat/completions`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.MODEL_API_KEY}` },
+      body: JSON.stringify({ model: env.MODEL_API_MODEL ?? 'muse-spark-1.3', temperature: 0, messages: [{ role: 'user', content: `Grade this spoken safety-training answer. Question: "${mod.viva.q.en}" Key points:\n${keys}\nLearner transcript (may be Kiswahili, English or mixed, and may contain speech-recognition errors — grade the meaning, not the wording): "${transcript}" Score = how many key points are clearly covered (0-3). Reply with only JSON: {"score":0,"feedback_sw":"","feedback_en":""} with one short encouraging feedback sentence in Kiswahili and the same in English, naming a missed point if any.` }] }), signal: AbortSignal.timeout(30000) });
+    if (!grade.ok) throw fail(502, `grading API returned HTTP ${grade.status}`);
+    let g; try { g = JSON.parse(String((await grade.json()).choices?.[0]?.message?.content ?? '').replace(/^```json?|```$/gm, '').trim()); } catch { throw fail(502, 'grading did not return JSON'); }
+    const score = Math.max(0, Math.min(3, Number(g.score) || 0));
+    await env.DB.prepare("insert into viva_result(employee_id, module, status, transcript, score, feedback_sw, feedback_en, secs) values (?,?,'graded',?,?,?,?,?)")
+      .bind(who.id, mod.id, transcript.slice(0, 2000), score, String(g.feedback_sw ?? '').slice(0, 300), String(g.feedback_en ?? '').slice(0, 300), secs).run();
+    return json({ status: 'graded', score, total: 3, feedback: { sw: g.feedback_sw, en: g.feedback_en }, transcript });
   }
   if (req.method === 'POST' && path === 'quiz') {
     const b = await body(req);

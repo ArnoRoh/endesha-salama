@@ -9,7 +9,7 @@ and deployment procedures. Read it before you change content.
 - No build step. The site is `site/`. Lesson text and questions are in
   `site/lessons.json`.
 - Run `npm run check` before you commit. It checks lessons, audio, the offline
-  list and the size budget (5 MB per 6 modules).
+  list and the size budget (5 MB per 6 modules, plus 45 KB per module with voice-answer clips).
 - After a change to site files, bump `CACHE` in `site/sw.js`. Add new pictures
   to `SHELL` in the same file. The service worker shares a public origin with
   other apps: never delete caches that this app does not own.

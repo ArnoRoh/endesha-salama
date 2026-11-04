@@ -74,7 +74,7 @@ for (const lang of Object.keys(L.langs)) for (const [mi, m] of L.modules.entries
   press({ lang });
   assert.deepEqual(fetched, [], 'language selection must not download the course');
   press({ mod: String(mi) });
-  const names = [...L.spoken.map((k) => `ui-${k}`), ...(m.hook ? [`${m.id}-hook`] : []), ...m.steps.flatMap((s) => s.why ? [s.id, `${s.id}-why`] : [s.id])];
+  const names = [...L.spoken.map((k) => `ui-${k}`), ...(m.hook ? [`${m.id}-hook`] : []), ...(m.viva ? [`${m.id}-viva`, `${m.id}-viva-model`] : []), ...m.steps.flatMap((s) => s.why ? [s.id, `${s.id}-why`] : [s.id])];
   assert.deepEqual(new Set(fetched), new Set(names.map((name) => audioPath(lang, name))));
 }
 console.log('ok: audio downloads only on module entry, in the selected language, after service worker control');
@@ -122,6 +122,9 @@ rider.press({ mod: '0' });
 assert.ok(rider.app.innerHTML.includes(L.modules[0].hook.en), 'module opens with its hook line');
 rider.press({ hookstart: '0' });
 assert.ok(rider.app.innerHTML.includes(L.modules[0].steps[0].text.en), 'hook leads into the first step');
+rider.press({ viva: '0' });
+assert.ok(rider.app.innerHTML.includes(L.modules[0].viva.q.en), 'voice question screen shows the spoken question');
+assert.ok(rider.app.innerHTML.includes(L.ui.en.vivaListenModel), 'without a microphone the self-mark fallback is offered');
 for (const [mi, m] of L.modules.entries()) {
   if (m.track !== 'work') continue;
   const s = screen('work', `?topic=${m.id}`);

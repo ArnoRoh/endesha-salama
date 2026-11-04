@@ -96,7 +96,7 @@ for (const f of ART_FILES) {
   if (bytes.length > 40e3) bad(`${f}: picture exceeds 40 KB`);
 }
 const size = await sizeOf(site);
-const budget = (5e6 / 6) * L.modules.length; // per module: the original 5 MB for 6 modules; audio loads per module, not at first visit
+const budget = (5e6 / 6) * L.modules.length + 45e3 * L.modules.filter((m) => m.viva).length; // per module: the original 5 MB for 6 modules, plus a measured allowance for each module's 4 short voice-answer clips; audio loads per module, not at first visit
 if (size > budget) bad(`site is ${(size / 1e6).toFixed(2)} MB, budget is ${(budget / 1e6).toFixed(2)} MB (${L.modules.length} modules)`);
 
 if (errors.length) {

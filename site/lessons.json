@@ -56,7 +56,20 @@
       "empPrompt": "Namba ya mfanyakazi (si lazima)",
       "deptPrompt": "Idara (si lazima)",
       "companyPrompt": "Kampuni (si lazima)",
-      "riderTrack": "Kwa wafanyakazi: ingia kwa msimbo wako kuhifadhi matokeo (si lazima)"
+      "riderTrack": "Kwa wafanyakazi: ingia kwa msimbo wako kuhifadhi matokeo (si lazima)",
+      "vivaTitle": "Swali la Sauti",
+      "vivaIntro": "Sikiliza swali, kisha jibu kwa sauti yako. Una sekunde 20.",
+      "vivaRecord": "Shikilia kurekodi",
+      "vivaStop": "Acha kurekodi",
+      "vivaSend": "Tuma jibu",
+      "vivaAgain": "Rekodi tena",
+      "vivaListenModel": "Sikiliza jibu bora",
+      "vivaSelfQ": "Ulijibu vipi?",
+      "vivaGood": "Nilijibu vizuri",
+      "vivaLearning": "Bado ninajifunza",
+      "vivaThanks": "Asante! Jibu lako limehifadhiwa.",
+      "vivaConsent": "Sauti yako itatumwa kwa msimamizi na mfumo wa AI kwa ajili ya kujifunza tu. Unaweza kuruka swali hili.",
+      "vivaPractice": "Jaribu: rekodi na ujisikilize. Hakuna kinachotumwa."
     },
     "en": {
       "hubName": "Salama",
@@ -111,7 +124,20 @@
       "empPrompt": "Employee ID (optional)",
       "deptPrompt": "Department (optional)",
       "companyPrompt": "Company (optional)",
-      "riderTrack": "For employees: sign in with your code to save results (optional)"
+      "riderTrack": "For employees: sign in with your code to save results (optional)",
+      "vivaTitle": "Voice Question",
+      "vivaIntro": "Listen to the question, then answer in your own voice. You have 20 seconds.",
+      "vivaRecord": "Hold to record",
+      "vivaStop": "Stop recording",
+      "vivaSend": "Send answer",
+      "vivaAgain": "Record again",
+      "vivaListenModel": "Hear a good answer",
+      "vivaSelfQ": "How did you do?",
+      "vivaGood": "I answered well",
+      "vivaLearning": "Still learning",
+      "vivaThanks": "Thank you! Your answer is saved.",
+      "vivaConsent": "Your voice is sent to your supervisor and an AI system for learning only. You may skip this question.",
+      "vivaPractice": "Practice: record and listen to yourself. Nothing is sent."
     }
   },
   "modules": [
@@ -120,6 +146,7 @@
       "icon": "🔧",
       "title": { "sw": "Kabla ya Kuondoka", "en": "Before You Ride" },
       "hook": {"sw": "Pikipiki inaweza kuonekana sawa lakini isiwe salama.", "en": "A motorcycle can look fine and still be unsafe."},
+      "viva": {"q": {"sw": "Unaangalia nini kabla ya safari? Taja vitatu.", "en": "What do you check before a trip? Name three."}, "points": [{"sw": "Matairi na upepo wake", "en": "Tyres and their pressure"}, {"sw": "Breki za mbele na nyuma", "en": "Front and rear brakes"}, {"sw": "Taa, mnyororo na mafuta", "en": "Lights, chain and fuel"}], "model": {"sw": "Matairi na upepo, breki, taa, mnyororo na mafuta.", "en": "Tyres and pressure, brakes, lights, chain and fuel."}},
       "steps": [
         { "id": "check-1", "pic": "🏍️🔍", "art": "bike-check", "text": { "sw": "Kabla ya kuondoka, kagua pikipiki yako kila siku.", "en": "Check your motorcycle every day before you ride." } },
         { "id": "check-2", "pic": "⭕💨", "art": "tyre-pressure", "text": { "sw": "Pima upepo wa matairi kwa kipima upepo. Matairi yasiwe yameisha au kuharibika.", "en": "Check the tyre pressure with a gauge. Do not ride on worn or damaged tyres." } },
@@ -137,6 +164,7 @@
       "icon": "⛑️",
       "title": { "sw": "Vifaa vya Kujikinga", "en": "Protective Gear" },
       "hook": {"sw": "Huwezi kutabiri ajali. Unaweza kuamua kujilinda vizuri.", "en": "You cannot predict a crash. You can decide how well you protect yourself."},
+      "viva": {"q": {"sw": "Mwambie abiria kwa nini avae kofia ya pikipiki.", "en": "Tell your passenger why they must wear a helmet."}, "points": [{"sw": "Ajali haiwezi kutabiriwa", "en": "A crash cannot be predicted"}, {"sw": "Kofia hulinda kichwa", "en": "A helmet protects the head"}, {"sw": "Nguo na glavu hulinda ngozi", "en": "Clothing and gloves protect the skin"}], "model": {"sw": "Ajali haitabiriki. Kofia hulinda kichwa; nguo na glavu hulinda ngozi.", "en": "A crash is unpredictable. A helmet protects the head; clothing protects skin."}},
       "steps": [
         { "id": "gear-1", "pic": "⛑️", "art": "helmet-on", "text": { "sw": "Vaa kofia ya pikipiki inayokutosha vizuri kila safari, hata safari fupi.", "en": "Wear a motorcycle helmet that fits you well on every trip, even a short one." } },
         { "id": "gear-2", "pic": "⛑️🔒", "art": "strap-closed", "text": { "sw": "Funga kamba ya kofia. Kofia isiyofungwa huruka wakati wa ajali.", "en": "Fasten the helmet strap. A helmet that is not fastened comes off in a crash." } },
@@ -155,6 +183,7 @@
       "icon": "🛣️",
       "title": { "sw": "Barabarani", "en": "On the Road" },
       "hook": {"sw": "Endesha kulingana na hali, si kikomo cha mwendo tu.", "en": "Ride for the conditions, not just the speed limit."},
+      "viva": {"q": {"sw": "Barabara imelowa. Utabadilisha nini? Taja vitatu.", "en": "The road is wet. What will you change? Name three."}, "points": [{"sw": "Nitaenda polepole", "en": "I will ride more slowly"}, {"sw": "Nitaacha nafasi kubwa mbele", "en": "I will leave a bigger gap ahead"}, {"sw": "Nitabreki taratibu kwa breki zote", "en": "I will brake gently with both brakes"}], "model": {"sw": "Nitapunguza mwendo, kuacha nafasi kubwa, na kubrekia taratibu.", "en": "I will slow down, leave a bigger gap, and brake gently."}},
       "steps": [
         { "id": "road-1", "pic": "🐢", "art": "steady-speed", "text": { "sw": "Usizidi kikomo cha mwendo. Punguza zaidi mwendo barabara ikiwa mbaya au huoni vizuri.", "en": "Stay within the speed limit. Slow down more when the road is bad or you cannot see well." } },
         { "id": "road-2", "pic": "🏍️↔️🚗", "art": "following-gap", "text": { "sw": "Acha nafasi kubwa kati yako na gari lililo mbele.", "en": "Keep a big gap between you and the vehicle in front." } },
@@ -172,6 +201,7 @@
       "icon": "🚶",
       "title": { "sw": "Abiria na Mzigo", "en": "Passengers and Loads" },
       "hook": {"sw": "Uzito wa ziada huathiri mizani, breki na udhibiti wako.", "en": "Extra weight affects your balance, braking and control."},
+      "viva": {"q": {"sw": "Mwenzako anataka kubeba sanduku kubwa nyuma yako. Utamwambia nini?", "en": "Your colleague wants to carry a big box behind you. What will you say?"}, "points": [{"sw": "Mzigo usizidi uwezo wa pikipiki", "en": "The load must not exceed the motorcycle limit"}, {"sw": "Ufungwe usisogee na usizibe vioo", "en": "Tie it so it cannot move or block the mirrors"}, {"sw": "Usipoziba, tumia usafiri mwingine", "en": "If it does not fit safely, use other transport"}], "model": {"sw": "Lazima lisizidi uwezo, lifungwe, na lisizibe vioo.", "en": "It must fit the limit, be tied down, and not block the mirrors."}},
       "steps": [
         { "id": "load-1", "pic": "☝️🚶", "art": "one-passenger", "text": { "sw": "Beba abiria mmoja tu.", "en": "Carry only one passenger." } },
         { "id": "load-2", "pic": "🚶⛑️", "art": "passenger-helmet", "text": { "sw": "Abiria lazima avae kofia ya pikipiki iliyofungwa.", "en": "The passenger must wear a fastened helmet." } },
@@ -187,6 +217,7 @@
       "icon": "🚫",
       "title": { "sw": "Makini kwa Asilimia Mia", "en": "100% Focused" },
       "hook": {"sw": "Kukosa umakini kwa sekunde moja kunaweza kusababisha ajali.", "en": "Lose focus for one second, and you may not have time to react before a crash."},
+      "viva": {"q": {"sw": "Umechoka sana na uko mbali na nyumbani. Utafanya nini?", "en": "You are very tired and far from home. What will you do?"}, "points": [{"sw": "Nitasimama mahali salama", "en": "I will stop somewhere safe"}, {"sw": "Nitapumzika au kulala kwanza", "en": "I will rest or sleep first"}, {"sw": "Sitaendelea kuendesha nikiwa nimechoka", "en": "I will not keep riding while tired"}], "model": {"sw": "Nitasimama mahali salama na kupumzika kwanza.", "en": "I will stop somewhere safe and rest first."}},
       "steps": [
         { "id": "habits-0", "pic": "🏍️", "art": "rest-break", "text": { "sw": "Kuendesha kunahitaji umakini wako wote. Kabla ya safari, hakikisha hujalewa, huna usingizi na simu haitakuvuruga.", "en": "Riding needs your full attention. Before a trip, make sure you have not drunk alcohol, are not sleepy and will not be distracted by your phone." } },
         { "id": "habits-1", "pic": "🍺🚫", "art": "refuse-alcohol", "text": { "sw": "Usinywe pombe kabla ya kuendesha. Pombe hupunguza uwezo wa kuona na kuamua.", "en": "Do not drink alcohol before you ride. Alcohol makes you slow to see and to decide." } },
@@ -203,6 +234,7 @@
       "icon": "🚑",
       "title": { "sw": "Ajali Ikitokea", "en": "If a Crash Happens" },
       "hook": {"sw": "Ajali ikitokea, unachofanya kinaweza kuokoa maisha.", "en": "In a crash, what you do next could save a life."},
+      "viva": {"q": {"sw": "Umepata ajali na mwenzako amelala barabarani. Utafanya nini kwanza?", "en": "You crashed and your colleague lies on the road. What first?"}, "points": [{"sw": "Nitahakikisha mimi niko salama na kuwaonya madereva", "en": "I will keep myself safe and warn drivers"}, {"sw": "Sitamhamisha isipokuwa ni lazima kwa kupumua", "en": "I will not move them unless needed for breathing"}, {"sw": "Nitaomba msaada na huduma ya kwanza", "en": "I will get help and first aid"}], "model": {"sw": "Nitawaonya madereva, sitamhamisha, nitaomba msaada.", "en": "I will warn drivers, not move them, and get help."}},
       "steps": [
         { "id": "crash-1", "pic": "⚠️", "art": "warn-traffic", "text": { "sw": "Kwanza, jilinde. Weka alama ya hatari ili magari mengine yapunguze mwendo.", "en": "First, keep yourself safe. Warn other traffic so they slow down." } },
         { "id": "crash-2", "pic": "📞", "art": "emergency-call", "text": { "sw": "Tanzania, jaribu 1 1 5 kwa ambulansi au 1 1 2 kwa polisi. Sema mahali ulipo na idadi ya majeruhi. Ukiwa nchi nyingine, tumia namba ya dharura ya huko.", "en": "In Tanzania, try 1 1 5 for an ambulance or 1 1 2 for police. Say where you are and how many people are hurt. Elsewhere, use the local emergency number." }, "source": { "label": "TCRA / ITU, 2022", "url": "https://www.ituob.org/issues/1248-en/" } },
@@ -221,6 +253,7 @@
       "icon": "🔥",
       "track": "work",
       "title": { "sw": "Moto na Gesi", "en": "Fire and Gas" },
+      "viva": {"q": {"sw": "Mtungi wa gesi unavuja kazini. Utafanya nini? Taja tatu.", "en": "A gas cylinder is leaking at work. What will you do? Name three."}, "points": [{"sw": "Sita washa wala kuzima chochote", "en": "I will not switch anything on or off"}, {"sw": "Nitawaondoa watu eneo hilo", "en": "I will move people away"}, {"sw": "Nitamwambia msimamizi mara moja", "en": "I will tell my supervisor at once"}], "model": {"sw": "Sitawasha chochote, nitawaondoa watu, nitamwambia msimamizi.", "en": "Switch nothing, move people away, tell the supervisor."}},
       "submodules": [
         {
           "id": "exits",
@@ -285,6 +318,7 @@
       "icon": "📦",
       "track": "work",
       "title": { "sw": "Kuinua na Kuhamisha", "en": "Lifting and Moving" },
+      "viva": {"q": {"sw": "Mwenzako anataka kubeba sanduku zito peke yake. Utamshauri nini?", "en": "Your colleague wants to carry a heavy box alone. Your advice?"}, "points": [{"sw": "Asimame na kupanga kwanza", "en": "Stop and plan first"}, {"sw": "Aombe msaada au atumie kifaa", "en": "Ask for help or use equipment"}, {"sw": "Anyanyue kwa miguu, si mgongo", "en": "Lift with the legs, not the back"}], "model": {"sw": "Aombe msaada au kifaa, na anyanyue kwa miguu.", "en": "Ask for help or equipment, and lift with the legs."}},
       "submodules": [
         {
           "id": "lifting",
@@ -349,6 +383,7 @@
       "icon": "🦺",
       "track": "work",
       "title": { "sw": "Vifaa vya Kinga Kazini", "en": "Protective Gear at Work" },
+      "viva": {"q": {"sw": "Unakata mbao mbaya kwa msumeno. Utaandaa kinga gani? Taja tatu.", "en": "You are cutting rough wood. What protection? Name three."}, "points": [{"sw": "Miwani ya usalama", "en": "Safety glasses"}, {"sw": "Glavu sahihi za kazi", "en": "The right work gloves"}, {"sw": "Viatu imara vya usalama", "en": "Strong safety shoes"}], "model": {"sw": "Miwani, glavu sahihi, na viatu imara vya usalama.", "en": "Glasses, the right gloves, and strong safety shoes."}},
       "submodules": [
         {
           "id": "feet",
@@ -422,6 +457,7 @@
       "icon": "📣",
       "track": "work",
       "title": { "sw": "Ripoti na Msaada", "en": "Report and Help" },
+      "viva": {"q": {"sw": "Unaona hatari kazini ambayo haijamdhuru mtu. Utafanya nini?", "en": "You see a hazard that has hurt nobody yet. What will you do?"}, "points": [{"sw": "Nitailinda au kuiwekea alama ikiwezekana", "en": "I will guard it or mark it if I can"}, {"sw": "Nitairipoti kwa msimamizi", "en": "I will report it to my supervisor"}, {"sw": "Nitasema ni nini, iko wapi na lini", "en": "I will say what it is, where and when"}], "model": {"sw": "Nitaiwekea alama na kuiripoti kwa msimamizi.", "en": "I will mark it and report it to my supervisor."}},
       "submodules": [
         {
           "id": "hazards",
@@ -486,6 +522,7 @@
       "icon": "🪜",
       "track": "work",
       "title": {"sw": "Kufanya Kazi Juu na Ngazi", "en": "Working at Height and Ladders"},
+      "viva": {"q": {"sw": "Kabla ya kupanda ngazi, unaangalia nini? Taja vitatu.", "en": "Before climbing a ladder, what do you check? Name three."}, "points": [{"sw": "Ngazi haijapasuka wala kulegea", "en": "The ladder is not cracked or loose"}, {"sw": "Iko kwenye ardhi imara", "en": "It stands on firm ground"}, {"sw": "Juu imefungwa au inashikwa", "en": "The top is tied or held"}], "model": {"sw": "Haijapasuka, iko kwenye ardhi imara, juu imefungwa.", "en": "Not cracked, on firm ground, tied at the top."}},
       "submodules": [
             {
                   "id": "ladders",
@@ -550,6 +587,7 @@
       "icon": "⚡",
       "track": "work",
       "title": {"sw": "Umeme na Kufunga Mashine", "en": "Electricity and Lockout"},
+      "viva": {"q": {"sw": "Mashine inahitaji kusafishwa ndani. Utaandaa nini kwanza?", "en": "A machine needs cleaning inside. What first?"}, "points": [{"sw": "Nitazima mashine na kuiondoa kwenye umeme", "en": "I will switch the machine off and unplug it"}, {"sw": "Nitaweka kufuli na alama yenye jina langu", "en": "I will put on a lock and a tag with my name"}, {"sw": "Sitairuhusu iwashwe hadi nimalize", "en": "I will not let it be switched on until I finish"}], "model": {"sw": "Nitazima, kuiondoa kwenye umeme, kufuli na alama.", "en": "Switch off, unplug, lock and tag it."}},
       "submodules": [
             {
                   "id": "cables",
@@ -614,6 +652,7 @@
       "icon": "🧪",
       "track": "work",
       "title": {"sw": "Kemikali na Mafuta", "en": "Chemicals and Fuels"},
+      "viva": {"q": {"sw": "Kemikali imemwagika sakafuni. Utafanya nini kwanza? Taja tatu.", "en": "A chemical spilled on the floor. What first? Name three."}, "points": [{"sw": "Nitawaweka watu mbali", "en": "I will keep people away"}, {"sw": "Nitamwambia msimamizi", "en": "I will tell my supervisor"}, {"sw": "Sitaimwaga kwa maji kwenye mtaro", "en": "I will not wash it into a drain with water"}], "model": {"sw": "Nitawaweka watu mbali na kumwambia msimamizi.", "en": "Keep people away and tell the supervisor."}},
       "submodules": [
             {
                   "id": "labels",
@@ -678,6 +717,7 @@
       "icon": "☀️",
       "track": "work",
       "title": {"sw": "Joto, Maji na Ustawi", "en": "Heat, Water and Welfare"},
+      "viva": {"q": {"sw": "Mwenzako juani anaumwa kichwa na kizunguzungu. Utafanya nini?", "en": "Your colleague in the sun has headache and dizziness. What will you do?"}, "points": [{"sw": "Atasimama na kwenda kivulini", "en": "They will stop and go to shade"}, {"sw": "Atakunywa maji safi", "en": "They will drink clean water"}, {"sw": "Nitamwambia msimamizi", "en": "I will tell the supervisor"}], "model": {"sw": "Atapumzika kivulini, kunywa maji, nitamwambia msimamizi.", "en": "Rest in shade, drink water, tell the supervisor."}},
       "submodules": [
             {
                   "id": "signs",

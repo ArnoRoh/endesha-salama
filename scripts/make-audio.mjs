@@ -33,7 +33,7 @@ try {
     for (let attempt = 1; ; attempt++) {
       try {
         await run(edge, ['--voice', L.voices[a.lang], `--text=${a.text}`, '--write-media', raw]);
-        await run(ffmpeg, ['-v', 'error', '-y', '-i', raw, '-ac', '1', '-c:a', 'libopus', '-b:a', '16k', '-application', 'voip', out]);
+        await run(ffmpeg, ['-v', 'error', '-y', '-i', raw, '-ac', '1', '-c:a', 'libopus', '-b:a', a.name.includes('-viva') ? '12k' : '16k', '-application', 'voip', out]); // voice-answer clips are short prompts: 12k speech is enough and keeps the size budget
         break;
       } catch (err) {
         if (attempt === 3) throw new Error(`${a.file}: ${err.message}`);
