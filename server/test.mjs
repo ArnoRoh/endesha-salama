@@ -14,7 +14,8 @@ const wrangler = (...args) => execFileSync('npx', ['wrangler', ...args, '--local
 const sql = (command) => wrangler('d1', 'execute', 'hsse', '--command', command);
 wrangler('d1', 'migrations', 'apply', 'hsse');
 const dev = spawn('npx', ['wrangler', 'dev', '--ip', '127.0.0.1', '--port', String(port), '--persist-to', dir,
-  '--var', `ADMIN_TOKEN:${adminToken}`, '--show-interactive-dev-session=false'], { stdio: 'pipe', detached: true });
+  '--var', `ADMIN_TOKEN:${adminToken}`, '--var', 'MODEL_API_KEY:', '--var', 'META_API_KEY:',
+  '--show-interactive-dev-session=false'], { stdio: 'pipe', detached: true });
 const base = `http://127.0.0.1:${port}`;
 for (let i = 0; ; i++) {
   if (await fetch(`${base}/lessons.json`).then((r) => r.ok, () => false)) break;
